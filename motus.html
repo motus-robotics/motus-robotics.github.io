@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motus: A Unified Latent Action World Model</title>
+    <meta name="description" content="Motus: A Unified Latent Action World Model">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="static/css/motus_style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <!-- Using Text Logo since no image logo is available yet -->
+                <span class="math-symbol" style="color: #0f172a">Motus</span>
+            </div>
+            <div class="nav-links">
+                <a href="#framework">Framework</a>
+                <a href="#demo">Demo</a>
+                <a href="#performance">Performance</a>
+                <a href="#citation">Citation</a>
+  </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" style="padding-bottom: 20px !important;">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Motus: A Unified Latent Action World Model
+                </h1>
+                
+                <div class="hero-authors">
+                    <!-- Row 1 -->
+                    <div>
+                        <a href="https://hongzhebi.github.io/">Hongzhe Bi</a><sup>1*</sup>,
+                        <a href="https://stormy-cheese-458.notion.site/Hengkai-Tan-22a9b6e0b5bb801782edc3771ff3ba37">Hengkai Tan</a><sup>1*</sup>,
+                        <a>Shenghao Xie</a><sup>2*</sup>,
+                        <a>Zeyuan Wang</a><sup>1*</sup>,
+                        <a>Shuhe Huang</a><sup>1*</sup>,
+                        <a>Haitian Liu</a><sup>1*</sup>
+    </div>
+                    <!-- Row 2 -->
+                    <div style="margin-top: 5px;">
+                        <a>Ruowen Zhao</a><sup>1</sup>,
+                        <a>Yao Feng</a><sup>1</sup>,
+                        <a>Chendong Xiang</a><sup>1</sup>,
+                        <a>Yinze Rong</a><sup>1</sup>,
+                        <a>Hongyan Zhao</a><sup>1</sup>,
+                        <a>Hanyu Liu</a><sup>2</sup>
+  </div>
+                    <!-- Row 3 -->
+                    <div style="margin-top: 5px;">
+                <a href="https://scholar.google.com/citations?user=HQfc8TEAAAAJ&hl=en">Zhizhong Su</a><sup>3</sup>,
+                        <a>Lei Ma</a><sup>2</sup>,
+              <a href="https://scholar.google.com/citations?user=dxN1_X0AAAAJ&hl=zh-CN&oi=ao">Hang Su</a><sup>1</sup>,
+              <a href="https://ml.cs.tsinghua.edu.cn/~jun/index.shtml">Jun Zhu</a><sup>1</sup>
+                    </div>
+          </div>
+
+                <div class="hero-affiliations">
+                    <span><sup>1</sup>Tsinghua University</span>&nbsp;&nbsp;
+                    <span><sup>2</sup>Peking University</span>&nbsp;&nbsp;
+                    <span><sup>3</sup>Horizon Robotics</span><br>
+                    <span><sup>*</sup>Equal contribution</span>
+          </div>
+
+                <div class="hero-buttons">
+                    <a href="https://arxiv.org/abs/2507.23523" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                    <a href="https://github.com/motus-robotics/Motus" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+                    <a href="https://huggingface.co/motus-robotics" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon" style="font-size: 1.2em;">
+                    🤗
+                  </span>
+                  <span>Model</span>
+                </a>
+                </div>
+            </div>
+    </section>
+
+    <!-- Framework Overview -->
+    <section id="framework" class="framework" style="padding-top: 0px !important; padding-bottom: 40px; scroll-margin-top: 80px;">
+        <div class="container">
+            <h2 class="section-title">
+                Framework Overview
+            </h2>
+            
+            <!-- Architecture Overview -->
+            <div class="architecture-section">
+                <h3 class="subsection-title">Motus Architecture</h3>
+
+                <div class="architecture-figure">
+                    <img src="./assets/motus/png/block.png" alt="Motus Architecture" class="architecture-image" style="max-width: 60%;">
+                    <div class="figure-caption">
+                        <strong>Figure 1: Motus Architecture.</strong> Here, $a_t \dots a_{t+k}$ are actions, $z_t \dots z_{t+k}$ are latent actions, and $\tau_v$ and $\tau_a$ are the rectified flow timesteps for the video generation model and the action expert, respectively.
+                    </div>
+                </div>
+
+                <div class="content" style="max-width: 900px; margin: 0 auto 40px auto; text-align: left; line-height: 1.8;">
+                    <p>
+                         Motus is a <strong>unified latent action world model</strong> that leverages existing pretrained models and rich, sharable motion information. Motus introduces a <strong>Mixture-of-Transformers (MoT)</strong> architecture to integrate three experts (understanding, action, and video generation) and adopts a <strong>UniDiffuser-style scheduler</strong> to enable flexible switching between different modeling modes (World Models, Vision-Language-Action Models, Inverse Dynamics Models, Video Generation Models, and Video-Action Joint Prediction Models). Motus further leverages <strong>optical flow</strong> to learn <strong>latent actions</strong> and adopts a <strong>three-phase training pipeline</strong> and <strong>six-layer data pyramid</strong>, thereby extracting pixel-level "delta action" and enabling large-scale action pretraining.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Latent Actions Section -->
+            <div class="architecture-section" style="margin-top: 40px;">
+                <h3 class="subsection-title" style="text-align: left;">Latent Actions</h3>
+
+                <div class="architecture-figure">
+                    <img src="./assets/motus/png/vae.png" alt="Latent Action VAE" class="architecture-image" style="max-width: 25%;">
+                    <div class="figure-caption">
+                        <strong>Figure 2: The Latent Action VAE.</strong> Optical flow-based representation that bridges visual dynamics with control signals through a variational autoencoder architecture.
+                    </div>
+                </div>
+
+                <div class="content" style="max-width: 900px; margin: 0 auto 40px auto; text-align: left; line-height: 1.8;">
+                    <p>
+                        To leverage large-scale heterogeneous data, we introduce <strong>latent actions</strong> that encode motion directly from optical flow. DPFlow computes pixel-level displacements between frames, which are then compressed via a deep convolutional variational autoencoder (DC-AE) and a lightweight encoder, enabling the model to learn cross-embodiment motion priors from diverse video sources.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Data Pyramid Section -->
+            <div class="architecture-section" style="margin-top: 40px;">
+                <h3 class="subsection-title" style="text-align: left;">Data Pyramid</h3>
+
+                <div class="architecture-figure">
+                    <img src="./assets/motus/png/data_pyramid.png" alt="Embodied Data Pyramid" class="architecture-image" style="max-width: 50%;">
+                    <div class="figure-caption">
+                        <strong>Figure 3: The Embodied Data Pyramid.</strong> Six-level data hierarchy from web data (Level 1) to target-robot demonstrations (Level 6), progressively increasing in task relevance and quality.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Recipe Section -->
+            <div class="training-recipe" style="margin-top: 40px;">
+                <h3 class="subsection-title" style="text-align: left;">Three-Stage Training Recipe</h3>
+                
+                <div class="recipe-stages" style="display: flex; align-items: flex-start; justify-content: space-between; margin-top: 25px; gap: 15px;">
+                    <div class="recipe-stage-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; padding: 20px 15px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); min-height: 120px;">
+                        <div class="stage-indicator" style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0;">1</div>
+                        <div class="stage-info" style="flex: 1;">
+                            <h4 style="font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0; color: var(--dark-color); line-height: 1.3;">Stage 1 (VGM Training)</h4>
+                            <p style="color: var(--gray-color); line-height: 1.5; margin: 0; font-size: 0.9rem;">Trains the VGM with embodied data.</p>
+                        </div>
+                    </div>
+                    <div class="stage-connector" style="font-size: 1.5rem; color: #667eea; font-weight: bold; margin: 0 5px; flex-shrink: 0; align-self: center; margin-top: 20px;">→</div>
+                    <div class="recipe-stage-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; padding: 20px 15px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); min-height: 120px;">
+                        <div class="stage-indicator" style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0;">2</div>
+                        <div class="stage-info" style="flex: 1;">
+                            <h4 style="font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0; color: var(--dark-color); line-height: 1.3;">Stage 2 (Motus Pretraining)</h4>
+                            <p style="color: var(--gray-color); line-height: 1.5; margin: 0; font-size: 0.9rem;">Pretrains the Motus model with latent actions.</p>
+                        </div>
+                    </div>
+                    <div class="stage-connector" style="font-size: 1.5rem; color: #667eea; font-weight: bold; margin: 0 5px; flex-shrink: 0; align-self: center; margin-top: 20px;">→</div>
+                    <div class="recipe-stage-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; padding: 20px 15px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); min-height: 120px;">
+                        <div class="stage-indicator" style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0;">3</div>
+                        <div class="stage-info" style="flex: 1;">
+                            <h4 style="font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0; color: var(--dark-color); line-height: 1.3;">Stage 3 (Motus SFT)</h4>
+                            <p style="color: var(--gray-color); line-height: 1.5; margin: 0; font-size: 0.9rem;">Fine-tunes the Motus model on target-robot trajectories.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content" style="max-width: 100%; margin: 30px auto 0 auto; text-align: left; line-height: 1.8;">
+                    <div class="performance-table">
+                        <table style="border-collapse: collapse; border: 1px solid #e2e8f0; width: 100%; table-layout: fixed;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #cbd5e1;">
+                                    <th style="text-align: left; padding: 12px; border: 1px solid #e2e8f0; background: #f8fafc; width: 30%;">Stage</th>
+                                    <th style="text-align: left; padding: 12px; border: 1px solid #e2e8f0; background: #f8fafc; width: 38%;">Data</th>
+                                    <th style="text-align: left; padding: 12px; border: 1px solid #e2e8f0; background: #f8fafc; width: 32%;">Training</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 600; padding: 12px; border: 1px solid #e2e8f0;">Pretrained Foundation Models</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Level 1: Web Data</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">VGM and VLM</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600; padding: 12px; border: 1px solid #e2e8f0;">Stage 1 (VGM Training)</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Level 2: Egocentric Human Videos<br>Level 3: Synthetic Data<br>Level 5: Multi-Robot Task Trajectory</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Only VGM</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600; padding: 12px; border: 1px solid #e2e8f0;">Stage 2 (Motus Pretraining)</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Level 2: Egocentric Human Videos<br>Level 3: Synthetic Data<br>Level 4: Task-agnostic Data<br>Level 5: Multi-Robot Task Trajectory</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Motus (all 3 experts, with <strong>latent actions</strong>)</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600; padding: 12px; border: 1px solid #e2e8f0;">Stage 3 (Motus SFT)</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Level 6: Target-Robot Task Trajectory</td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0;">Motus (all 3 experts, with actions)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Experiments / Demos -->
+    <section id="demo" class="demo" style="padding-top: 80px; padding-bottom: 60px; background: white; scroll-margin-top: 50px;">
+        <div class="demo-container">
+            <h2 class="section-title">
+                Real-World Robot Experiments
+            </h2>
+            
+            <div class="demo-grid">
+                      
+                <div class="demo-card">
+                  <div class="demo-video">
+                      <video controls loop muted preload="metadata">
+                    <source src="./assets/motus/videos/grind_coffee_beans_with_grinder_using_both_hands/ac_one/observations_4.mp4" type="video/mp4">
+                  </video>
+                </div>
+                  <div class="demo-info">
+                      <h3>Grind Coffee Beans</h3>
+                      <p>Grind coffee beans with grinder</p>
+            </div>
+          </div>
+
+                 <div class="demo-card">
+                    <div class="demo-video">
+                        <video controls loop muted preload="metadata">
+                            <source src="./assets/motus/videos/get_water_from_water_dispenser_using_both_hands/ac_one/observations_4.mp4" type="video/mp4">
+                        </video>
+                </div>
+                    <div class="demo-info">
+                        <h3>Get Water</h3>
+                        <p>Get water from water dispenser</p>
+              </div>
+            </div>
+           
+                 <div class="demo-card">
+                    <div class="demo-video">
+                        <video controls loop muted preload="metadata">
+                            <source src="./assets/motus/videos/brew_coffee_using_drip_coffee_machine_using_both_hands/ac_one/observations_4.mp4" type="video/mp4">
+                        </video>
+                </div>
+                    <div class="demo-info">
+                        <h3>Brew Coffee</h3>
+                        <p>Brew coffee using drip coffee machine</p>
+              </div>
+            </div>
+
+          </div>
+          
+            <div class="demo-grid">
+                 <div class="demo-card">
+                    <div class="demo-video">
+                        <video controls loop muted preload="metadata">
+                      <source src="./assets/motus/videos/pour_water_from_kettle_to_flowers_using_both_hands/ac_one/observations_4.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                    <div class="demo-info">
+                        <h3>Water the flowers</h3>
+                        <p>Pour water from kettle to flowers</p>
+                  </div>
+                </div>
+                
+                 <div class="demo-card">
+                    <div class="demo-video">
+                        <video controls loop muted preload="metadata">
+                            <source src="./assets/motus/videos/put_bread_into_oven_using_both_hands/ac_one/observations_4.mp4" type="video/mp4">
+                        </video>
+                </div>
+                    <div class="demo-info">
+                        <h3>Bake bread</h3>
+                        <p>Use the oven to bake bread</p>
+              </div>
+            </div>
+            
+                 <div class="demo-card">
+                    <div class="demo-video">
+                        <video controls loop muted preload="metadata">
+                      <source src="./assets/motus/videos/touch_keyboard_for_computer_operation_using_both_hands/ac_one/observations_4_4.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                    <div class="demo-info">
+                        <h3>Touch Keyboard</h3>
+                        <p>Touch keyboard for computer operation
+              </div>
+        </div>
+
+  </div>
+</section>
+
+    <!-- Performance Section -->
+    <section id="performance" class="performance" style="scroll-margin-top: 0px; background: white;">
+        <div class="container">
+            <h2 class="section-title">
+                Performance Highlights
+            </h2>
+            <div class="performance-grid">
+                <!-- Real-World Experiments Table -->
+                <div class="performance-card">
+                    <h3>Real-World Experiments</h3>
+                    <div class="performance-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task Description</th>
+                                    <th>$\pi_{0.5}$</th>
+                                    <th>w/o Pretrain</th>
+                                    <th>Motus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" style="background: #f0f0f0; font-weight: 600; text-align: center;"><strong>AC-One</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Fold Towel</td>
+                                    <td>4%</td>
+                                    <td>1%</td>
+                                    <td><strong>14.5%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Brew Coffee using Coffee Maker</td>
+                                    <td>0%</td>
+                                    <td>0%</td>
+                                    <td><strong>62%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Get Water from Water Dispenser</td>
+                                    <td>30%</td>
+                                    <td>8%</td>
+                                    <td><strong>36%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Cube into Plate</td>
+                                    <td>46%</td>
+                                    <td>60%</td>
+                                    <td><strong>100%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Cube into Plate (OOD)</td>
+                                    <td>28.1%</td>
+                                    <td>18.8%</td>
+                                    <td><strong>75%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Grind Coffee Beans with Grinder</td>
+                                    <td>8%</td>
+                                    <td>0%</td>
+                                    <td><strong>92%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Pour Water from Kettle to Flowers</td>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                    <td><strong>65%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Touch Instructed Keyboard</td>
+                                    <td>0%</td>
+                                    <td><strong>100%</strong></td>
+                                    <td>82.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Put Bread into Oven</td>
+                                    <td>12%</td>
+                                    <td>40%</td>
+                                    <td><strong>42%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">Average</td>
+                                    <td>14.79%</td>
+                                    <td>25.86%</td>
+                                    <td style="font-weight: 600;"><strong>63.22%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="background: #f0f0f0; font-weight: 600; text-align: center;"><strong>Agilex-Aloha-2</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Fold Towel</td>
+                                    <td>27.5%</td>
+                                    <td>0%</td>
+                                    <td><strong>39%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Get Water from Water Dispenser</td>
+                                    <td>62%</td>
+                                    <td>8%</td>
+                                    <td><strong>96%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Pour Water from Kettle to Flowers</td>
+                                    <td>45%</td>
+                                    <td>40%</td>
+                                    <td><strong>47.5%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Touch Instructed Keyboard</td>
+                                    <td>72.5%</td>
+                                    <td><strong>85%</strong></td>
+                                    <td>80%</td>
+                                </tr>
+                                <tr>
+                                    <td>Put Bread into Oven</td>
+                                    <td><strong>36%</strong></td>
+                                    <td>0%</td>
+                                    <td>34%</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">Average</td>
+                                    <td>48.60%</td>
+                                    <td>26.60%</td>
+                                    <td style="font-weight: 600;"><strong>59.30%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+        
+                <!-- Simulation Environment Table -->
+                <div class="performance-card">
+                    <h3>RoboTwin 2.0 Simulation (Randomized)</h3>
+                    <div class="performance-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Simulation Task</th>
+                                    <th>$\pi_{0.5}$</th>
+                                    <th>X-VLA</th>
+                                    <th>w/o Pretrain</th>
+                                    <th>Stage1</th>
+                                    <th>Motus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Place Dual Shoes</td>
+                                    <td>7%</td>
+                                    <td>88%</td>
+                                    <td>80%</td>
+                                    <td><strong>94%</strong></td>
+                                    <td>87%</td>
+                                </tr>
+                                <tr>
+                                    <td>Move Stapler Pad</td>
+                                    <td>18%</td>
+                                    <td>73%</td>
+                                    <td>37%</td>
+                                    <td>68%</td>
+                                    <td><strong>85%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Stack Blocks Two</td>
+                                    <td>56%</td>
+                                    <td>87%</td>
+                                    <td>94%</td>
+                                    <td><strong>99%</strong></td>
+                                    <td>98%</td>
+                                </tr>
+                                <tr>
+                                    <td>Scan Object</td>
+                                    <td>38%</td>
+                                    <td>36%</td>
+                                    <td>50%</td>
+                                    <td><strong>69%</strong></td>
+                                    <td>66%</td>
+                                </tr>
+                                <tr>
+                                    <td>Place Object Stand</td>
+                                    <td>65%</td>
+                                    <td>88%</td>
+                                    <td>93%</td>
+                                    <td>96%</td>
+                                    <td><strong>97%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Fan</td>
+                                    <td>36%</td>
+                                    <td>75%</td>
+                                    <td>85%</td>
+                                    <td>85%</td>
+                                    <td><strong>87%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Move Pillbottle Pad</td>
+                                    <td>29%</td>
+                                    <td>71%</td>
+                                    <td>83%</td>
+                                    <td>90%</td>
+                                    <td><strong>96%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Pick Dual Bottles</td>
+                                    <td>6%</td>
+                                    <td>36%</td>
+                                    <td>68%</td>
+                                    <td>17%</td>
+                                    <td><strong>90%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Blocks Ranking RGB</td>
+                                    <td>35%</td>
+                                    <td>83%</td>
+                                    <td>88%</td>
+                                    <td><strong>98%</strong></td>
+                                    <td>97%</td>
+                                </tr>
+                                <tr>
+                                    <td>......(50 tasks)</td>
+                                    <td colspan="5" style="text-align: center;">...</td>
+                                </tr>
+                                <tr>
+                                    <td>Turn Switch</td>
+                                    <td>6%</td>
+                                    <td>61%</td>
+                                    <td>60%</td>
+                                    <td>64%</td>
+                                    <td><strong>78%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Pick Diverse Bottles</td>
+                                    <td>3%</td>
+                                    <td>36%</td>
+                                    <td>62%</td>
+                                    <td>18%</td>
+                                    <td><strong>91%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Bread Basket</td>
+                                    <td>56%</td>
+                                    <td>71%</td>
+                                    <td>83%</td>
+                                    <td>87%</td>
+                                    <td><strong>94%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Stack Blocks Three</td>
+                                    <td>16%</td>
+                                    <td>10%</td>
+                                    <td>76%</td>
+                                    <td><strong>95%</strong></td>
+                                    <td><strong>95%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Put Bottles Dustbin</td>
+                                    <td>9%</td>
+                                    <td>77%</td>
+                                    <td>33%</td>
+                                    <td>24%</td>
+                                    <td><strong>79%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Can Basket</td>
+                                    <td>25%</td>
+                                    <td>52%</td>
+                                    <td>62%</td>
+                                    <td>55%</td>
+                                    <td><strong>76%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Stamp Seal</td>
+                                    <td>23%</td>
+                                    <td>82%</td>
+                                    <td>88%</td>
+                                    <td><strong>95%</strong></td>
+                                    <td>92%</td>
+                                </tr>
+                                <tr>
+                                    <td>Hanging Mug</td>
+                                    <td>3%</td>
+                                    <td>27%</td>
+                                    <td>10%</td>
+                                    <td>25%</td>
+                                    <td><strong>38%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Handover Block</td>
+                                    <td>19%</td>
+                                    <td>37%</td>
+                                    <td>15%</td>
+                                    <td>55%</td>
+                                    <td><strong>73%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Stack Bowls Three</td>
+                                    <td>35%</td>
+                                    <td>86%</td>
+                                    <td>74%</td>
+                                    <td>83%</td>
+                                    <td><strong>87%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Place Object Basket</td>
+                                    <td>36%</td>
+                                    <td>39%</td>
+                                    <td>75%</td>
+                                    <td>80%</td>
+                                    <td><strong>87%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Open Microwave</td>
+                                    <td>37%</td>
+                                    <td>71%</td>
+                                    <td>82%</td>
+                                    <td>84%</td>
+                                    <td><strong>91%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">Average</td>
+                                    <td style="font-weight: 600;">43.84%</td>
+                                    <td style="font-weight: 600;">72.84%</td>
+                                    <td style="font-weight: 600;">77.00%</td>
+                                    <td style="font-weight: 600;">81.86%</td>
+                                    <td style="font-weight: 600;"><strong>87.02%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    </section>
+</section>
+
+    <!-- Citation Section -->
+    <section id="citation" class="citation" style="scroll-margin-top: 10px;">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation-content">
+                <div class="citation-text">
+        <pre><code>@misc{bi2025hrdt,
+    title={H-RDT: Human Manipulation Enhanced Bimanual Robotic Manipulation}, 
+    author={Hongzhe Bi and Lingxuan Wu and Tianwei Lin and Hengkai Tan and Zhizhong Su and Hang Su and Jun Zhu},
+    year={2025},
+    eprint={2507.23523},
+    archivePrefix={arXiv},
+    primaryClass={cs.RO},
+    url={https://embodiedfoundation.github.io/hrdt}, 
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Footer -->
+<footer class="footer">
+  <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>Motus: A Unified Latent Action<br>
+                    World Model</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="https://github.com/motus-robotics/Motus">GitHub Repository</a>
+                        <a href="https://arxiv.org/abs/2507.23523">arXiv Paper</a>
+    </div>
+                    <div class="footer-section">
+                        <h4>Contact</h4>
+                        <p>Tsinghua University</p>
+        </div>
+      </div>
+    </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Motus Team. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html> 
