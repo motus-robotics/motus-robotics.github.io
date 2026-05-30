@@ -3,35 +3,577 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motus2 | Motus Robotics</title>
-  <meta name="description" content="Motus2 project page">
-  <link rel="stylesheet" href="/static/css/motus_style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #f8fafc; margin: 0; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 64px 20px; }
-    .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08); }
-    h1 { margin: 0 0 12px; color: #111827; }
-    p { color: #4b5563; line-height: 1.7; }
-    .links { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn { display:inline-block; padding: 10px 16px; border-radius: 10px; text-decoration:none; font-weight:600; }
-    .btn-primary { background:#2563eb; color:#fff; }
-    .btn-secondary { background:#e5e7eb; color:#111827; }
-    .note { margin-top: 16px; font-size: 14px; color: #6b7280; }
-  </style>
+  <title>Motus2: A Self-Evolved Egocentric Embodied Agent</title>
+  <meta name="description" content="Motus2 pushes general-purpose dexterous manipulation toward human level through a unified world model, human-centric data at scale, tactile sensing, and self-evolving RL.">
+  <meta property="og:title" content="Motus2: A Self-Evolved Egocentric Embodied Agent">
+  <meta property="og:description" content="Unified World Model × Human Data × Dextrous Hand × Tactile Glove × Self-Evolving">
+  <meta property="og:image" content="assets/img/joint_video_action_tactile_dit.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="../static/css/motus_style.css">
+  <link rel="stylesheet" href="static/css/motus2.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1>Motus2</h1>
-      <p>This page has been created for the Motus2 project at <code>/motus2</code>.</p>
-      <p>You can now use this URL for content updates and project publishing.</p>
-      <div class="links">
-        <a class="btn btn-primary" href="https://motus-robotics.github.io/motus2">Open /motus2</a>
-        <a class="btn btn-secondary" href="https://motus-robotics.github.io/motus">Open existing /motus</a>
+
+  <nav class="navbar navbar--motus2">
+    <div class="nav-container">
+      <a href="#home" class="nav-wordmark">Motus<span>2</span></a>
+      <div class="nav-links">
+        <a href="#tldr">TL;DR</a>
+        <a href="#demo">Demo</a>
+        <a href="#model">Model</a>
+        <a href="#data">Data</a>
+        <a href="#evolving">Self-Evolving</a>
+        <a href="#results">Results</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#citation">Citation</a>
       </div>
-      <p class="note">Last updated by repository automation.</p>
     </div>
-  </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="motus2-hero">
+    <div class="motus2-hero__inner">
+      <div class="motus2-hero__meta">
+        <span class="motus2-hero__meta-tag">Research</span>
+        <span>By Motus Robotics Team</span>
+        <span>May 2026</span>
+      </div>
+
+      <h1 class="motus2-hero__title">
+        Motus2: Advancing Dexterous Manipulation to Human Level
+      </h1>
+
+      <p class="motus2-hero__lede">
+        Motus2 is a self-evolved egocentric embodied agent built on a unified world model,
+        scaling human-centric data from web video to tactile robot demonstrations —
+        on a bionic stereo dual-arm platform with full-palm tactile sensing.
+      </p>
+
+      <div class="motus2-formula" aria-label="Motus2 formula">
+        <span class="motus2-formula__term">Unified World Model</span>
+        <span class="motus2-formula__op">×</span>
+        <span class="motus2-formula__term">Human Data</span>
+        <span class="motus2-formula__op">×</span>
+        <span class="motus2-formula__term">Dextrous Hand</span>
+        <span class="motus2-formula__op">×</span>
+        <span class="motus2-formula__term">Tactile Glove</span>
+        <span class="motus2-formula__op">×</span>
+        <span class="motus2-formula__term">Self-Evolving</span>
+        <span class="motus2-formula__op">=</span>
+        <span class="motus2-formula__result">The End</span>
+      </div>
+
+      <div id="tldr" class="motus2-tldr">
+        <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
+        <ul>
+          <li><strong>Manipulation is the core bottleneck</strong> — contact-rich, long-horizon dexterity requires full-stack thinking beyond model training alone.</li>
+          <li><strong>Human-centric data at scale</strong> — a five-tier data pyramid from web video (110k+ hrs ego) to tactile robot demos bridges the embodiment gap.</li>
+          <li><strong>Joint Video-Action-Tactile DiT</strong> — multi-token in, multi-token out; one model for control, simulation, IDM, and value estimation.</li>
+          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL turns failure and suboptimal data into continuous improvement.</li>
+          <li><strong>Predictable scaling</strong> — human data scaling laws show consistent loss reduction as data grows from 2k to 20k hours.</li>
+        </ul>
+      </div>
+
+      <div class="motus2-hero__actions">
+        <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Watch Demo</span>
+        </a>
+        <a href="https://motus-robotics.github.io/motus" class="external-link button is-normal is-rounded is-light">
+          <span class="icon"><i class="fas fa-arrow-left"></i></span>
+          <span>Motus v1</span>
+        </a>
+        <a href="#citation" class="external-link button is-normal is-rounded is-light">
+          <span class="icon"><i class="ai ai-arxiv"></i></span>
+          <span>Paper (Soon)</span>
+        </a>
+      </div>
+
+      <div class="demo-task-chips">
+        <span class="demo-task-chip">Spray Cleaner</span>
+        <span class="demo-task-chip">Screw Bulb</span>
+        <span class="demo-task-chip">Cut Banana</span>
+        <span class="demo-task-chip">Fry Egg</span>
+        <span class="demo-task-chip">Toast Bread</span>
+        <span class="demo-task-chip">Multi-Finger Grasp</span>
+        <span class="demo-task-chip">Cut Asparagus</span>
+      </div>
+
+      <div class="motus2-hero__media-strip">
+        <div class="media-placeholder">
+          <i class="fas fa-film media-placeholder__icon"></i>
+          <span class="media-placeholder__label">Hero demo reel</span>
+          <span class="media-placeholder__hint">Full-width teaser video — coming soon</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Why manipulation -->
+  <section class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Motivation</p>
+      <h2 class="m2-section__title">Manipulation: why, and how.</h2>
+      <div class="m2-prose">
+        <p>
+          <strong>Manipulation is the most valuable problem in robotics</strong> because it turns
+          intelligence into useful work. Most physical labor is not about moving <em>through</em> the
+          world, but <em>transforming</em> it — and that transformation happens through contact.
+        </p>
+        <p>
+          Motus2 addresses this as a <strong>full-stack system problem</strong>, not a pure model
+          training problem. Hardware that can express rich contact, data that preserves human
+          interaction fidelity, a robotics-native foundation model, and evaluation infrastructure
+          that scales — all must work together.
+        </p>
+        <p>
+          Our robot platform combines <strong>stereo egocentric vision</strong>, a
+          <strong>bionic dual-arm dual-hand</strong> system, and <strong>full-palm tactile
+          sensing</strong> — designed to minimize the embodiment gap between human demonstrations
+          and robot execution.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" class="m2-section m2-section--alt demo">
+    <div class="demo-container">
+      <p class="m2-section__label" style="text-align:center;">Real-World Experiments</p>
+      <h2 class="section-title">What Motus2 can do</h2>
+      <p style="text-align:center; max-width:680px; margin:-32px auto 40px; color:var(--m2-muted); line-height:1.7; font-size:1.02rem;">
+        Contact-rich, long-horizon tasks at real-world speed. Demo videos will be added progressively.
+      </p>
+
+      <div class="demo-grid">
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Spray Cleaner</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Spray Cleaner</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Screw Bulb</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Screw Bulb</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Cut Banana</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Cut Banana</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Fry Egg</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Fry Egg</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Toast Bread</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Toast Bread</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Multi-Finger Grasp</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Multi-Finger Grasp</h3><p>Coming soon</p></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-video">
+            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
+              <i class="fas fa-video media-placeholder__icon"></i>
+              <span class="media-placeholder__label">Cut Asparagus</span>
+            </div>
+          </div>
+          <div class="demo-info"><h3>Cut Asparagus</h3><p>Scissors task — coming soon</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Model -->
+  <section id="model" class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Architecture</p>
+      <h2 class="m2-section__title">A robotics-native foundation model</h2>
+      <div class="m2-prose">
+        <p>
+          Motus2 learns a <strong>joint distribution over video, action, and tactile
+          trajectories</strong> using a Joint Video-Action-Tactile DiT. Multi-token input and
+          multi-token output enable a single unified model for control, generative simulation
+          (AC-WM), inverse dynamics, and value estimation — with missing modalities inferred
+          through denoising.
+        </p>
+        <p>
+          Post-training supports four modes: <em>joint</em>, <em>video_idm</em>,
+          <em>action_only</em>, and <em>loop</em>. A sliding-window autoregressive scheme
+          enables long-horizon rollouts at deployment.
+        </p>
+      </div>
+
+      <figure class="m2-figure">
+        <img src="assets/img/joint_video_action_tactile_dit.png"
+             alt="Joint Video-Action-Tactile DiT architecture"
+             loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Figure 1: Joint Video-Action-Tactile DiT.</strong>
+          Video, action, tactile, and language inputs are encoded into latents and processed
+          through causal DiT blocks. The model jointly predicts video, action, and tactile
+          feedback — enabling unified control and world simulation.
+        </figcaption>
+      </figure>
+
+      <div class="model-pills">
+        <div class="model-pill">Motus2-base<span>Pretrain foundation model</span></div>
+        <div class="model-pill">Motus2-sft<span>Human + robot data (4:1 / 5:1)</span></div>
+        <div class="model-pill">Motus2-mbrl<span>Model-based RL fine-tuning</span></div>
+        <div class="model-pill">Motus2-ultra<span>MotuBrain-Dex (Vidu-Q3)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data -->
+  <section id="data" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Scaling Path</p>
+      <h2 class="m2-section__title">The human-centric data engine</h2>
+      <div class="m2-prose">
+        <p>
+          <strong>Over 80% of physical labor is manipulation — almost none of it has ever been
+          recorded.</strong> Motus2 is built around a scaling path from diverse human
+          demonstrations to tactile robot data, spanning five tiers of the data pyramid.
+        </p>
+      </div>
+
+      <figure class="m2-figure">
+        <img src="assets/img/human_data_pyramid.png"
+             alt="Human data pyramid from web video to robot tactile data"
+             loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Figure 2: Human Data Pyramid.</strong>
+          From internet-scale web video at the base, through monocular (110k+ hrs) and stereo
+          egocentric data (20k hrs), to human-robot aligned tactile data and target-robot
+          demonstrations at the apex.
+        </figcaption>
+      </figure>
+
+      <div class="m2-split" style="margin-top:48px;">
+        <div class="m2-prose">
+          <h3>Human Data Scaling Laws</h3>
+          <p>
+            Increasing human data consistently reduces validation loss. From 2k to 20k hours,
+            models converge faster and reach lower asymptotic error — following a predictable
+            logarithmic scaling law.
+          </p>
+          <div class="m2-callout">L = 0.101 − 0.005 · ln(D)</div>
+        </div>
+        <figure class="m2-figure" style="margin:0;">
+          <img src="assets/img/scaling_laws.png"
+               alt="Human validation loss vs epoch and scaling law plot"
+               loading="lazy">
+          <figcaption class="m2-figure__caption">
+            <strong>Figure 3: Training-time scaling.</strong>
+            Left: validation loss vs. epoch at 2k / 4k / 10k / 20k hours.
+            Right: optimal loss vs. data amount on log scale.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-Evolving -->
+  <section id="evolving" class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Self-Evolving</p>
+      <h2 class="m2-section__title">Scaling towards deployment</h2>
+      <div class="m2-prose">
+        <p>
+          Beyond imitation learning, Motus2 leverages <strong>failure data</strong>,
+          <strong>suboptimal trajectories</strong>, and <strong>task-irrelevant data</strong>
+          through a self-evolving pipeline powered by <strong>Ray-based distributed
+          asynchronous RL</strong> — continuously improving policy quality from real-world
+          feedback.
+        </p>
+        <h3>Test-Time Scaling</h3>
+        <p>
+          At inference, Motus2 performs iterative denoising via IDM + FDM, alternating between
+          action prediction and video rollout for improved planning:
+        </p>
+      </div>
+
+      <div class="loop-steps">
+        <div class="loop-step">
+          <div class="loop-step__num">1</div>
+          <h4>Predict Action</h4>
+          <p>Roll out one action step</p>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step__num">2</div>
+          <h4>Simulate Video</h4>
+          <p>FDM / AC-WM generates observation</p>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step__num">3</div>
+          <h4>Infer Action</h4>
+          <p>IDM / Policy refines action</p>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step__num">4</div>
+          <h4>Loop</h4>
+          <p>Repeat until completion</p>
+        </div>
+      </div>
+
+      <figure class="m2-figure">
+        <div class="media-placeholder media-placeholder--light" style="min-height:260px;">
+          <i class="fas fa-arrows-spin media-placeholder__icon"></i>
+          <span class="media-placeholder__label">Self-Evolution Diagram</span>
+          <span class="media-placeholder__hint">Failure / suboptimal / irrelevant data → distributed RL loop</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Evaluation</p>
+      <h2 class="m2-section__title">Results &amp; ablation</h2>
+      <div class="m2-prose">
+        <p>
+          Each component of the Motus2 stack contributes measurably to downstream task
+          performance. On screw-bulb insertion with only 100 teleop demos, the full pipeline
+          lifts success rate from 5% to 90%.
+        </p>
+      </div>
+
+      <div class="m2-results-grid">
+        <div class="m2-result-card">
+          <div class="m2-result-card__head">Screw Bulb — Success Rate Progression</div>
+          <div class="m2-result-card__body">
+            <div class="ablation-bar">
+              <div class="ablation-bar__label"><span>Teleop baseline (100 demos)</span><span>5%</span></div>
+              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:5%;"></div></div>
+            </div>
+            <div class="ablation-bar">
+              <div class="ablation-bar__label"><span>+ Stage 2 human data pretrain</span><span>50%</span></div>
+              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:50%;"></div></div>
+            </div>
+            <div class="ablation-bar">
+              <div class="ablation-bar__label"><span>+ Human-Robot Align collection</span><span>70%</span></div>
+              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:70%;"></div></div>
+            </div>
+            <div class="ablation-bar">
+              <div class="ablation-bar__label"><span>+ Tactile sensing</span><span>80%</span></div>
+              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:80%;"></div></div>
+            </div>
+            <div class="ablation-bar">
+              <div class="ablation-bar__label"><span>+ MBRL (Motus2-mbrl)</span><span>90%</span></div>
+              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:90%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="m2-result-card">
+          <div class="m2-result-card__head">Post-Training Mode Ablation (Cut Banana)</div>
+          <div class="m2-result-card__body" style="padding:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mode</th>
+                  <th>Description</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>joint</strong></td>
+                  <td>Joint video-action prediction</td>
+                  <td>TBD</td>
+                </tr>
+                <tr>
+                  <td><strong>video_idm</strong></td>
+                  <td>Video + inverse dynamics</td>
+                  <td>TBD</td>
+                </tr>
+                <tr>
+                  <td><strong>action_only</strong></td>
+                  <td>Action expert only</td>
+                  <td>TBD</td>
+                </tr>
+                <tr>
+                  <td><strong>loop</strong></td>
+                  <td>Iterative IDM + FDM</td>
+                  <td>TBD</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <figure class="m2-figure">
+        <div class="media-placeholder media-placeholder--light" style="min-height:240px;">
+          <i class="fas fa-images media-placeholder__icon"></i>
+          <span class="media-placeholder__label">Ablation Visualizations</span>
+          <span class="media-placeholder__hint">Comparison GIFs for joint / video_idm / action_only / loop modes</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Hardware -->
+  <section id="hardware" class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Platform</p>
+      <h2 class="m2-section__title">Hardware is not downstream of the model</h2>
+      <div class="m2-prose">
+        <p>
+          Capable hardware is what makes the right data scalable. Motus2 runs on a platform
+          designed to minimize the embodiment gap — from data collection glove to deployment robot.
+        </p>
+      </div>
+
+      <div class="hardware-grid">
+        <div class="hardware-card">
+          <div class="hardware-card__header"><i class="fas fa-robot"></i> Robot Platform</div>
+          <div class="hardware-card__body">
+            <ul>
+              <li>Stereo camera (ZED 2)</li>
+              <li>TianJi dual-arm system</li>
+              <li>WuJi dextrous hands</li>
+              <li>Full-palm tactile glove</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hardware-card">
+          <div class="hardware-card__header"><i class="fas fa-gamepad"></i> Teleoperation</div>
+          <div class="hardware-card__body">
+            <ul>
+              <li>Manus glove</li>
+              <li>HTC Vive tracking</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hardware-card">
+          <div class="hardware-card__header"><i class="fas fa-hand"></i> Human Data Collection</div>
+          <div class="hardware-card__body">
+            <ul>
+              <li>WuJi human tactile glove</li>
+              <li>HTC Vive tracking</li>
+              <li>Stereo egocentric camera</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <figure class="m2-figure">
+        <div class="media-placeholder media-placeholder--light" style="min-height:260px;">
+          <i class="fas fa-camera media-placeholder__icon"></i>
+          <span class="media-placeholder__label">Hardware Photos</span>
+          <span class="media-placeholder__hint">Robot, teleop rig, and human collection device — coming soon</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Acknowledgments -->
+  <section id="acknowledgments" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Partners</p>
+      <h2 class="m2-section__title">Acknowledgments</h2>
+      <div class="ack-grid">
+        <div class="ack-block">
+          <h4>Hardware Partners</h4>
+          <p>WuJi · TianJi</p>
+        </div>
+        <div class="ack-block">
+          <h4>Data Partners</h4>
+          <p>Ropedia · Egoscale · JD Group · LightWheel · SaiYuan · Chaowei</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation -->
+  <section id="citation" class="citation m2-section">
+    <div class="container">
+      <h2 class="section-title">Citation</h2>
+      <div class="citation-content">
+        <div class="citation-text">
+          <pre><code>@misc{motus22026,
+  title={Motus2: A Self-Evolved Egocentric Embodied Agent},
+  author={Motus Robotics Team},
+  year={2026},
+  note={Paper forthcoming},
+  url={https://motus-robotics.github.io/motus2},
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p>Motus2<br>Advancing Dexterous Manipulation to Human Level</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="https://motus-robotics.github.io/motus">Motus v1</a>
+            <a href="#demo">Demo</a>
+            <a href="#citation">Citation</a>
+          </div>
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <p>Motus Robotics</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Motus Robotics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
