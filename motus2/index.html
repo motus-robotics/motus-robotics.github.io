@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motus2: A Self-Evolved Egocentric Embodied Agent</title>
-  <meta name="description" content="Motus2 pushes general-purpose dexterous manipulation toward human level through a unified world model, human-centric data at scale, tactile sensing, and self-evolving RL.">
+  <meta name="description" content="Motus2: A Self-Evolved Egocentric Embodied Agent — Unified World Model × Human Data × Dextrous Hand × Tactile Glove × Self-Evolving.">
   <meta property="og:title" content="Motus2: A Self-Evolved Egocentric Embodied Agent">
   <meta property="og:description" content="Unified World Model × Human Data × Dextrous Hand × Tactile Glove × Self-Evolving">
   <meta property="og:image" content="assets/img/joint_video_action_tactile_dit.png">
@@ -39,18 +39,31 @@
     <div class="motus2-hero__inner">
       <div class="motus2-hero__meta">
         <span class="motus2-hero__meta-tag">Research</span>
-        <span>By Motus Robotics Team</span>
+        <span>Motus2 Team</span>
         <span>May 2026</span>
       </div>
 
+      <p class="motus2-hero__display">MOTUS2</p>
       <h1 class="motus2-hero__title">
-        Motus2: Advancing Dexterous Manipulation to Human Level
+        A Self-Evolved Egocentric Embodied Agent
       </h1>
 
+      <div class="hero-authors motus2-hero__authors">
+        <a href="https://hongzhebi.github.io/">Hongzhe Bi</a><sup>*†</sup>,
+        <a href="https://pangjingrui.github.io/">Jingrui Pang</a><sup>*†</sup>,
+        <a>Shuhe Huang</a><sup>*</sup>,
+        <a>Haitian Liu</a><sup>*</sup>,
+        et al.
+      </div>
+      <p class="motus2-hero__author-note">
+        <sup>*</sup>Joint first authors&nbsp;&nbsp;
+        <sup>†</sup>Joint project lead
+      </p>
+
       <p class="motus2-hero__lede">
-        Motus2 is a self-evolved egocentric embodied agent built on a unified world model,
-        scaling human-centric data from web video to tactile robot demonstrations —
-        on a bionic stereo dual-arm platform with full-palm tactile sensing.
+        Unified World Model, human data at scale, dextrous bimanual hands, tactile gloves,
+        and a self-evolving training loop — built on a fully bionic stereo dual-arm dual-hand
+        platform with full-palm tactile sensing.
       </p>
 
       <div class="motus2-formula" aria-label="Motus2 formula">
@@ -70,11 +83,11 @@
       <div id="tldr" class="motus2-tldr">
         <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
         <ul>
-          <li><strong>Manipulation is the core bottleneck</strong> — contact-rich, long-horizon dexterity requires full-stack thinking beyond model training alone.</li>
-          <li><strong>Human-centric data at scale</strong> — a five-tier data pyramid from web video (110k+ hrs ego) to tactile robot demos bridges the embodiment gap.</li>
-          <li><strong>Joint Video-Action-Tactile DiT</strong> — multi-token in, multi-token out; one model for control, simulation, IDM, and value estimation.</li>
-          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL turns failure and suboptimal data into continuous improvement.</li>
-          <li><strong>Predictable scaling</strong> — human data scaling laws show consistent loss reduction as data grows from 2k to 20k hours.</li>
+          <li><strong>Unified World Model</strong> — World Action Model + World Simulator (AC-WM) + Value Model; multi-token in, multi-token out.</li>
+          <li><strong>Human Data Pyramid</strong> — from web video to stereo egocentric (20k hrs) and monocular ego (110k+ hrs), down to tactile robot data.</li>
+          <li><strong>Joint Video-Action-Tactile DiT</strong> — one model for joint / video_idm / action_only / loop post-training modes.</li>
+          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant data.</li>
+          <li><strong>Human data scaling laws</strong> — predictable loss reduction from 2k to 20k hours; test-time scaling via IDM + FDM loop.</li>
         </ul>
       </div>
 
@@ -107,34 +120,29 @@
         <div class="media-placeholder">
           <i class="fas fa-film media-placeholder__icon"></i>
           <span class="media-placeholder__label">Hero demo reel</span>
-          <span class="media-placeholder__hint">Full-width teaser video — coming soon</span>
+          <span class="media-placeholder__hint">Bionic stereo dual-arm dual-hand platform with full-palm tactile sensing — coming soon</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Why manipulation -->
+  <!-- Overview -->
   <section class="m2-section">
     <div class="m2-wrap">
-      <p class="m2-section__label">Motivation</p>
-      <h2 class="m2-section__title">Manipulation: why, and how.</h2>
+      <p class="m2-section__label">Overview</p>
+      <h2 class="m2-section__title">The End — Motus2</h2>
       <div class="m2-prose">
         <p>
-          <strong>Manipulation is the most valuable problem in robotics</strong> because it turns
-          intelligence into useful work. Most physical labor is not about moving <em>through</em> the
-          world, but <em>transforming</em> it — and that transformation happens through contact.
+          Motus2 unifies <strong>world action modeling</strong>, <strong>autoregressive world
+          simulation</strong>, and <strong>value learning</strong> into a single egocentric
+          embodied agent — scaling from internet video and human demonstrations to tactile
+          robot trajectories, then continuously improving through self-evolution.
         </p>
         <p>
-          Motus2 addresses this as a <strong>full-stack system problem</strong>, not a pure model
-          training problem. Hardware that can express rich contact, data that preserves human
-          interaction fidelity, a robotics-native foundation model, and evaluation infrastructure
-          that scales — all must work together.
-        </p>
-        <p>
-          Our robot platform combines <strong>stereo egocentric vision</strong>, a
-          <strong>bionic dual-arm dual-hand</strong> system, and <strong>full-palm tactile
-          sensing</strong> — designed to minimize the embodiment gap between human demonstrations
-          and robot execution.
+          Demo tasks include spray cleaner, screw bulb, cut banana, fry egg, toast bread,
+          multi-finger grasp, and cut asparagus — contact-rich bimanual skills executed on a
+          <strong>fully bionic stereo dual-arm dual-hand platform with full-palm tactile
+          sensing</strong>.
         </p>
       </div>
     </div>
@@ -144,7 +152,7 @@
   <section id="demo" class="m2-section m2-section--alt demo">
     <div class="demo-container">
       <p class="m2-section__label" style="text-align:center;">Real-World Experiments</p>
-      <h2 class="section-title">What Motus2 can do</h2>
+      <h2 class="section-title">Demo</h2>
       <p style="text-align:center; max-width:680px; margin:-32px auto 40px; color:var(--m2-muted); line-height:1.7; font-size:1.02rem;">
         Contact-rich, long-horizon tasks at real-world speed. Demo videos will be added progressively.
       </p>
@@ -221,18 +229,17 @@
   <section id="model" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Architecture</p>
-      <h2 class="m2-section__title">A robotics-native foundation model</h2>
+      <h2 class="m2-section__title">Unified World Model</h2>
       <div class="m2-prose">
         <p>
-          Motus2 learns a <strong>joint distribution over video, action, and tactile
-          trajectories</strong> using a Joint Video-Action-Tactile DiT. Multi-token input and
-          multi-token output enable a single unified model for control, generative simulation
-          (AC-WM), inverse dynamics, and value estimation — with missing modalities inferred
-          through denoising.
+          <strong>Multi-token in, multi-token out.</strong> Motus2 learns a joint distribution
+          over video, action, and tactile trajectories using a Joint Video-Action-Tactile DiT —
+          unifying World Action Model, Autoregressive World Simulator (AC-WM), and Value Model
+          in a single framework.
         </p>
         <p>
           Post-training supports four modes: <em>joint</em>, <em>video_idm</em>,
-          <em>action_only</em>, and <em>loop</em>. A sliding-window autoregressive scheme
+          <em>action_only</em>, and <em>loop</em>. Sliding-window autoregressive decoding
           enables long-horizon rollouts at deployment.
         </p>
       </div>
@@ -262,12 +269,12 @@
   <section id="data" class="m2-section m2-section--alt">
     <div class="m2-wrap">
       <p class="m2-section__label">Scaling Path</p>
-      <h2 class="m2-section__title">The human-centric data engine</h2>
+      <h2 class="m2-section__title">Human Data Pyramid</h2>
       <div class="m2-prose">
         <p>
-          <strong>Over 80% of physical labor is manipulation — almost none of it has ever been
-          recorded.</strong> Motus2 is built around a scaling path from diverse human
-          demonstrations to tactile robot data, spanning five tiers of the data pyramid.
+          Motus2 scales along a five-tier human data pyramid — from internet-scale web video,
+          through 110k+ hours of monocular and 20k hours of stereo egocentric data, to
+          human-robot aligned tactile trajectories and target-robot demonstrations.
         </p>
       </div>
 
@@ -311,21 +318,32 @@
   <section id="evolving" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Self-Evolving</p>
-      <h2 class="m2-section__title">Scaling towards deployment</h2>
+      <h2 class="m2-section__title">Self-Evolving Agent</h2>
       <div class="m2-prose">
         <p>
-          Beyond imitation learning, Motus2 leverages <strong>failure data</strong>,
-          <strong>suboptimal trajectories</strong>, and <strong>task-irrelevant data</strong>
-          through a self-evolving pipeline powered by <strong>Ray-based distributed
-          asynchronous RL</strong> — continuously improving policy quality from real-world
-          feedback.
+          Motus2-mbrl closes the loop with <strong>model-based RL</strong>: a Policy (Joint Model,
+          VLA) interacts with a World Model and Reward Model (Value Model), trained on
+          <strong>failure data</strong>, <strong>suboptimal trajectories</strong>, and
+          <strong>task-irrelevant data</strong> via <strong>Ray-based distributed async RL</strong>.
         </p>
         <h3>Test-Time Scaling</h3>
         <p>
-          At inference, Motus2 performs iterative denoising via IDM + FDM, alternating between
-          action prediction and video rollout for improved planning:
+          At inference, IDM + FDM iterative denoising alternates action prediction and video
+          rollout — predict action, simulate video, infer action, loop:
         </p>
       </div>
+
+      <figure class="m2-figure">
+        <img src="assets/img/model_base_rl.png"
+             alt="Model-based RL architecture with Policy, World Model, and Reward Model"
+             loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Figure 4: Model-Based RL.</strong>
+          Policy (Joint Model, VLA) generates actions from observations; the World Model
+          predicts future frames; the Reward Model provides value feedback — closing the
+          self-evolution loop.
+        </figcaption>
+      </figure>
 
       <div class="loop-steps">
         <div class="loop-step">
@@ -350,13 +368,6 @@
         </div>
       </div>
 
-      <figure class="m2-figure">
-        <div class="media-placeholder media-placeholder--light" style="min-height:260px;">
-          <i class="fas fa-arrows-spin media-placeholder__icon"></i>
-          <span class="media-placeholder__label">Self-Evolution Diagram</span>
-          <span class="media-placeholder__hint">Failure / suboptimal / irrelevant data → distributed RL loop</span>
-        </div>
-      </figure>
     </div>
   </section>
 
@@ -452,11 +463,11 @@
   <section id="hardware" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Platform</p>
-      <h2 class="m2-section__title">Hardware is not downstream of the model</h2>
+      <h2 class="m2-section__title">Hardware</h2>
       <div class="m2-prose">
         <p>
-          Capable hardware is what makes the right data scalable. Motus2 runs on a platform
-          designed to minimize the embodiment gap — from data collection glove to deployment robot.
+          Motus2 spans three hardware stacks — deployment robot, teleoperation, and human data
+          collection — sharing tactile gloves and stereo egocentric sensing across the pipeline.
         </p>
       </div>
 
@@ -493,13 +504,24 @@
         </div>
       </div>
 
-      <figure class="m2-figure">
-        <div class="media-placeholder media-placeholder--light" style="min-height:260px;">
-          <i class="fas fa-camera media-placeholder__icon"></i>
-          <span class="media-placeholder__label">Hardware Photos</span>
-          <span class="media-placeholder__hint">Robot, teleop rig, and human collection device — coming soon</span>
-        </div>
-      </figure>
+      <div class="m2-hardware-photos">
+        <figure class="m2-figure m2-figure--compact">
+          <img src="assets/img/robot_platform.png"
+               alt="Motus2 robot platform with ZED stereo camera and WuJi hands"
+               loading="lazy">
+          <figcaption class="m2-figure__caption">
+            <strong>Robot platform.</strong> Stereo camera (ZED 2), TianJi dual-arm, WuJi dextrous hands, full-palm tactile.
+          </figcaption>
+        </figure>
+        <figure class="m2-figure m2-figure--compact">
+          <img src="assets/img/human_data_collection.png"
+               alt="Human data collection with WuJi tactile glove and stereo camera"
+               loading="lazy">
+          <figcaption class="m2-figure__caption">
+            <strong>Human data collection.</strong> WuJi human tactile glove, Vive tracking, stereo egocentric camera.
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -529,9 +551,9 @@
         <div class="citation-text">
           <pre><code>@misc{motus22026,
   title={Motus2: A Self-Evolved Egocentric Embodied Agent},
-  author={Motus Robotics Team},
+  author={Hongzhe Bi and Jingrui Pang and Shuhe Huang and Haitian Liu and others},
   year={2026},
-  note={Paper forthcoming},
+  note={*Joint first authors. †Joint project lead. Paper forthcoming.},
   url={https://motus-robotics.github.io/motus2},
 }</code></pre>
         </div>
@@ -543,7 +565,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-info">
-          <p>Motus2<br>Advancing Dexterous Manipulation to Human Level</p>
+          <p>Motus2<br>A Self-Evolved Egocentric Embodied Agent</p>
         </div>
         <div class="footer-links">
           <div class="footer-section">
@@ -554,12 +576,12 @@
           </div>
           <div class="footer-section">
             <h4>Contact</h4>
-            <p>Motus Robotics</p>
+            <p>Motus2 Team</p>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Motus Robotics. All rights reserved.</p>
+        <p>&copy; 2026 Motus2 Team. All rights reserved.</p>
       </div>
     </div>
   </footer>

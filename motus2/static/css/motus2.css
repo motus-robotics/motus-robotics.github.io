@@ -1,4 +1,4 @@
-/* Motus2 — editorial layout inspired by Genesis blog + Motus academic style */
+/* Motus2 — editorial layout (Motus academic + Dexora visual showcase) */
 
 html {
   scroll-behavior: smooth;
@@ -53,7 +53,7 @@ html {
   }
 }
 
-/* ── Hero (Genesis-style editorial opener) ── */
+/* ── Hero ── */
 .motus2-hero {
   position: relative;
   padding: 108px 0 72px;
@@ -86,13 +86,58 @@ html {
   font-size: 0.78rem;
 }
 
-.motus2-hero__title {
-  font-size: clamp(2.6rem, 5.5vw, 4rem);
+.motus2-hero__authors {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.motus2-hero__authors a {
+  color: hsl(204, 86%, 53%);
+  text-decoration: none;
+}
+
+.motus2-hero__authors a:hover {
+  text-decoration: underline;
+}
+
+.motus2-hero__authors sup {
+  margin-left: 1px;
+  font-size: 0.75em;
+}
+
+.motus2-hero__author-note {
+  margin: 0 0 24px;
+  font-size: 0.88rem;
+  color: var(--m2-muted);
+  text-align: left;
+}
+
+.motus2-hero__author-note sup {
+  margin-right: 2px;
+}
+
+.motus2-hero__display {
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
   font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0 0 12px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.motus2-hero__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0 0 20px;
-  max-width: 900px;
+  letter-spacing: -0.02em;
+  max-width: 820px;
+  color: var(--m2-ink);
 }
 
 .motus2-hero__lede {
@@ -137,7 +182,7 @@ html {
   font-weight: 700;
 }
 
-/* TL;DR box — Genesis-style */
+/* TL;DR box */
 .motus2-tldr {
   max-width: var(--m2-max-content);
   margin: 0 0 36px;
@@ -222,15 +267,34 @@ html {
   color: var(--m2-muted);
 }
 
-/* Hero media strip (video placeholder) */
+/* Hero media strip (Dexora-style showcase) */
 .motus2-hero__media-strip {
   margin-top: 48px;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--m2-border);
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-  aspect-ratio: 16 / 9;
   background: #0f172a;
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+}
+
+.motus2-hero__media-strip img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+
+.motus2-hero__media-caption {
+  margin: 0;
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  color: var(--m2-muted);
+  background: #fff;
+  border-top: 1px solid var(--m2-border);
+  text-align: center;
 }
 
 /* ── Editorial prose sections ── */
@@ -667,4 +731,34 @@ html {
 
 .m2-result-card td {
   color: var(--m2-muted);
+}
+
+/* Hardware photo pair */
+.m2-hardware-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+@media (max-width: 768px) {
+  .m2-hardware-photos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.m2-figure--compact {
+  margin: 0;
+}
+
+.m2-figure--compact img {
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Demo card images */
+.demo-video img {
+  min-height: 220px;
+  background: #f1f5f9;
 }
