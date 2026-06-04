@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motus2: A Self-Evolved Egocentric Embodied Agent</title>
-  <meta name="description" content="Motus2: A Self-Evolved Egocentric Embodied Agent — Unified World Model × Human Data × Dextrous Hand × Tactile Glove × Self-Evolving.">
+  <meta name="description" content="Motus2: a unified world model that renders pixels, simulates state, plans actions, and evaluates rollouts — scaled on human data and self-evolved via model-based RL.">
   <meta property="og:title" content="Motus2: A Self-Evolved Egocentric Embodied Agent">
-  <meta property="og:description" content="Unified World Model × Human Data × Dextrous Hand × Tactile Glove × Self-Evolving">
+  <meta property="og:description" content="One world model — renderer, simulator, planner, and evaluator — with human data at scale and a self-evolving loop.">
   <meta property="og:image" content="assets/img/joint_video_action_tactile_dit.png">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -27,7 +27,7 @@
         <a href="#model">Model</a>
         <a href="#data">Data</a>
         <a href="#evolving">Self-Evolving</a>
-        <a href="#results">Results</a>
+        <!-- <a href="#results">Results</a> -->
         <a href="#hardware">Hardware</a>
         <a href="#citation">Citation</a>
       </div>
@@ -64,9 +64,10 @@
       </p>
 
       <p class="motus2-hero__lede">
-        Unified World Model, human data at scale, dextrous bimanual hands, tactile gloves,
-        and a self-evolving training loop — built on a fully bionic stereo dual-arm dual-hand
-        platform with full-palm tactile sensing.
+        One unified world model that <strong>renders</strong> egocentric video, <strong>simulates</strong>
+        contact-rich dynamics, <strong>plans</strong> dexterous actions, and <strong>evaluates</strong>
+        imagined rollouts — scaled on a human data pyramid and closed with model-based RL, on a
+        fully bionic stereo dual-arm dual-hand platform with full-palm tactile sensing.
       </p>
 
       <div class="motus2-formula" aria-label="Motus2 formula">
@@ -86,11 +87,11 @@
       <div id="tldr" class="motus2-tldr">
         <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
         <ul>
-          <li><strong>Unified World Model</strong> — World Action Model + World Simulator (AC-WM) + Value Model; multi-token in, multi-token out.</li>
-          <li><strong>Human Data Pyramid</strong> — from web video to stereo egocentric (20k hrs) and monocular ego (110k+ hrs), down to tactile robot data.</li>
-          <li><strong>Joint Video-Action-Tactile DiT</strong> — one model for joint / video_idm / action_only / loop post-training modes.</li>
-          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant data.</li>
-          <li><strong>Human data scaling laws</strong> — predictable loss reduction from 2k to 20k hours; test-time scaling via IDM + FDM loop.</li>
+          <li><strong>Unified World Model</strong> — renderer, simulator, planner, and evaluator in one Joint Video-Action-Tactile DiT; multi-token in, multi-token out.</li>
+          <li><strong>Sliding Window AR + Streaming Inference</strong> — long-horizon autoregressive rollouts at deployment without resetting context each step.</li>
+          <li><strong>Human Data Pyramid</strong> — web video → monocular ego (110k+ hrs) → stereo ego (20k hrs) → human-robot align → robot tactile demos.</li>
+          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant trajectories.</li>
+          <li><strong>Scaling laws &amp; test-time compute</strong> — predictable human-data loss scaling; planning via imagined rollouts and value search.</li>
         </ul>
       </div>
 
@@ -136,16 +137,26 @@
       <h2 class="m2-section__title">The End — Motus2</h2>
       <div class="m2-prose">
         <p>
-          Motus2 unifies <strong>world action modeling</strong>, <strong>autoregressive world
-          simulation</strong>, and <strong>value learning</strong> into a single egocentric
-          embodied agent — scaling from internet video and human demonstrations to tactile
-          robot trajectories, then continuously improving through self-evolution.
+          Embodied AI has long split the stack: models that <strong>render pixels</strong>,
+          models that <strong>simulate state</strong>, and models that <strong>plan actions</strong>.
+          The field’s clearest trend is their <strong>convergence</strong> — the knowledge to paint a
+          world, predict what happens inside it, and choose how to move is largely the <em>same</em>.
+          A model that truly understands a cup on a table should render it from any view, roll out
+          contact when it is pushed, and plan how a hand grasps it. Those are three projections of
+          one underlying world understanding; the logical endpoint is a <strong>unified world model</strong>.
         </p>
         <p>
-          Demo tasks include spray cleaner, screw bulb, cut banana, and multi-fruit grasp —
-          contact-rich bimanual skills executed on a
-          <strong>fully bionic stereo dual-arm dual-hand platform with full-palm tactile
-          sensing</strong>.
+          <strong>Motus2 is that endpoint, with the loop closed.</strong> A single Joint
+          Video-Action-Tactile DiT acts as <strong>renderer</strong> (future frames),
+          <strong>simulator</strong> (action-conditioned world model), <strong>planner</strong> (world
+          action model / policy), and <strong>evaluator</strong> (value model) — trained on a human
+          data pyramid from web video to tactile robot trajectories, then <strong>self-evolved</strong>
+          with model-based RL on real failure and suboptimal data.
+        </p>
+        <p>
+          On hardware, we demonstrate spray cleaner, screw bulb, cut banana, and multi-fruit grasp —
+          contact-rich bimanual skills on a
+          <strong>fully bionic stereo dual-arm dual-hand platform with full-palm tactile sensing</strong>.
         </p>
       </div>
     </div>
@@ -154,10 +165,11 @@
   <!-- Demo -->
   <section id="demo" class="m2-section m2-section--alt demo">
     <div class="demo-container">
-      <p class="m2-section__label" style="text-align:center;">Real-World Experiments</p>
-      <h2 class="section-title">Demo</h2>
-      <p style="text-align:center; max-width:680px; margin:-32px auto 40px; color:var(--m2-muted); line-height:1.7; font-size:1.02rem;">
-        Contact-rich, long-horizon tasks at real-world speed.
+      <p class="m2-section__label m2-section__label--center">Real-World Experiments</p>
+      <h2 class="section-title m2-demo-title">Demo</h2>
+      <p class="m2-demo-lead">
+        The unified model plans and controls contact-rich, long-horizon bimanual skills — evaluated
+        on real hardware with stereo vision and full-palm tactile feedback.
       </p>
 
       <div class="demo-grid">
@@ -231,16 +243,33 @@
       <h2 class="m2-section__title">Unified World Model</h2>
       <div class="m2-prose">
         <p>
-          <strong>Multi-token in, multi-token out.</strong> Motus2 learns a joint distribution
-          over video, action, and tactile trajectories using a Joint Video-Action-Tactile DiT —
-          unifying World Action Model, Autoregressive World Simulator (AC-WM), and Value Model
-          in a single framework.
+          <strong>Multi-token in, multi-token out.</strong> Motus2 learns a joint distribution over
+          language, stereo video, action, and tactile trajectories in one Joint Video-Action-Tactile
+          DiT. Language, perception, dynamics, and control are not separate heads bolted together —
+          they are interleaved tokens processed by shared causal DiT blocks, so the same weights
+          that imagine pixels also roll out physics and score futures.
         </p>
         <p>
-          Post-training supports four modes: <em>joint</em>, <em>video_idm</em>,
-          <em>action_only</em>, and <em>loop</em>. Sliding-window autoregressive decoding
-          enables long-horizon rollouts at deployment.
+          In deployment terms, the unified model is simultaneously a <strong>renderer</strong>
+          (predicting future egocentric frames), a <strong>simulator</strong> (action-conditioned
+          world model / AC-WM), a <strong>planner</strong> (world action model proposing action
+          chunks), and an <strong>evaluator</strong> (value model over imagined trajectories). Training
+          aligns these roles; inference runs them in a closed loop — imagine, simulate, plan, judge.
         </p>
+        <p>
+          Long horizons are handled with <strong>Sliding Window AR</strong>: the model autoregressively
+          extends video–action–tactile context in overlapping windows instead of a single-shot
+          prediction. <strong>Streaming Inference</strong> keeps latent state warm across windows so
+          each new chunk conditions on the previous rollout without cold-starting the full sequence —
+          enabling real-time control on contact-rich tasks.
+        </p>
+      </div>
+
+      <div class="model-pills" aria-label="Unified world model roles">
+        <div class="model-pill">Renderer<span>Future egocentric video tokens</span></div>
+        <div class="model-pill">Simulator<span>Action-conditioned world model</span></div>
+        <div class="model-pill">Planner<span>World action model / policy</span></div>
+        <div class="model-pill">Evaluator<span>Value model over rollouts</span></div>
       </div>
 
       <figure class="m2-figure">
@@ -249,17 +278,22 @@
              loading="lazy">
         <figcaption class="m2-figure__caption">
           <strong>Figure 1: Joint Video-Action-Tactile DiT.</strong>
-          Video, action, tactile, and language inputs are encoded into latents and processed
-          through causal DiT blocks. The model jointly predicts video, action, and tactile
-          feedback — enabling unified control and world simulation.
+          Video, action, tactile, and language are encoded into a shared interleaved sequence,
+          processed by causal DiT blocks, and decoded into future frames, actions, and tactile
+          feedback — one backbone for rendering, simulation, planning, and evaluation.
         </figcaption>
       </figure>
 
-      <div class="model-pills">
-        <div class="model-pill">Motus2-base<span>Pretrain foundation model</span></div>
-        <div class="model-pill">Motus2-sft<span>Human + robot data (4:1 / 5:1)</span></div>
-        <div class="model-pill">Motus2-mbrl<span>Model-based RL fine-tuning</span></div>
-        <div class="model-pill">Motus2-ultra<span>MotuBrain-Dex (Vidu-Q3)</span></div>
+      <div class="model-pills" aria-label="Model stack">
+        <div class="model-pill">Motus2-base<span>Large-scale pretrain on the human data pyramid</span></div>
+        <div class="model-pill">Motus2-sft<span>Human + robot alignment post-training</span></div>
+        <div class="model-pill">Motus2-mbrl<span>Model-based RL on failure &amp; suboptimal data</span></div>
+        <div class="model-pill">Motus2-ultra<span>Open physical-AI omnimodel (vision reasoning · world simulation · action generation)</span></div>
+      </div>
+
+      <div class="model-pills" aria-label="Deployment inference">
+        <div class="model-pill">Sliding Window AR<span>Overlapping autoregressive windows for long horizons</span></div>
+        <div class="model-pill">Streaming Inference<span>Stateful rollouts across windows at control rate</span></div>
       </div>
     </div>
   </section>
@@ -271,9 +305,12 @@
       <h2 class="m2-section__title">Human Data Pyramid</h2>
       <div class="m2-prose">
         <p>
-          Motus2 scales along a five-tier human data pyramid — from internet-scale web video,
-          through 110k+ hours of monocular and 20k hours of stereo egocentric data, to
-          human-robot aligned tactile trajectories and target-robot demonstrations.
+          A unified world model is only as good as the world it has seen. Motus2 scales along a
+          five-tier <strong>human data pyramid</strong> — from internet-scale web video (breadth),
+          through 110k+ hours of monocular and 20k hours of stereo egocentric video (egocentric
+          physics and hand–object contact), to human-robot aligned tactile trajectories and
+          target-robot demonstrations (the distribution we deploy on). Each tier teaches the same
+          underlying object and contact knowledge the renderer, simulator, and planner must share.
         </p>
       </div>
 
@@ -289,7 +326,7 @@
         </figcaption>
       </figure>
 
-      <div class="m2-split" style="margin-top:48px;">
+      <div class="m2-split m2-split--spaced">
         <div class="m2-prose">
           <h3>Human Data Scaling Laws</h3>
           <p>
@@ -299,7 +336,7 @@
           </p>
           <div class="m2-callout">L = 0.101 − 0.005 · ln(D)</div>
         </div>
-        <figure class="m2-figure" style="margin:0;">
+        <figure class="m2-figure m2-figure--flush">
           <img src="assets/img/scaling_laws.png"
                alt="Human validation loss vs epoch and scaling law plot"
                loading="lazy">
@@ -320,57 +357,74 @@
       <h2 class="m2-section__title">Self-Evolving Agent</h2>
       <div class="m2-prose">
         <p>
-          Motus2-mbrl closes the loop with <strong>model-based RL</strong>: a Policy (Joint Model,
-          VLA) interacts with a World Model and Reward Model (Value Model), trained on
-          <strong>failure data</strong>, <strong>suboptimal trajectories</strong>, and
-          <strong>task-irrelevant data</strong> via <strong>Ray-based distributed async RL</strong>.
-        </p>
-        <h3>Test-Time Scaling</h3>
-        <p>
-          At inference, IDM + FDM iterative denoising alternates action prediction and video
-          rollout — predict action, simulate video, infer action, loop:
+          Pretraining gives Motus2 a shared world prior; <strong>self-evolution</strong> sharpens it on
+          the robot. Motus2-mbrl runs <strong>model-based RL</strong> where the same unified backbone
+          proposes actions, the action-conditioned world model imagines consequences, and the value
+          model scores them — trained with <strong>Ray-based distributed async RL</strong> on
+          <strong>failure rollouts</strong>, <strong>suboptimal teleop</strong>, and
+          <strong>task-irrelevant exploration</strong> that static imitation would discard.
         </p>
       </div>
 
       <figure class="m2-figure">
-        <img src="assets/img/model_base_rl.png"
-             alt="Model-based RL architecture with Policy, World Model, and Reward Model"
+        <img src="assets/img/model_based_rl.png"
+             alt="Model-based RL: World Action Model, action-conditioned world model, and value model"
              loading="lazy">
         <figcaption class="m2-figure__caption">
           <strong>Figure 4: Model-Based RL.</strong>
-          Policy (Joint Model, VLA) generates actions from observations; the World Model
-          predicts future frames; the Reward Model provides value feedback — closing the
-          self-evolution loop.
+          World Action Model proposes actions from observation and state; the action-conditioned
+          world model rolls out future frames; the value model provides reward for RL updates.
+        </figcaption>
+      </figure>
+
+      <div class="m2-prose">
+        <h3>Test-Time Scaling &amp; Planning</h3>
+        <p>
+          At deployment, the planner and simulator run inside the same weights: propose an action
+          chunk, roll out future frames with the world model, re-infer actions (IDM + FDM / denoising),
+          and let the evaluator pick high-value branches — <strong>test-time scaling</strong> over
+          imagined trajectories rather than more parameters.
+        </p>
+      </div>
+
+      <figure class="m2-figure">
+        <img src="assets/img/model_based_planning.png"
+             alt="Model-based planning with world action model, rollouts, value model, and policy optimization"
+             loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Figure 5: Model-Based Planning.</strong>
+          The world action model generates future frame and action-chunk rollouts; the value model
+          scores trajectories for policy optimization at deployment.
         </figcaption>
       </figure>
 
       <div class="loop-steps">
         <div class="loop-step">
           <div class="loop-step__num">1</div>
-          <h4>Predict Action</h4>
-          <p>Roll out one action step</p>
+          <h4>Plan</h4>
+          <p>World action model proposes an action chunk</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">2</div>
-          <h4>Simulate Video</h4>
-          <p>FDM / AC-WM generates observation</p>
+          <h4>Simulate</h4>
+          <p>Renderer / AC-WM rolls out future frames</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">3</div>
-          <h4>Infer Action</h4>
-          <p>IDM / Policy refines action</p>
+          <h4>Refine</h4>
+          <p>IDM + FDM re-infer actions on new observations</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">4</div>
-          <h4>Loop</h4>
-          <p>Repeat until completion</p>
+          <h4>Evaluate</h4>
+          <p>Value model scores branches; deploy best rollout</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Results -->
+  <!-- Results (hidden until ablation / mode comparison ready)
   <section id="results" class="m2-section m2-section--alt">
     <div class="m2-wrap">
       <p class="m2-section__label">Evaluation</p>
@@ -457,6 +511,7 @@
       </figure>
     </div>
   </section>
+  -->
 
   <!-- Hardware -->
   <section id="hardware" class="m2-section">
@@ -465,8 +520,10 @@
       <h2 class="m2-section__title">Hardware</h2>
       <div class="m2-prose">
         <p>
-          Motus2 spans three hardware stacks — deployment robot, teleoperation, and human data
-          collection — sharing tactile gloves and stereo egocentric sensing across the pipeline.
+          The same tactile and stereo egocentric sensing appears across three stacks — robot
+          deployment, teleoperation for collection, and in-the-wild human demos — so what the
+          unified model learns from human video matches what it sees and feels on the bimanual
+          platform at test time.
         </p>
       </div>
 
@@ -544,7 +601,7 @@
 
   <!-- Citation -->
   <section id="citation" class="citation m2-section">
-    <div class="container">
+    <div class="container m2-wrap m2-wrap--citation">
       <h2 class="section-title">Citation</h2>
       <div class="citation-content">
         <div class="citation-text">
@@ -564,7 +621,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-info">
-          <p>Motus2<br>A Self-Evolved Egocentric Embodied Agent</p>
+          <p>Motus2<br>Unified World Model · Human Data · Self-Evolving</p>
         </div>
         <div class="footer-links">
           <div class="footer-section">
