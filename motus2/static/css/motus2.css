@@ -196,49 +196,6 @@ body.motus2-dark .hero-authors a {
 
 .motus2-hero__inner {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-@media (min-width: 900px) {
-  .motus2-hero__inner {
-    align-items: center;
-    text-align: center;
-  }
-
-  .motus2-hero__meta,
-  .motus2-hero__authors,
-  .motus2-hero__author-note,
-  .motus2-hero__lede,
-  .motus2-formula,
-  .motus2-tldr,
-  .motus2-hero__actions,
-  .demo-task-chips {
-    align-self: center;
-  }
-
-  .motus2-hero__authors,
-  .motus2-hero__author-note {
-    text-align: center;
-  }
-
-  .motus2-hero__lede {
-    margin-inline: auto;
-  }
-
-  .motus2-formula {
-    justify-content: center;
-  }
-
-  .motus2-hero__actions,
-  .demo-task-chips {
-    justify-content: center;
-  }
-
-  .motus2-hero__title {
-    margin-inline: auto;
-  }
 }
 
 .motus2-hero__logo {
@@ -493,41 +450,6 @@ body.motus2-dark .hero-authors a {
   box-sizing: border-box;
 }
 
-/* Centered editorial column — avoids narrow prose stuck on the left */
-.m2-section .m2-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.m2-section .m2-wrap > .m2-section__label,
-.m2-section .m2-wrap > .m2-section__title,
-.m2-section .m2-wrap > .m2-prose,
-.m2-section .m2-wrap > .m2-figure,
-.m2-section .m2-wrap > .model-pills,
-.m2-section .m2-wrap > .loop-steps,
-.m2-section .m2-wrap > .hardware-grid,
-.m2-section .m2-wrap > .m2-hardware-photos,
-.m2-section .m2-wrap > .m2-split,
-.m2-section .m2-wrap > .ack-grid {
-  width: 100%;
-}
-
-.m2-section .m2-wrap > .m2-section__label,
-.m2-section .m2-wrap > .m2-section__title {
-  max-width: var(--m2-max-content);
-  text-align: center;
-}
-
-.m2-section .m2-wrap > .m2-prose {
-  max-width: var(--m2-max-prose);
-  margin-inline: auto;
-}
-
-.m2-section .m2-wrap > .m2-figure {
-  max-width: var(--m2-max-wide);
-}
-
 .m2-section__label--center {
   text-align: center;
 }
@@ -578,17 +500,9 @@ body.motus2-dark .hero-authors a {
 
 .m2-prose {
   max-width: min(var(--m2-max-prose), 100%);
-  margin-inline: auto;
   line-height: 1.8;
   color: #cbd5e1;
   font-size: clamp(0.98rem, 1.5vw, 1.05rem);
-  text-align: left;
-  hyphens: auto;
-}
-
-.m2-split .m2-prose {
-  max-width: none;
-  margin-inline: 0;
 }
 
 .m2-prose p {
@@ -665,15 +579,14 @@ body.motus2-dark .hero-authors a {
 .model-pills {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 12px;
   margin-top: 28px;
 }
 
 .model-pill {
-  flex: 0 1 auto;
-  min-width: min(100%, 11.5rem);
-  max-width: 22rem;
+  flex: 1 1 auto;
+  min-width: min(100%, 12rem);
+  max-width: 100%;
   padding: 12px clamp(14px, 2.5vw, 18px);
   border-radius: 10px;
   background: var(--m2-surface);
