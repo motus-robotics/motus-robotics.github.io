@@ -166,6 +166,21 @@ body.motus2-dark .hero-authors a {
   padding: 0 24px;
 }
 
+.motus2-hero__logo {
+  display: inline-block;
+  margin-bottom: 32px;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  line-height: 0;
+}
+
+.motus2-hero__logo img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
 .motus2-hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -720,6 +735,24 @@ body.motus2-dark .hero-authors a {
   color: var(--m2-accent);
 }
 
+.media-placeholder--hero {
+  min-height: 100%;
+  gap: 14px;
+}
+
+.media-placeholder__soon {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .media-placeholder__label {
   font-size: 0.88rem;
   font-weight: 600;
@@ -829,8 +862,14 @@ body.motus2-dark .hero-authors a {
   object-position: center top;
 }
 
-.demo-video img {
-  min-height: 220px;
+.demo-video img,
+.demo-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  object-position: center center;
   background: #000;
 }
 

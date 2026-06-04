@@ -37,6 +37,9 @@
   <!-- Hero -->
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
+      <a href="#home" class="motus2-hero__logo" aria-label="Company logo">
+        <img src="assets/img/ss-logo-text.png" alt="Company logo">
+      </a>
       <div class="motus2-hero__meta">
         <span class="motus2-hero__meta-tag">Research</span>
         <span>Motus2 Team</span>
@@ -57,7 +60,7 @@
       </div>
       <p class="motus2-hero__author-note">
         <sup>*</sup>Joint first authors&nbsp;&nbsp;
-        <sup>†</sup>Joint project lead
+        <sup>†</sup>Project Lead
       </p>
 
       <p class="motus2-hero__lede">
@@ -110,17 +113,17 @@
         <span class="demo-task-chip">Spray Cleaner</span>
         <span class="demo-task-chip">Screw Bulb</span>
         <span class="demo-task-chip">Cut Banana</span>
-        <span class="demo-task-chip">Fry Egg</span>
-        <span class="demo-task-chip">Toast Bread</span>
-        <span class="demo-task-chip">Multi-Finger Grasp</span>
-        <span class="demo-task-chip">Cut Asparagus</span>
+        <span class="demo-task-chip">Multi-Fruit Grasp</span>
+        <!-- <span class="demo-task-chip">Fry Egg</span> -->
+        <!-- <span class="demo-task-chip">Toast Bread</span> -->
+        <!-- <span class="demo-task-chip">Cut Asparagus</span> -->
       </div>
 
       <div class="motus2-hero__media-strip">
-        <div class="media-placeholder">
-          <i class="fas fa-film media-placeholder__icon"></i>
-          <span class="media-placeholder__label">Hero demo reel</span>
-          <span class="media-placeholder__hint">Bionic stereo dual-arm dual-hand platform with full-palm tactile sensing — coming soon</span>
+        <div class="media-placeholder media-placeholder--hero">
+          <span class="media-placeholder__soon">Coming Soon</span>
+          <span class="media-placeholder__label">Hero Demo Reel</span>
+          <span class="media-placeholder__hint">Full demonstration video will be released shortly. Stay tuned.</span>
         </div>
       </div>
     </div>
@@ -139,8 +142,8 @@
           robot trajectories, then continuously improving through self-evolution.
         </p>
         <p>
-          Demo tasks include spray cleaner, screw bulb, cut banana, fry egg, toast bread,
-          multi-finger grasp, and cut asparagus — contact-rich bimanual skills executed on a
+          Demo tasks include spray cleaner, screw bulb, cut banana, and multi-fruit grasp —
+          contact-rich bimanual skills executed on a
           <strong>fully bionic stereo dual-arm dual-hand platform with full-palm tactile
           sensing</strong>.
         </p>
@@ -154,38 +157,43 @@
       <p class="m2-section__label" style="text-align:center;">Real-World Experiments</p>
       <h2 class="section-title">Demo</h2>
       <p style="text-align:center; max-width:680px; margin:-32px auto 40px; color:var(--m2-muted); line-height:1.7; font-size:1.02rem;">
-        Contact-rich, long-horizon tasks at real-world speed. Demo videos will be added progressively.
+        Contact-rich, long-horizon tasks at real-world speed.
       </p>
 
       <div class="demo-grid">
         <div class="demo-card">
           <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Spray Cleaner</span>
-            </div>
+            <video autoplay controls loop muted playsinline preload="auto">
+              <source src="assets/video/spray_cleaner.mp4" type="video/mp4">
+            </video>
           </div>
-          <div class="demo-info"><h3>Spray Cleaner</h3><p>Coming soon</p></div>
+          <div class="demo-info"><h3>Spray Cleaner</h3><p>Spray cleaner and wipe the tabletop.</p></div>
         </div>
         <div class="demo-card">
           <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Screw Bulb</span>
-            </div>
+            <video autoplay controls loop muted playsinline preload="auto">
+              <source src="assets/video/screw_bulb.mp4" type="video/mp4">
+            </video>
           </div>
-          <div class="demo-info"><h3>Screw Bulb</h3><p>Coming soon</p></div>
+          <div class="demo-info"><h3>Screw Bulb</h3><p>Screw in a light bulb with dual hands.</p></div>
         </div>
         <div class="demo-card">
           <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Cut Banana</span>
-            </div>
+            <video autoplay controls loop muted playsinline preload="auto">
+              <source src="assets/video/cut_banana.mp4" type="video/mp4">
+            </video>
           </div>
-          <div class="demo-info"><h3>Cut Banana</h3><p>Coming soon</p></div>
+          <div class="demo-info"><h3>Cut Banana</h3><p>Cut banana with a knife.</p></div>
         </div>
         <div class="demo-card">
+          <div class="demo-video">
+            <video autoplay controls loop muted playsinline preload="auto">
+              <source src="assets/video/multi_fruit_grasp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="demo-info"><h3>Multi-Fruit Grasp</h3><p>Grasp multiple fruits from the table.</p></div>
+        </div>
+        <!-- <div class="demo-card">
           <div class="demo-video">
             <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
               <i class="fas fa-video media-placeholder__icon"></i>
@@ -207,20 +215,11 @@
           <div class="demo-video">
             <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
               <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Multi-Finger Grasp</span>
-            </div>
-          </div>
-          <div class="demo-info"><h3>Multi-Finger Grasp</h3><p>Coming soon</p></div>
-        </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
               <span class="media-placeholder__label">Cut Asparagus</span>
             </div>
           </div>
           <div class="demo-info"><h3>Cut Asparagus</h3><p>Scissors task — coming soon</p></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -553,7 +552,7 @@
   title={Motus2: A Self-Evolved Egocentric Embodied Agent},
   author={Hongzhe Bi and Jingrui Pang and Shuhe Huang and Haitian Liu and others},
   year={2026},
-  note={*Joint first authors. †Joint project lead. Paper forthcoming.},
+  note={*Joint first authors. †Project lead. Paper forthcoming.},
   url={https://motus-robotics.github.io/motus2},
 }</code></pre>
         </div>
@@ -596,6 +595,32 @@
         }
       });
     });
+
+    (function () {
+      var demoVideos = document.querySelectorAll('.demo-video video');
+      function playAll() {
+        demoVideos.forEach(function (video) {
+          video.muted = true;
+          var p = video.play();
+          if (p && p.catch) p.catch(function () {});
+        });
+      }
+      playAll();
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) playAll();
+      });
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.muted = true;
+              entry.target.play().catch(function () {});
+            }
+          });
+        }, { threshold: 0.25 });
+        demoVideos.forEach(function (video) { observer.observe(video); });
+      }
+    })();
   </script>
 </body>
 </html>
