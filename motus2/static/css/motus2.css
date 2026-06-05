@@ -196,6 +196,7 @@ body.motus2-dark .hero-authors a {
 
 .motus2-hero__inner {
   box-sizing: border-box;
+  text-align: center;
 }
 
 .motus2-hero__logo {
@@ -217,6 +218,7 @@ body.motus2-dark .hero-authors a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 10px 18px;
   margin-bottom: 28px;
   font-size: 0.88rem;
@@ -231,11 +233,19 @@ body.motus2-dark .hero-authors a {
   font-size: 0.78rem;
 }
 
+.motus2-hero__meta-tag--open {
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+}
+
 .motus2-hero__authors {
   margin: 0 0 8px;
   font-size: 1.05rem;
   line-height: 1.6;
-  text-align: left;
+  text-align: center;
 }
 
 .motus2-hero__authors a {
@@ -258,7 +268,7 @@ body.motus2-dark .hero-authors a {
   margin: 0 0 24px;
   font-size: 0.88rem;
   color: var(--m2-muted);
-  text-align: left;
+  text-align: center;
 }
 
 .motus2-hero__author-note sup {
@@ -266,11 +276,11 @@ body.motus2-dark .hero-authors a {
 }
 
 .motus2-hero__display {
-  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   line-height: 1;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 45%, #60a5fa 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -281,7 +291,7 @@ body.motus2-dark .hero-authors a {
   font-size: clamp(1.35rem, 2.8vw, 2rem);
   font-weight: 700;
   line-height: 1.25;
-  margin: 0 0 20px;
+  margin: 0 auto 20px;
   letter-spacing: -0.02em;
   max-width: min(820px, 100%);
   color: var(--m2-ink);
@@ -291,16 +301,24 @@ body.motus2-dark .hero-authors a {
   font-size: clamp(1rem, 1.8vw, 1.3rem);
   line-height: 1.65;
   color: #cbd5e1;
-  max-width: min(var(--m2-max-prose), 100%);
-  margin: 0 0 36px;
+  max-width: min(58rem, 100%);
+  margin: 0 auto 36px;
+  text-align: left;
+  text-indent: 2em;
+}
+
+.motus2-hero__lede strong {
+  color: var(--m2-ink);
+  font-weight: 900;
 }
 
 .motus2-formula {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 7px 9px;
-  margin-bottom: 36px;
+  margin: 0 auto 36px;
   max-width: min(56rem, 100%);
 }
 
@@ -332,13 +350,14 @@ body.motus2-dark .hero-authors a {
 /* TL;DR box */
 .motus2-tldr {
   max-width: min(var(--m2-max-content), 100%);
-  margin: 0 0 36px;
+  margin: 0 auto 36px;
   padding: clamp(1.1rem, 3vw, 1.75rem) clamp(1.15rem, 3.5vw, 1.85rem);
   border-radius: 12px;
   background: var(--m2-surface);
   border: 1px solid var(--m2-border);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   scroll-margin-top: 100px;
+  text-align: left;
 }
 
 .motus2-tldr__heading {
@@ -378,6 +397,7 @@ body.motus2-dark .hero-authors a {
 .motus2-hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
   margin-bottom: 32px;
 }
@@ -390,6 +410,11 @@ body.motus2-dark .hero-authors a {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
+.motus2-hero__actions .button--soon {
+  cursor: default;
+  pointer-events: none;
+}
+
 .motus2-hero__actions .external-link.button:hover {
   background: rgba(255, 255, 255, 0.95);
   color: #111827 !important;
@@ -400,6 +425,7 @@ body.motus2-dark .hero-authors a {
 .demo-task-chips {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -415,14 +441,15 @@ body.motus2-dark .hero-authors a {
 
 /* Hero media strip */
 .motus2-hero__media-strip {
-  margin-top: 48px;
+  width: min(640px, 50%);
+  margin: 48px auto 0;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--m2-border);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
   background: #000;
   aspect-ratio: 16 / 9;
-  min-height: 280px;
+  min-height: 0;
 }
 
 .motus2-hero__media-strip img {
@@ -431,6 +458,12 @@ body.motus2-dark .hero-authors a {
   object-fit: cover;
   object-position: center 35%;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .motus2-hero__media-strip {
+    width: 100%;
+  }
 }
 
 /* ── Editorial sections ── */
@@ -499,7 +532,7 @@ body.motus2-dark .hero-authors a {
 }
 
 .m2-prose {
-  max-width: min(var(--m2-max-prose), 100%);
+  max-width: 100%;
   line-height: 1.8;
   color: #cbd5e1;
   font-size: clamp(0.98rem, 1.5vw, 1.05rem);
@@ -541,18 +574,40 @@ body.motus2-dark .hero-authors a {
 }
 
 .m2-figure img {
+  display: block;
   width: 100%;
   max-width: 100%;
   height: auto;
+  margin-inline: auto;
   border-radius: clamp(8px, 1.5vw, 12px);
   border: 1px solid var(--m2-border);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
+/* Architecture figure */
+.m2-figure--architecture img {
+  max-width: 85%;
+}
+
+/* Smaller figure (e.g. data pyramid) */
+.m2-figure--sm img {
+  max-width: min(780px, 100%);
+}
+
+/* Half-width figure (e.g. model-based RL / planning) */
+.m2-figure--half img {
+  max-width: min(660px, 100%);
+}
+
+/* Large but contained figure (e.g. scaling laws) */
+.m2-figure--lg img {
+  max-width: min(900px, 100%);
+}
+
 .m2-figure__caption {
   max-width: min(var(--m2-max-content), 100%);
   margin: 16px auto 0;
-  padding-inline: 0.25rem;
+  padding-inline: 0;
   font-size: clamp(0.86rem, 1.4vw, 0.92rem);
   line-height: 1.65;
   color: var(--m2-muted);
@@ -564,8 +619,9 @@ body.motus2-dark .hero-authors a {
 }
 
 .m2-callout {
-  display: inline-block;
-  margin-top: 16px;
+  display: block;
+  width: fit-content;
+  margin: 16px auto 0;
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--m2-accent-soft);
@@ -573,12 +629,13 @@ body.motus2-dark .hero-authors a {
   font-family: 'Monaco', 'Menlo', monospace;
   font-size: 0.88rem;
   color: var(--m2-accent-bright);
+  text-align: center;
 }
 
 /* Model pills */
 .model-pills {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 12px;
   margin-top: 28px;
 }
@@ -845,6 +902,106 @@ body.motus2-dark .demo-grid {
   margin-top: 8px;
 }
 
+body.motus2-dark .demo-grid--2x2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+@media (max-width: 560px) {
+  body.motus2-dark .demo-grid--2x2 {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+}
+
+/* Post-training mode attention masks — three side by side */
+.m2-mask-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: 28px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .m2-mask-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+.m2-mask {
+  margin: 0;
+  text-align: center;
+}
+
+.m2-mask img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--m2-border);
+  background: #fff;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.m2-mask figcaption {
+  margin-top: 10px;
+  font-size: clamp(0.78rem, 1.3vw, 0.86rem);
+  line-height: 1.5;
+  color: var(--m2-muted);
+}
+
+.m2-mask figcaption strong {
+  color: var(--m2-ink);
+}
+
+/* Author team */
+.team-group {
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  max-width: min(var(--m2-max-content), 100%);
+}
+
+.team-group__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--m2-accent-bright);
+  margin: 0 0 6px;
+}
+
+.team-group__note {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--m2-muted);
+}
+
+.team-group__plain {
+  margin: 0;
+  line-height: 1.8;
+  color: #cbd5e1;
+  font-size: clamp(0.95rem, 1.5vw, 1.02rem);
+}
+
+.team-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.85;
+  color: #cbd5e1;
+  font-size: clamp(0.95rem, 1.5vw, 1.02rem);
+}
+
+.team-list li {
+  margin-bottom: 6px;
+}
+
+.team-name {
+  font-weight: 600;
+  color: var(--m2-ink);
+}
+
 .m2-section .section-title {
   font-size: clamp(1.5rem, 3.2vw, 2.25rem);
   margin-bottom: clamp(0.75rem, 2vw, 1rem);
@@ -971,7 +1128,8 @@ body.motus2-dark .subsection-title {
   }
 
   .motus2-hero__display {
-    font-size: clamp(2.5rem, 14vw, 3.5rem);
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    letter-spacing: -0.02em;
   }
 
   .motus2-formula__term,

@@ -29,6 +29,7 @@
         <a href="#evolving">Self-Evolving</a>
         <!-- <a href="#results">Results</a> -->
         <a href="#hardware">Hardware</a>
+        <a href="#team">Team</a>
         <a href="#citation">Citation</a>
       </div>
     </div>
@@ -38,15 +39,14 @@
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
       <a href="#home" class="motus2-hero__logo" aria-label="Company logo">
-        <img src="assets/img/ss-logo-text.png" alt="Company logo">
+        <img src="assets/img/ss-logo.png" alt="Company logo">
       </a>
       <div class="motus2-hero__meta">
-        <span class="motus2-hero__meta-tag">Research</span>
         <span>Motus2 Team</span>
-        <span>May 2026</span>
+        <span>June 2026</span>
       </div>
 
-      <p class="motus2-hero__display">MOTUS2</p>
+      <p class="motus2-hero__display">Motus2</p>
       <h1 class="motus2-hero__title">
         A Self-Evolved Egocentric Embodied Agent
       </h1>
@@ -88,10 +88,11 @@
         <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
         <ul>
           <li><strong>Unified World Model</strong> — renderer, simulator, planner, and evaluator in one Joint Video-Action-Tactile DiT; multi-token in, multi-token out.</li>
-          <li><strong>Sliding Window AR + Streaming Inference</strong> — long-horizon autoregressive rollouts at deployment without resetting context each step.</li>
           <li><strong>Human Data Pyramid</strong> — web video → monocular ego (110k+ hrs) → stereo ego (20k hrs) → human-robot align → robot tactile demos.</li>
+          <li><strong>Sliding Window AR + Streaming Inference</strong> — long-horizon autoregressive rollouts at deployment without resetting context each step.</li>
           <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant trajectories.</li>
           <li><strong>Scaling laws &amp; test-time compute</strong> — predictable human-data loss scaling; planning via imagined rollouts and value search.</li>
+          <li><strong>Fully open-source</strong> — code, model weights, and paper will be released to the community (coming soon).</li>
         </ul>
       </div>
 
@@ -104,9 +105,21 @@
           <span class="icon"><i class="fas fa-arrow-left"></i></span>
           <span>Motus v1</span>
         </a>
-        <a href="#citation" class="external-link button is-normal is-rounded is-light">
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
           <span class="icon"><i class="ai ai-arxiv"></i></span>
           <span>Paper (Soon)</span>
+        </span>
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>Code (Soon)</span>
+        </span>
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
+          <span class="icon">🤗</span>
+          <span>Model (Soon)</span>
+        </span>
+        <a href="assets/img/wechat_group.png" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
+          <span class="icon"><i class="fab fa-weixin"></i></span>
+          <span>WeChat Group</span>
         </a>
       </div>
 
@@ -172,7 +185,7 @@
         on real hardware with stereo vision and full-palm tactile feedback.
       </p>
 
-      <div class="demo-grid">
+      <div class="demo-grid demo-grid--2x2">
         <div class="demo-card">
           <div class="demo-video">
             <video autoplay controls loop muted playsinline preload="auto">
@@ -272,7 +285,7 @@
         <div class="model-pill">Evaluator<span>Value model over rollouts</span></div>
       </div>
 
-      <figure class="m2-figure">
+      <figure class="m2-figure m2-figure--architecture">
         <img src="assets/img/joint_video_action_tactile_dit.png"
              alt="Joint Video-Action-Tactile DiT architecture"
              loading="lazy">
@@ -288,12 +301,7 @@
         <div class="model-pill">Motus2-base<span>Large-scale pretrain on the human data pyramid</span></div>
         <div class="model-pill">Motus2-sft<span>Human + robot alignment post-training</span></div>
         <div class="model-pill">Motus2-mbrl<span>Model-based RL on failure &amp; suboptimal data</span></div>
-        <div class="model-pill">Motus2-ultra<span>Open physical-AI omnimodel (vision reasoning · world simulation · action generation)</span></div>
-      </div>
-
-      <div class="model-pills" aria-label="Deployment inference">
-        <div class="model-pill">Sliding Window AR<span>Overlapping autoregressive windows for long horizons</span></div>
-        <div class="model-pill">Streaming Inference<span>Stateful rollouts across windows at control rate</span></div>
+        <div class="model-pill">Motus2-ultra<span>Built on a stronger foundation model</span></div>
       </div>
     </div>
   </section>
@@ -314,8 +322,8 @@
         </p>
       </div>
 
-      <figure class="m2-figure">
-        <img src="assets/img/human_data_pyramid.png"
+      <figure class="m2-figure m2-figure--sm">
+        <img src="assets/img/data_pyramid.png"
              alt="Human data pyramid from web video to robot tactile data"
              loading="lazy">
         <figcaption class="m2-figure__caption">
@@ -326,27 +334,25 @@
         </figcaption>
       </figure>
 
-      <div class="m2-split m2-split--spaced">
-        <div class="m2-prose">
-          <h3>Human Data Scaling Laws</h3>
-          <p>
-            Increasing human data consistently reduces validation loss. From 2k to 20k hours,
-            models converge faster and reach lower asymptotic error — following a predictable
-            logarithmic scaling law.
-          </p>
-          <div class="m2-callout">L = 0.101 − 0.005 · ln(D)</div>
-        </div>
-        <figure class="m2-figure m2-figure--flush">
-          <img src="assets/img/scaling_laws.png"
-               alt="Human validation loss vs epoch and scaling law plot"
-               loading="lazy">
-          <figcaption class="m2-figure__caption">
-            <strong>Figure 3: Training-time scaling.</strong>
-            Left: validation loss vs. epoch at 2k / 4k / 10k / 20k hours.
-            Right: optimal loss vs. data amount on log scale.
-          </figcaption>
-        </figure>
+      <div class="m2-prose m2-split--spaced">
+        <h3>Human Data Scaling Laws</h3>
+        <p>
+          Increasing human data consistently reduces validation loss. From 2k to 20k hours,
+          models converge faster and reach lower asymptotic error — following a predictable
+          logarithmic scaling law.
+        </p>
+        <div class="m2-callout">L = 0.101 − 0.005 · ln(D)</div>
       </div>
+      <figure class="m2-figure m2-figure--lg">
+        <img src="assets/img/scaling_laws.png"
+             alt="Human validation loss vs epoch and scaling law plot"
+             loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Figure 3: Training-time scaling.</strong>
+          Left: validation loss vs. epoch at 2k / 4k / 10k / 20k hours.
+          Right: optimal loss vs. data amount on log scale.
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -366,8 +372,8 @@
         </p>
       </div>
 
-      <figure class="m2-figure">
-        <img src="assets/img/model_based_rl.png"
+      <figure class="m2-figure m2-figure--half">
+        <img src="assets/img/mbrl.png"
              alt="Model-based RL: World Action Model, action-conditioned world model, and value model"
              loading="lazy">
         <figcaption class="m2-figure__caption">
@@ -387,8 +393,8 @@
         </p>
       </div>
 
-      <figure class="m2-figure">
-        <img src="assets/img/model_based_planning.png"
+      <figure class="m2-figure m2-figure--half">
+        <img src="assets/img/mb_planning.png"
              alt="Model-based planning with world action model, rollouts, value model, and policy optimization"
              loading="lazy">
         <figcaption class="m2-figure__caption">
@@ -421,6 +427,55 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Post-Training Modes -->
+  <section id="post-training" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Post-Training</p>
+      <h2 class="m2-section__title">Four Post-Training Modes</h2>
+      <div class="m2-prose">
+        <p>
+          Because one backbone attends over interleaved context (<strong>C</strong>), latent
+          (<strong>Z</strong>), action (<strong>A</strong>), tactile (<strong>T</strong>), and video
+          (<strong>V</strong>) tokens, changing the <strong>attention mask</strong> defines which operator
+          the backbone is optimized as during post-training. The same token interface supports a joint
+          predictor, an inverse-dynamics model, a pure policy, or a closed refinement loop.
+        </p>
+      </div>
+
+      <div class="m2-mask-grid" aria-label="Post-training mode attention masks">
+        <figure class="m2-mask">
+          <img src="assets/img/Joint.png" alt="Joint post-training mode attention mask" loading="lazy">
+          <figcaption><strong>Joint</strong> — predict video, action &amp; tactile together.</figcaption>
+        </figure>
+        <figure class="m2-mask">
+          <img src="assets/img/Video_IDM.png" alt="Video + IDM post-training mode attention mask" loading="lazy">
+          <figcaption><strong>Video + IDM</strong> — imagine frames, then infer the action that caused them.</figcaption>
+        </figure>
+        <figure class="m2-mask">
+          <img src="assets/img/Action_Only.png" alt="Action-only post-training mode attention mask" loading="lazy">
+          <figcaption><strong>Action-only</strong> — direct policy, actions without rendering video.</figcaption>
+        </figure>
+      </div>
+
+      <div class="model-pills" aria-label="Post-training modes">
+        <div class="model-pill">Joint<span>Joint video-action-tactile prediction</span></div>
+        <div class="model-pill">Video + IDM<span>Forward video rollout + inverse dynamics</span></div>
+        <div class="model-pill">Action-only<span>Action expert as a direct policy</span></div>
+        <div class="model-pill">Loop<span>Iterative refine: alternate FDM &amp; IDM to refine actions</span></div>
+      </div>
+
+      <div class="m2-prose">
+        <p>
+          The fourth mode, <strong>Loop</strong>, has no fixed mask of its own: it <strong>iteratively
+          refines</strong> by alternating the forward dynamics model (FDM, imagine the next frames) and
+          the inverse dynamics model (IDM, re-infer actions from those frames). Each pass conditions on
+          the previous rollout, so the action chunk is progressively sharpened against the model's own
+          imagined future.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -581,6 +636,46 @@
     </div>
   </section>
 
+  <!-- Author Team -->
+  <section id="team" class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Contributors</p>
+      <h2 class="m2-section__title">Author Team</h2>
+
+      <div class="team-group">
+        <h3 class="team-group__title">Core Team</h3>
+        <ul class="team-list">
+          <li><span class="team-name">Hongzhe Bi</span>: Base Model, Pre-Training, Post-Training, Human-Robot Align, Tactile Sensing, Model base RL, Hardware(Robot Platform), Data Quality</li>
+          <li><span class="team-name">Jingrui Pang</span>: Hardware(Robot Platform + Teleoperation + Human Data Collection), Tactile Sensing, Human-Robot Align, Post-Training</li>
+          <li><span class="team-name">Shuhe Huang</span>: Model base RL(Self-Evolving), Post-Training, Tactile Sensing</li>
+          <li><span class="team-name">Haitian Liu</span>: Human-Robot Align, Tactile Sensing, Inference Speedup, Post-Training, Hardware(Human Data Collection)</li>
+          <li><span class="team-name">Runqing Wang</span>: Async Inference</li>
+          <li><span class="team-name">Mengcheng Cai</span>: Async Inference</li>
+          <li><span class="team-name">Ruowen Zhao</span>: Test-Time Scaling &amp; Planning, Writing &amp; Visualization</li>
+        </ul>
+      </div>
+
+      <div class="team-group">
+        <h3 class="team-group__title">Data Team</h3>
+        <ul class="team-list">
+          <li><span class="team-name">Jinghui Wan</span>: Data Procurement, Data Collection</li>
+          <li><span class="team-name">Jiabao Liu</span>: Data Cleaning, Data Transformation, Data Annotation</li>
+          <li><span class="team-name">Xiaolong Liu</span>: Data Annotation, Offline Processing</li>
+        </ul>
+      </div>
+
+      <div class="team-group">
+        <h3 class="team-group__title">Contributors</h3>
+        <p class="team-group__plain">TBD</p>
+      </div>
+
+      <div class="team-group">
+        <h3 class="team-group__title">Advisors</h3>
+        <p class="team-group__plain">Min Zhao, Fan Bao, Dongyun Ge, Hang Su, Jun Zhu</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Acknowledgments -->
   <section id="acknowledgments" class="m2-section m2-section--alt">
     <div class="m2-wrap">
@@ -621,7 +716,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-info">
-          <p>Motus2<br>Unified World Model · Human Data · Self-Evolving</p>
+          <p>Motus2<br>Unified World Model · Human Data · Dextrous Hand · Tactile Glove · Self-Evolving</p>
         </div>
         <div class="footer-links">
           <div class="footer-section">
@@ -629,10 +724,7 @@
             <a href="https://motus-robotics.github.io/motus">Motus v1</a>
             <a href="#demo">Demo</a>
             <a href="#citation">Citation</a>
-          </div>
-          <div class="footer-section">
-            <h4>Contact</h4>
-            <p>Motus2 Team</p>
+            <a href="mailto:bhz24@mails.tsinghua.edu.cn">Contact</a>
           </div>
         </div>
       </div>
