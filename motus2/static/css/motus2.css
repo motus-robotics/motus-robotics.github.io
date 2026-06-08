@@ -558,6 +558,27 @@ body.motus2-dark .hero-authors a {
   margin: 2rem 0 0.75rem;
 }
 
+.m2-prose h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--m2-ink);
+  margin: 1.75rem 0 0.65rem;
+}
+
+.m2-tts-list {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+  line-height: 1.75;
+}
+
+.m2-tts-list li {
+  margin-bottom: 0.6rem;
+}
+
+.m2-tts-list li:last-child {
+  margin-bottom: 0;
+}
+
 .m2-prose ul {
   margin: 0 0 1.25rem;
   padding-left: 1.25rem;
@@ -915,6 +936,24 @@ body.motus2-dark .demo-grid--2x2 {
   }
 }
 
+/* Tactile viz — same width as the 2×2 demo row */
+.demo-tactile {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  margin-top: clamp(1.15rem, 3vw, 2.25rem);
+}
+
+@media (max-width: 560px) {
+  .demo-tactile {
+    max-width: 360px;
+  }
+}
+
+.demo-card--tactile {
+  width: 100%;
+}
+
 /* Post-training mode attention masks — three side by side */
 .m2-mask-grid {
   display: grid;
@@ -1102,6 +1141,13 @@ body.motus2-dark .demo-grid--2x2 {
   object-fit: contain;
   object-position: center center;
   background: #000;
+}
+
+/* Tactile viz: landscape native ratio (override 9:16 demo default) */
+body.motus2-dark .demo-video--tactile video {
+  aspect-ratio: 1280 / 416;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Subsection title from motus_style if used */

@@ -91,7 +91,7 @@
           <li><strong>Human Data Pyramid</strong> — web video → monocular ego (110k+ hrs) → stereo ego (20k hrs) → human-robot align → robot tactile demos.</li>
           <li><strong>Sliding Window AR + Streaming Inference</strong> — long-horizon autoregressive rollouts at deployment without resetting context each step.</li>
           <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant trajectories.</li>
-          <li><strong>Scaling laws &amp; test-time compute</strong> — predictable human-data loss scaling; planning via imagined rollouts and value search.</li>
+          <li><strong>Test-time scaling</strong> — spend inference compute on the unified world model: <em>Planning</em> (search rollouts in breadth) and <em>Loop</em> (refine via FDM↔IDM in depth).</li>
           <li><strong>Fully open-source</strong> — code, model weights, and paper will be released to the community (coming soon).</li>
         </ul>
       </div>
@@ -246,6 +246,20 @@
           <div class="demo-info"><h3>Cut Asparagus</h3><p>Scissors task — coming soon</p></div>
         </div> -->
       </div>
+
+      <div class="demo-tactile">
+        <div class="demo-card demo-card--tactile">
+          <div class="demo-video demo-video--tactile">
+            <video autoplay controls loop muted playsinline preload="auto">
+              <source src="assets/video/tactile_realtime.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="demo-info">
+            <h3>Real-Time Tactile Visualization</h3>
+            <p>Live full-palm tactile heatmaps streamed during manipulation.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -384,12 +398,40 @@
       </figure>
 
       <div class="m2-prose">
-        <h3>Test-Time Scaling &amp; Planning</h3>
+        <h3>Test-Time Scaling</h3>
         <p>
-          At deployment, the planner and simulator run inside the same weights: propose an action
-          chunk, roll out future frames with the world model, re-infer actions (IDM + FDM / denoising),
-          and let the evaluator pick high-value branches — <strong>test-time scaling</strong> over
-          imagined trajectories rather than more parameters.
+          Training-time scaling adds parameters and data; <strong>test-time scaling</strong> adds
+          <em>inference compute</em> on the <em>same</em> unified world model — the model imagines
+          futures before acting on the robot. Because renderer, simulator, planner, and evaluator
+          share one backbone, every extra forward pass is a meaningful thought step: simulate contact,
+          score outcomes, and only then commit an action.
+        </p>
+        <p>
+          Motus2 uses two complementary routes, both enabled by <strong>Sliding Window AR</strong> and
+          <strong>Streaming Inference</strong> for long horizons:
+        </p>
+        <ul class="m2-tts-list">
+          <li><strong>Planning (breadth)</strong> — propose candidate action chunks, roll out parallel
+          imagined trajectories with the world model, and let the value model pick the best branch
+          before deployment.</li>
+          <li><strong>Loop (depth)</strong> — iteratively alternate forward dynamics (FDM: imagine the
+          next frames) and inverse dynamics (IDM: re-infer actions from those frames), sharpening one
+          trajectory through multiple denoising passes — the operational form of post-training
+          <em>Loop</em> mode.</li>
+        </ul>
+        <p>
+          Planning answers <em>which branch to take</em>; Loop answers <em>how to refine the action
+          on that branch</em>. Together they are test-time scaling without a larger model: think longer
+          in imagination, then act once on hardware.
+        </p>
+
+        <h4>Planning — search across imagined rollouts</h4>
+        <p>
+          The world action model proposes action-chunk candidates from the current egocentric
+          observation. The action-conditioned world model (renderer + simulator) rolls out future
+          frames and tactile feedback; the value model scores each imagined trajectory. The highest-value
+          rollout is selected for execution — model-based planning as <strong>breadth-first</strong>
+          test-time compute.
         </p>
       </div>
 
@@ -398,32 +440,43 @@
              alt="Model-based planning with world action model, rollouts, value model, and policy optimization"
              loading="lazy">
         <figcaption class="m2-figure__caption">
-          <strong>Figure 5: Model-Based Planning.</strong>
-          The world action model generates future frame and action-chunk rollouts; the value model
-          scores trajectories for policy optimization at deployment.
+          <strong>Figure 5: Test-Time Planning.</strong>
+          World Action Model generates frame and action-chunk rollouts; the Value Model scores
+          trajectories; the best branch is deployed — breadth scaling over parallel imagined futures.
         </figcaption>
       </figure>
 
-      <div class="loop-steps">
+      <div class="m2-prose">
+        <h4>Loop — iterative FDM ↔ IDM refinement</h4>
+        <p>
+          When a single rollout needs to be sharpened rather than selected among many, Motus2 enters
+          the <strong>Loop</strong> path: FDM predicts the next observation tokens, IDM re-infers the
+          action that would have produced them, and the cycle repeats — each pass conditioning on the
+          model's own imagined future. This is <strong>depth-first</strong> test-time compute: more
+          denoising iterations, same weights.
+        </p>
+      </div>
+
+      <div class="loop-steps" aria-label="Test-time loop refinement">
         <div class="loop-step">
           <div class="loop-step__num">1</div>
-          <h4>Plan</h4>
-          <p>World action model proposes an action chunk</p>
+          <h4>FDM</h4>
+          <p>Forward dynamics: simulate next video &amp; tactile tokens</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">2</div>
-          <h4>Simulate</h4>
-          <p>Renderer / AC-WM rolls out future frames</p>
+          <h4>IDM</h4>
+          <p>Inverse dynamics: re-infer action from imagined observation</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">3</div>
-          <h4>Refine</h4>
-          <p>IDM + FDM re-infer actions on new observations</p>
+          <h4>Loop</h4>
+          <p>Condition on rollout; repeat until action chunk converges</p>
         </div>
         <div class="loop-step">
           <div class="loop-step__num">4</div>
-          <h4>Evaluate</h4>
-          <p>Value model scores branches; deploy best rollout</p>
+          <h4>Act</h4>
+          <p>Deploy refined chunk; replan with new real observation</p>
         </div>
       </div>
 
@@ -470,10 +523,10 @@
       <div class="m2-prose">
         <p>
           The fourth mode, <strong>Loop</strong>, has no fixed mask of its own: it <strong>iteratively
-          refines</strong> by alternating the forward dynamics model (FDM, imagine the next frames) and
-          the inverse dynamics model (IDM, re-infer actions from those frames). Each pass conditions on
-          the previous rollout, so the action chunk is progressively sharpened against the model's own
-          imagined future.
+          refines</strong> by alternating FDM (imagine the next frames) and IDM (re-infer actions from
+          those frames). Post-training teaches these operators; at deployment they become the
+          <strong>depth</strong> path of test-time scaling — complementary to <strong>Planning</strong>,
+          which searches across parallel rollouts in breadth.
         </p>
       </div>
     </div>
