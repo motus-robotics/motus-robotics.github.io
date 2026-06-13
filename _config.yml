@@ -8,6 +8,9 @@ plugins:
 
 permalink: /:year/:month/:day/:title/
 
+exclude:
+  - test
+
 defaults:
   -
     scope:
