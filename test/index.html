@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motus2: A Self-Evolved Egocentric Embodied Agent</title>
-  <meta name="description" content="Motus2: a unified world model that renders pixels, simulates state, plans actions, and evaluates rollouts — scaled on human data and self-evolved via model-based RL.">
+  <meta name="description" content="Motus2 scales dexterous manipulation with large-scale egocentric human data, a Unified World Model, closed-loop self-evolution, memory, and tactile sensing.">
   <meta property="og:title" content="Motus2: A Self-Evolved Egocentric Embodied Agent">
-  <meta property="og:description" content="One world model — renderer, simulator, planner, and evaluator — with human data at scale and a self-evolving loop.">
-  <meta property="og:image" content="assets/img/joint_video_action_tactile_dit.png">
+  <meta property="og:description" content="A Unified World Model for egocentric data scaling, closed-loop self-evolution, working memory, and tactile sensing.">
+  <meta property="og:image" content="assets/img/latest/motus2_overview.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="stylesheet" href="../static/css/motus_style.css">
   <link rel="stylesheet" href="static/css/motus2.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 </head>
 <body class="motus2-dark">
@@ -22,745 +22,459 @@
     <div class="nav-container">
       <a href="#home" class="nav-wordmark">Motus<span>2</span></a>
       <div class="nav-links">
-        <a href="#tldr">TL;DR</a>
-        <a href="#demo">Demo</a>
+        <a href="#demo">Demos</a>
         <a href="#model">Model</a>
+        <a href="#masks">Masks</a>
         <a href="#data">Data</a>
-        <a href="#evolving">Self-Evolving</a>
-        <!-- <a href="#results">Results</a> -->
+        <a href="#evolving">Self-Evolution</a>
+        <a href="#memory">Memory</a>
+        <a href="#tactile">Tactile</a>
         <a href="#hardware">Hardware</a>
         <a href="#team">Team</a>
-        <a href="#citation">Citation</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
-      <a href="#home" class="motus2-hero__logo" aria-label="Company logo">
-        <img src="assets/img/ss-logo.png" alt="Company logo">
+      <a href="#home" class="motus2-hero__logo" aria-label="ShengShu Technology">
+        <img src="assets/img/ss-logo.png" alt="ShengShu Technology logo">
       </a>
       <div class="motus2-hero__meta">
         <span>Motus2 Team</span>
-        <span>June 2026</span>
+        <span>August 2026</span>
       </div>
 
       <p class="motus2-hero__display">Motus2</p>
-      <h1 class="motus2-hero__title">
-        A Self-Evolved Egocentric Embodied Agent
-      </h1>
-
-      <div class="hero-authors motus2-hero__authors">
-        <a href="https://hongzhebi.github.io/">Hongzhe Bi</a><sup>*†</sup>,
-        <a href="https://pangjingrui.github.io/">Jingrui Pang</a><sup>*†</sup>,
-        <a>Shuhe Huang</a><sup>*</sup>,
-        <a>Haitian Liu</a><sup>*</sup>,
-        et al.
+      <h1 class="motus2-hero__title">A Self-Evolved Egocentric Embodied Agent</h1>
+      <div class="motus2-hero__author-block" aria-label="Paper authors and affiliations">
+        <p class="motus2-hero__authors">
+          <a class="motus2-author-name" href="https://hongzhebi.github.io/" target="_blank" rel="noreferrer">Hongzhe Bi</a><sup>1,2*&dagger;</sup>,
+          <span class="motus2-author-name">Jingrui Pang</span><sup>1,2*</sup>,
+          <span class="motus2-author-name">Zihao Zhou</span><sup>2,3*</sup>,
+          <span class="motus2-author-name">Yihang Tang</span><sup>2,4*</sup>,
+          <span class="motus2-author-name">Shuhe Huang</span><sup>1,2*</sup>,
+          <span class="motus2-author-name">Haitian Liu</span><sup>1,2</sup>,
+          <span class="motus2-author-name">Runqing Wang</span><sup>2,4</sup>,
+          <span class="motus2-author-name">Shuai Huang</span><sup>2</sup>,<br>
+          <span class="motus2-author-name">Yichen Wang</span><sup>2</sup>,
+          <span class="motus2-author-name">Yiming Cheng</span><sup>1</sup>,
+          <span class="motus2-author-name">Ruowen Zhao</span><sup>1,2</sup>,
+          <span class="motus2-author-name">Zhenghua Li</span><sup>1</sup>,
+          <span class="motus2-author-name">Xiaolong Liu</span><sup>2</sup>,
+          <span class="motus2-author-name">Jinhui Wan</span><sup>2</sup>,
+          <span class="motus2-author-name">Jiabao Liu</span><sup>2</sup>,
+          <span class="motus2-author-name">Min Zhao</span><sup>1,2</sup>,
+          <span class="motus2-author-name">Fan Bao</span><sup>2</sup>,
+          <span class="motus2-author-name">Jun Zhu</span><sup>1,2&#9993;</sup>
+        </p>
+        <p class="motus2-hero__affiliations">
+          <span><sup>1</sup>Tsinghua University</span>
+          <span><sup>2</sup>GensPi</span>
+          <span><sup>3</sup>BUAA</span>
+          <span><sup>4</sup>BIT</span>
+        </p>
+        <p class="motus2-hero__author-note">
+          <span><sup>&dagger;</sup>Project lead.</span>
+          <span><sup>*</sup>Joint first authors.</span>
+          <span><sup>&#9993;</sup>Corresponding author.</span>
+        </p>
       </div>
-      <p class="motus2-hero__author-note">
-        <sup>*</sup>Joint first authors&nbsp;&nbsp;
-        <sup>†</sup>Project Lead
-      </p>
-
       <p class="motus2-hero__lede">
-        One unified world model that <strong>renders</strong> egocentric video, <strong>simulates</strong>
-        contact-rich dynamics, <strong>plans</strong> dexterous actions, and <strong>evaluates</strong>
-        imagined rollouts — scaled on a human data pyramid and closed with model-based RL, on a
-        fully bionic stereo dual-arm dual-hand platform with full-palm tactile sensing.
+        Motus2 scales dexterous manipulation along two complementary axes: <strong>data scaling</strong>
+        through a hierarchical egocentric human-data pyramid, and <strong>model scaling</strong>
+        through a Unified World Model. With one shared set of weights, the model proposes actions,
+        predicts their visual consequences, and evaluates imagined trajectories, forming a closed
+        decision-and-learning loop for planning and policy improvement. Motus2 further extends
+        joint video-action modeling with a lightweight tactile expert for tactile-conditioned
+        action refinement and tactile prediction.
       </p>
 
-      <div class="motus2-formula" aria-label="Motus2 formula">
-        <span class="motus2-formula__term">Unified World Model</span>
-        <span class="motus2-formula__op">×</span>
-        <span class="motus2-formula__term">Human Data</span>
-        <span class="motus2-formula__op">×</span>
-        <span class="motus2-formula__term">Dextrous Hand</span>
-        <span class="motus2-formula__op">×</span>
-        <span class="motus2-formula__term">Tactile Glove</span>
-        <span class="motus2-formula__op">×</span>
-        <span class="motus2-formula__term">Self-Evolving</span>
-        <span class="motus2-formula__op">=</span>
-        <span class="motus2-formula__result">The End</span>
+      <div class="motus2-hero__actions">
+        <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon"><i class="fas fa-play"></i></span><span>Watch Demo</span>
+        </a>
+        <a href="https://motus-robotics.github.io/motus" class="external-link button is-normal is-rounded is-light">
+          <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Motus v1</span>
+        </a>
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
+          <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv (Soon)</span>
+        </span>
+        <a href="assets/paper/Motus2.pdf" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+        </a>
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
+          <span class="icon"><i class="fab fa-github"></i></span><span>Code (Soon)</span>
+        </span>
+        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
+          <span class="icon">🤗</span><span>Model (Soon)</span>
+        </span>
+        <a href="assets/img/wechat_group.png?v=20260819" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
+          <span class="icon"><i class="fab fa-weixin"></i></span><span>WeChat Group</span>
+        </a>
       </div>
 
       <div id="tldr" class="motus2-tldr">
         <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
         <ul>
-          <li><strong>Unified World Model</strong> — renderer, simulator, planner, and evaluator in one Joint Video-Action-Tactile DiT; multi-token in, multi-token out.</li>
-          <li><strong>Human Data Pyramid</strong> — web video → monocular ego (110k+ hrs) → stereo ego (20k hrs) → human-robot align → robot tactile demos.</li>
-          <li><strong>Sliding Window AR + Streaming Inference</strong> — long-horizon autoregressive rollouts at deployment without resetting context each step.</li>
-          <li><strong>Self-evolving via MBRL</strong> — Ray-based distributed async RL on failure, suboptimal, and task-irrelevant trajectories.</li>
-          <li><strong>Test-time scaling</strong> — spend inference compute on the unified world model: <em>Planning</em> (search rollouts in breadth) and <em>Loop</em> (refine via FDM↔IDM in depth).</li>
-          <li><strong>Fully open-source</strong> — code, model weights, and paper will be released to the community (coming soon).</li>
+          <li><strong>Unified World Model</strong> — one shared video-action backbone serves as a planner, simulator, and evaluator, forming a closed decision-and-learning loop.</li>
+          <li><strong>Human Data Pyramid</strong> — 130K hours of data support progressive pretraining from monocular egocentric video to stereo egocentric video-action data, followed by robot-domain mid-training.</li>
+          <li><strong>Self-evolving via MBRL</strong> — action proposal, visual consequence prediction, and value evaluation form a closed loop for Best-of-N planning and policy improvement.</li>
+          <li><strong>Working Memory</strong> — sliding-window autoregression provides the default streaming-inference path, while variable-length full-episode training supports two extensions: global autoregression and Hybrid Memory.</li>
+          <li><strong>Tactile sensing</strong> — a lightweight tactile expert supports tactile-conditioned action refinement and tactile prediction.</li>
+          <li><strong>Fully open-source</strong> — code and model weights will be released to the community; the paper is available above and arXiv is coming soon.</li>
         </ul>
-      </div>
-
-      <div class="motus2-hero__actions">
-        <a href="#demo" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="fas fa-play"></i></span>
-          <span>Watch Demo</span>
-        </a>
-        <a href="https://motus-robotics.github.io/motus" class="external-link button is-normal is-rounded is-light">
-          <span class="icon"><i class="fas fa-arrow-left"></i></span>
-          <span>Motus v1</span>
-        </a>
-        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
-          <span class="icon"><i class="ai ai-arxiv"></i></span>
-          <span>Paper (Soon)</span>
-        </span>
-        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
-          <span class="icon"><i class="fab fa-github"></i></span>
-          <span>Code (Soon)</span>
-        </span>
-        <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
-          <span class="icon">🤗</span>
-          <span>Model (Soon)</span>
-        </span>
-        <a href="assets/img/wechat_group.png" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fab fa-weixin"></i></span>
-          <span>WeChat Group</span>
-        </a>
-      </div>
-
-      <div class="demo-task-chips">
-        <span class="demo-task-chip">Spray Cleaner</span>
-        <span class="demo-task-chip">Screw Bulb</span>
-        <span class="demo-task-chip">Cut Banana</span>
-        <span class="demo-task-chip">Multi-Fruit Grasp</span>
-        <!-- <span class="demo-task-chip">Fry Egg</span> -->
-        <!-- <span class="demo-task-chip">Toast Bread</span> -->
-        <!-- <span class="demo-task-chip">Cut Asparagus</span> -->
-      </div>
-
-      <div class="motus2-hero__media-strip">
-        <div class="media-placeholder media-placeholder--hero">
-          <span class="media-placeholder__soon">Coming Soon</span>
-          <span class="media-placeholder__label">Hero Demo Reel</span>
-          <span class="media-placeholder__hint">Full demonstration video will be released shortly. Stay tuned.</span>
-        </div>
       </div>
     </div>
   </header>
 
-  <!-- Overview -->
-  <section class="m2-section">
-    <div class="m2-wrap">
-      <p class="m2-section__label">Overview</p>
-      <h2 class="m2-section__title">The End — Motus2</h2>
-      <div class="m2-prose">
-        <p>
-          Embodied AI has long split the stack: models that <strong>render pixels</strong>,
-          models that <strong>simulate state</strong>, and models that <strong>plan actions</strong>.
-          The field’s clearest trend is their <strong>convergence</strong> — the knowledge to paint a
-          world, predict what happens inside it, and choose how to move is largely the <em>same</em>.
-          A model that truly understands a cup on a table should render it from any view, roll out
-          contact when it is pushed, and plan how a hand grasps it. Those are three projections of
-          one underlying world understanding; the logical endpoint is a <strong>unified world model</strong>.
-        </p>
-        <p>
-          <strong>Motus2 is that endpoint, with the loop closed.</strong> A single Joint
-          Video-Action-Tactile DiT acts as <strong>renderer</strong> (future frames),
-          <strong>simulator</strong> (action-conditioned world model), <strong>planner</strong> (world
-          action model / policy), and <strong>evaluator</strong> (value model) — trained on a human
-          data pyramid from web video to tactile robot trajectories, then <strong>self-evolved</strong>
-          with model-based RL on real failure and suboptimal data.
-        </p>
-        <p>
-          On hardware, we demonstrate spray cleaner, screw bulb, cut banana, and multi-fruit grasp —
-          contact-rich bimanual skills on a
-          <strong>fully bionic stereo dual-arm dual-hand platform with full-palm tactile sensing</strong>.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Demo -->
   <section id="demo" class="m2-section m2-section--alt demo">
     <div class="demo-container">
-      <p class="m2-section__label m2-section__label--center">Real-World Experiments</p>
-      <h2 class="section-title m2-demo-title">Demo</h2>
+      <p class="m2-section__label m2-section__label--center">Real-Robot Rollouts</p>
+      <h2 class="section-title m2-demo-title">Explore the Demos</h2>
       <p class="m2-demo-lead">
-        The unified model plans and controls contact-rich, long-horizon bimanual skills — evaluated
-        on real hardware with stereo vision and full-palm tactile feedback.
+        Choose an embodiment and capability, then select a task.
       </p>
 
-      <div class="demo-grid demo-grid--2x2">
-        <div class="demo-card">
-          <div class="demo-video">
-            <video autoplay controls loop muted playsinline preload="auto">
-              <source src="assets/video/spray_cleaner.mp4" type="video/mp4">
-            </video>
+      <div class="demo-explorer">
+        <div class="demo-filter-row" aria-label="Filter demos by embodiment">
+          <span class="demo-filter-label">Embodiment</span>
+          <div class="demo-filter-buttons" id="embodiment-filters">
+            <button type="button" class="demo-filter is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="demo-filter" data-filter="WuJi-2" aria-pressed="false">WuJi-2</button>
+            <button type="button" class="demo-filter" data-filter="Sharpa" aria-pressed="false">Sharpa</button>
+            <button type="button" class="demo-filter" data-filter="WuJi-1" aria-pressed="false">WuJi-1</button>
           </div>
-          <div class="demo-info"><h3>Spray Cleaner</h3><p>Spray cleaner and wipe the tabletop.</p></div>
         </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <video autoplay controls loop muted playsinline preload="auto">
-              <source src="assets/video/screw_bulb.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="demo-info"><h3>Screw Bulb</h3><p>Screw in a light bulb with dual hands.</p></div>
-        </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <video autoplay controls loop muted playsinline preload="auto">
-              <source src="assets/video/cut_banana.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="demo-info"><h3>Cut Banana</h3><p>Cut banana with a knife.</p></div>
-        </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <video autoplay controls loop muted playsinline preload="auto">
-              <source src="assets/video/multi_fruit_grasp.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="demo-info"><h3>Multi-Fruit Grasp</h3><p>Grasp multiple fruits from the table.</p></div>
-        </div>
-        <!-- <div class="demo-card">
-          <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Fry Egg</span>
-            </div>
-          </div>
-          <div class="demo-info"><h3>Fry Egg</h3><p>Coming soon</p></div>
-        </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Toast Bread</span>
-            </div>
-          </div>
-          <div class="demo-info"><h3>Toast Bread</h3><p>Coming soon</p></div>
-        </div>
-        <div class="demo-card">
-          <div class="demo-video">
-            <div class="media-placeholder media-placeholder--light" style="min-height:200px; border-radius:0; border:none;">
-              <i class="fas fa-video media-placeholder__icon"></i>
-              <span class="media-placeholder__label">Cut Asparagus</span>
-            </div>
-          </div>
-          <div class="demo-info"><h3>Cut Asparagus</h3><p>Scissors task — coming soon</p></div>
-        </div> -->
-      </div>
 
-      <div class="demo-tactile">
-        <div class="demo-card demo-card--tactile">
-          <div class="demo-video demo-video--tactile">
-            <video autoplay controls loop muted playsinline preload="auto">
-              <source src="assets/video/tactile_realtime.mp4" type="video/mp4">
+        <div class="demo-filter-row" aria-label="Filter demos by capability">
+          <span class="demo-filter-label">Capability</span>
+          <div class="demo-filter-buttons" id="capability-filters">
+            <button type="button" class="demo-filter is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="demo-filter" data-filter="Normal" aria-pressed="false">Normal</button>
+            <button type="button" class="demo-filter" data-filter="Dexterous" aria-pressed="false">Dexterous</button>
+            <button type="button" class="demo-filter" data-filter="Memory" aria-pressed="false">Memory</button>
+            <button type="button" class="demo-filter" data-filter="Tactile" aria-pressed="false">Tactile</button>
+            <button type="button" class="demo-filter" data-filter="Generalize" aria-pressed="false">Generalize</button>
+          </div>
+        </div>
+
+        <div class="demo-filter-row demo-filter-row--tasks" aria-label="Select a demonstration task">
+          <span class="demo-filter-label">Task</span>
+          <div class="demo-task-selector" id="demo-task-selector"></div>
+        </div>
+
+        <div class="demo-player-panel">
+          <div class="demo-player-shell">
+            <video id="demo-player" controls autoplay loop muted playsinline preload="metadata">
+              <source id="demo-source" src="assets/video/demos/screw_bulb.mp4" type="video/mp4">
             </video>
           </div>
-          <div class="demo-info">
-            <h3>Real-Time Tactile Visualization</h3>
-            <p>Live full-palm tactile heatmaps streamed during manipulation.</p>
+          <div class="demo-player-copy" aria-live="polite">
+            <div class="demo-player-tags">
+              <span id="demo-embodiment">WuJi-1</span>
+              <span id="demo-capability">Normal</span>
+              <span class="demo-runtime-tag">1× · Real Inference</span>
+            </div>
+            <h3 id="demo-title">Screw Bulb</h3>
+            <p id="demo-description">Align, rotate, and secure a light bulb.</p>
           </div>
         </div>
       </div>
+      <noscript><p class="m2-demo-lead">Enable JavaScript to use the demo filters.</p></noscript>
     </div>
   </section>
 
-  <!-- Model -->
   <section id="model" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Architecture</p>
       <h2 class="m2-section__title">Unified World Model</h2>
       <div class="m2-prose">
         <p>
-          <strong>Multi-token in, multi-token out.</strong> Motus2 learns a joint distribution over
-          language, stereo video, action, and tactile trajectories in one Joint Video-Action-Tactile
-          DiT. Language, perception, dynamics, and control are not separate heads bolted together —
-          they are interleaved tokens processed by shared causal DiT blocks, so the same weights
-          that imagine pixels also roll out physics and score futures.
+          Embodied control often separates action proposal, future prediction, and value estimation
+          into unrelated networks. Yet all three operate on the same interaction evidence: a
+          candidate action, its predicted consequence, and the resulting task progress. Motus2
+          brings them together in one shared-parameter video-action backbone.
         </p>
         <p>
-          In deployment terms, the unified model is simultaneously a <strong>renderer</strong>
-          (predicting future egocentric frames), a <strong>simulator</strong> (action-conditioned
-          world model / AC-WM), a <strong>planner</strong> (world action model proposing action
-          chunks), and an <strong>evaluator</strong> (value model over imagined trajectories). Training
-          aligns these roles; inference runs them in a closed loop — imagine, simulate, plan, judge.
-        </p>
-        <p>
-          Long horizons are handled with <strong>Sliding Window AR</strong>: the model autoregressively
-          extends video–action–tactile context in overlapping windows instead of a single-shot
-          prediction. <strong>Streaming Inference</strong> keeps latent state warm across windows so
-          each new chunk conditions on the previous rollout without cold-starting the full sequence —
-          enabling real-time control on contact-rich tasks.
+          The <strong>planner</strong> proposes executable action chunks, the
+          <strong>simulator</strong> predicts their visual consequences with an action-conditioned
+          world model, and the <strong>evaluator</strong> estimates task progress or value to rank
+          imagined trajectories. These three functional roles are realized by one video-action
+          backbone with a single shared set of weights, rather than separate architectures.
         </p>
       </div>
-
-      <div class="model-pills" aria-label="Unified world model roles">
-        <div class="model-pill">Renderer<span>Future egocentric video tokens</span></div>
-        <div class="model-pill">Simulator<span>Action-conditioned world model</span></div>
-        <div class="model-pill">Planner<span>World action model / policy</span></div>
-        <div class="model-pill">Evaluator<span>Value model over rollouts</span></div>
+      <div class="role-grid">
+        <article class="role-card"><span>01</span><h3>Planner</h3><p>World-action model / policy that proposes executable action chunks.</p></article>
+        <article class="role-card"><span>02</span><h3>Simulator</h3><p>Action-conditioned world model that predicts future visual consequences.</p></article>
+        <article class="role-card"><span>03</span><h3>Evaluator</h3><p>Value model that scores imagined trajectories for selection and learning.</p></article>
       </div>
-
       <figure class="m2-figure m2-figure--architecture">
-        <img src="assets/img/joint_video_action_tactile_dit.png"
-             alt="Joint Video-Action-Tactile DiT architecture"
-             loading="lazy">
+        <img src="assets/img/latest/motus2_overview.png" alt="Motus2 Unified World Model and closed policy-world-value loop" loading="lazy">
         <figcaption class="m2-figure__caption">
-          <strong>Figure 1: Joint Video-Action-Tactile DiT.</strong>
-          Video, action, tactile, and language are encoded into a shared interleaved sequence,
-          processed by causal DiT blocks, and decoded into future frames, actions, and tactile
-          feedback — one backbone for rendering, simulation, planning, and evaluation.
+          <strong>Figure 1: Motus2 overview.</strong> One shared weight set supports planning,
+          action-conditioned world simulation, and value evaluation. The resulting closed loop
+          connects candidate generation, consequence prediction, action selection, and policy
+          improvement. Memory and tactile sensing are developed as separate extensions.
         </figcaption>
       </figure>
-
-      <div class="model-pills" aria-label="Model stack">
-        <div class="model-pill">Motus2-base<span>Large-scale pretrain on the human data pyramid</span></div>
-        <div class="model-pill">Motus2-sft<span>Human + robot alignment post-training</span></div>
-        <div class="model-pill">Motus2-mbrl<span>Model-based RL on failure &amp; suboptimal data</span></div>
-        <div class="model-pill">Motus2-ultra<span>Built on a stronger foundation model</span></div>
-      </div>
     </div>
   </section>
 
-  <!-- Data -->
-  <section id="data" class="m2-section m2-section--alt">
+  <section id="masks" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Training Interface</p>
+      <h2 class="m2-section__title">Stage-Specific Chunk Masks</h2>
+      <div class="m2-prose">
+        <p>
+          Motus2 uses two stage-specific visibility patterns. Stage 2 stereo human pretraining uses
+          a joint mask with bidirectional video-action interaction inside each chunk. Mid-training
+          and post-training use an action-first mask: actions cannot read the current future-video
+          or value tokens, while future-video and value targets may condition on the action.
+        </p>
+        <p>
+          Planning, simulation, and evaluation are supervision roles under the shared action-first
+          layout rather than separate attention masks. Both masks remain causal across chunks.
+          Tactile signals are handled by the separate tactile expert and do not enter these masks.
+        </p>
+      </div>
+      <div class="mask-pair">
+        <figure class="m2-mask">
+          <img src="assets/img/latest/joint_mask.png?v=paper-20260818" alt="Joint pretraining attention mask" loading="lazy">
+          <figcaption><strong>Joint mask.</strong> Stereo video-action pretraining.</figcaption>
+        </figure>
+        <figure class="m2-mask">
+          <img src="assets/img/latest/action_first_mask.png?v=paper-20260818" alt="Action-first attention mask" loading="lazy">
+          <figcaption><strong>Action-first mask.</strong> Mid-training and post-training.</figcaption>
+        </figure>
+      </div>
+      <p class="m2-figure__caption m2-figure__caption--standalone">
+        <strong>Figure 2: Stage-specific chunk masks.</strong> Context (<em>C</em>), video
+        (<em>Z</em>), action (<em>A</em>), and value (<em>V</em>) tokens share one backbone.
+        Joint pre-training permits bidirectional video-action interaction within a chunk. The
+        action-first mask used from mid-training onward blocks current future-video information
+        from action prediction, while future-video and value targets may read the action. Both
+        remain causal across chunks.
+      </p>
+    </div>
+  </section>
+
+  <section id="data" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Scaling Path</p>
       <h2 class="m2-section__title">Human Data Pyramid</h2>
       <div class="m2-prose">
         <p>
-          A unified world model is only as good as the world it has seen. Motus2 scales along a
-          five-tier <strong>human data pyramid</strong> — from internet-scale web video (breadth),
-          through 110k+ hours of monocular and 20k hours of stereo egocentric video (egocentric
-          physics and hand–object contact), to human-robot aligned tactile trajectories and
-          target-robot demonstrations (the distribution we deploy on). Each tier teaches the same
-          underlying object and contact knowledge the renderer, simulator, and planner must share.
+          Motus2 scales through a hierarchical <strong>human data pyramid</strong>: approximately
+          130K raw
+          recording hours progress from low- and high-resolution monocular egocentric video to
+          synchronized stereo human video-action data. Robot-domain mid-training then uses more
+          than 100 hours of robot trajectories and supplementary human-robot alignment data.
+          Together, these stages provide shared experience for the planner, simulator, and
+          evaluator before target-task post-training.
         </p>
       </div>
-
       <figure class="m2-figure m2-figure--sm">
-        <img src="assets/img/data_pyramid.png"
-             alt="Human data pyramid from web video to robot tactile data"
-             loading="lazy">
+        <img src="assets/img/latest/data_pyramid.png" alt="Egocentric data pyramid from web and monocular video to stereo human, alignment, and robot data" loading="lazy">
         <figcaption class="m2-figure__caption">
-          <strong>Figure 2: Human Data Pyramid.</strong>
-          From internet-scale web video at the base, through monocular (110k+ hrs) and stereo
-          egocentric data (20k hrs), to human-robot aligned tactile data and target-robot
-          demonstrations at the apex.
+          <strong>Human Data Pyramid.</strong> Monocular egocentric video provides broad visual and
+          semantic coverage; synchronized stereo human data provides implicit depth cues; robot
+          trajectories and alignment data bridge to deployment.
+        </figcaption>
+      </figure>
+      <div class="m2-prose m2-split--spaced">
+        <h3>Human Data Scaling Laws</h3>
+        <p>
+          Increasing stereo egocentric human data consistently reduces held-out action-prediction
+          error. Across subsets constructed from 2K, 4K, 10K, and 20K raw recording hours, larger
+          datasets converge to lower validation error within the measured range.
+        </p>
+        <div class="m2-callout">L = 0.101 - 0.005 · ln(D)</div>
+      </div>
+      <figure class="m2-figure m2-figure--lg">
+        <img src="assets/img/latest/stereo_scaling_law.png" alt="Stereo egocentric human-action validation error and log-linear data scaling trend" loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Human Data Scaling Laws.</strong> Held-out action-prediction error across training
+          epochs and the fitted log-linear trend over raw stereo recording hours. The effective
+          processed training duration is smaller after filtering and segmentation.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="evolving" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Self-Evolving</p>
+      <h2 class="m2-section__title">Closed-Loop Self-Evolution</h2>
+      <div class="m2-prose">
+        <p>
+          Pretraining gives Motus2 a shared interaction prior; model-based reinforcement learning
+          closes the decision-and-learning loop on robot data. Under a bounded sliding-window
+          context, the planner proposes candidate action chunks, the simulator predicts their
+          visual consequences, and the evaluator scores the resulting branches. DiffusionNFT uses
+          the same value signal to improve the policy distribution during post-training.
+        </p>
+        <p>
+          Curated demonstrations provide action-learning targets. Failed, suboptimal, and
+          out-of-distribution interactions remain useful as transition and value supervision for
+          world simulation and value learning.
+        </p>
+      </div>
+      <figure class="m2-figure m2-figure--half">
+        <img src="assets/img/latest/mbrl_loop.png" alt="Motus2 closed decision-and-learning loop" loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Model-Based Reinforcement Learning.</strong> The planner proposes actions, the
+          simulator predicts consequences, and the evaluator provides the signal used for policy
+          improvement.
         </figcaption>
       </figure>
 
       <div class="m2-prose m2-split--spaced">
-        <h3>Human Data Scaling Laws</h3>
-        <p>
-          Increasing human data consistently reduces validation loss. From 2k to 20k hours,
-          models converge faster and reach lower asymptotic error — following a predictable
-          logarithmic scaling law.
-        </p>
-        <div class="m2-callout">L = 0.101 − 0.005 · ln(D)</div>
-      </div>
-      <figure class="m2-figure m2-figure--lg">
-        <img src="assets/img/scaling_laws.png"
-             alt="Human validation loss vs epoch and scaling law plot"
-             loading="lazy">
-        <figcaption class="m2-figure__caption">
-          <strong>Figure 3: Training-time scaling.</strong>
-          Left: validation loss vs. epoch at 2k / 4k / 10k / 20k hours.
-          Right: optimal loss vs. data amount on log scale.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Self-Evolving -->
-  <section id="evolving" class="m2-section">
-    <div class="m2-wrap">
-      <p class="m2-section__label">Self-Evolving</p>
-      <h2 class="m2-section__title">Self-Evolving Agent</h2>
-      <div class="m2-prose">
-        <p>
-          Pretraining gives Motus2 a shared world prior; <strong>self-evolution</strong> sharpens it on
-          the robot. Motus2-mbrl runs <strong>model-based RL</strong> where the same unified backbone
-          proposes actions, the action-conditioned world model imagines consequences, and the value
-          model scores them — trained with <strong>Ray-based distributed async RL</strong> on
-          <strong>failure rollouts</strong>, <strong>suboptimal teleop</strong>, and
-          <strong>task-irrelevant exploration</strong> that static imitation would discard.
-        </p>
-      </div>
-
-      <figure class="m2-figure m2-figure--half">
-        <img src="assets/img/mbrl.png"
-             alt="Model-based RL: World Action Model, action-conditioned world model, and value model"
-             loading="lazy">
-        <figcaption class="m2-figure__caption">
-          <strong>Figure 4: Model-Based RL.</strong>
-          World Action Model proposes actions from observation and state; the action-conditioned
-          world model rolls out future frames; the value model provides reward for RL updates.
-        </figcaption>
-      </figure>
-
-      <div class="m2-prose">
         <h3>Test-Time Scaling</h3>
         <p>
-          Training-time scaling adds parameters and data; <strong>test-time scaling</strong> adds
-          <em>inference compute</em> on the <em>same</em> unified world model — the model imagines
-          futures before acting on the robot. Because renderer, simulator, planner, and evaluator
-          share one backbone, every extra forward pass is a meaningful thought step: simulate contact,
-          score outcomes, and only then commit an action.
+          Best-of-N planning spends additional inference compute without changing the model
+          weights. The planner samples candidate action chunks, the simulator predicts a future for
+          each candidate, and the evaluator ranks the branches before one action is executed.
         </p>
+        <h4>Planning - search across imagined rollouts</h4>
         <p>
-          Motus2 uses two complementary routes, both enabled by <strong>Sliding Window AR</strong> and
-          <strong>Streaming Inference</strong> for long horizons:
-        </p>
-        <ul class="m2-tts-list">
-          <li><strong>Planning (breadth)</strong> — propose candidate action chunks, roll out parallel
-          imagined trajectories with the world model, and let the value model pick the best branch
-          before deployment.</li>
-          <li><strong>Loop (depth)</strong> — iteratively alternate forward dynamics (FDM: imagine the
-          next frames) and inverse dynamics (IDM: re-infer actions from those frames), sharpening one
-          trajectory through multiple denoising passes — the operational form of post-training
-          <em>Loop</em> mode.</li>
-        </ul>
-        <p>
-          Planning answers <em>which branch to take</em>; Loop answers <em>how to refine the action
-          on that branch</em>. Together they are test-time scaling without a larger model: think longer
-          in imagination, then act once on hardware.
-        </p>
-
-        <h4>Planning — search across imagined rollouts</h4>
-        <p>
-          The world action model proposes action-chunk candidates from the current egocentric
-          observation. The action-conditioned world model (renderer + simulator) rolls out future
-          frames and tactile feedback; the value model scores each imagined trajectory. The highest-value
-          rollout is selected for execution — model-based planning as <strong>breadth-first</strong>
-          test-time compute.
+          Increasing the number of candidates broadens the search over predicted outcomes. The
+          highest-value branch is selected for execution, after which planning is repeated from the
+          next real observation.
         </p>
       </div>
-
       <figure class="m2-figure m2-figure--half">
-        <img src="assets/img/mb_planning.png"
-             alt="Model-based planning with world action model, rollouts, value model, and policy optimization"
-             loading="lazy">
+        <img src="assets/img/latest/best_of_n_planning.png" alt="Motus2 Best-of-N planning" loading="lazy">
         <figcaption class="m2-figure__caption">
-          <strong>Figure 5: Test-Time Planning.</strong>
-          World Action Model generates frame and action-chunk rollouts; the Value Model scores
-          trajectories; the best branch is deployed — breadth scaling over parallel imagined futures.
+          <strong>Test-Time Planning.</strong> Candidate action chunks are compared through their
+          predicted futures and values before execution.
         </figcaption>
       </figure>
 
-      <div class="m2-prose">
-        <h4>Loop — iterative FDM ↔ IDM refinement</h4>
+      <div class="m2-prose m2-split--spaced">
+        <h3>Qualitative Value Trajectories</h3>
         <p>
-          When a single rollout needs to be sharpened rather than selected among many, Motus2 enters
-          the <strong>Loop</strong> path: FDM predicts the next observation tokens, IDM re-infers the
-          action that would have produced them, and the cycle repeats — each pass conditioning on the
-          model's own imagined future. This is <strong>depth-first</strong> test-time compute: more
-          denoising iterations, same weights.
+          Predicted task progress is visualized along Turn Bulb trajectories. The
+          successful trajectory rises toward task completion, whereas failed trajectories decline
+          after progress is lost.
         </p>
       </div>
-
-      <div class="loop-steps" aria-label="Test-time loop refinement">
-        <div class="loop-step">
-          <div class="loop-step__num">1</div>
-          <h4>FDM</h4>
-          <p>Forward dynamics: simulate next video &amp; tactile tokens</p>
-        </div>
-        <div class="loop-step">
-          <div class="loop-step__num">2</div>
-          <h4>IDM</h4>
-          <p>Inverse dynamics: re-infer action from imagined observation</p>
-        </div>
-        <div class="loop-step">
-          <div class="loop-step__num">3</div>
-          <h4>Loop</h4>
-          <p>Condition on rollout; repeat until action chunk converges</p>
-        </div>
-        <div class="loop-step">
-          <div class="loop-step__num">4</div>
-          <h4>Act</h4>
-          <p>Deploy refined chunk; replan with new real observation</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Post-Training Modes -->
-  <section id="post-training" class="m2-section m2-section--alt">
-    <div class="m2-wrap">
-      <p class="m2-section__label">Post-Training</p>
-      <h2 class="m2-section__title">Four Post-Training Modes</h2>
-      <div class="m2-prose">
-        <p>
-          Because one backbone attends over interleaved context (<strong>C</strong>), latent
-          (<strong>Z</strong>), action (<strong>A</strong>), tactile (<strong>T</strong>), and video
-          (<strong>V</strong>) tokens, changing the <strong>attention mask</strong> defines which operator
-          the backbone is optimized as during post-training. The same token interface supports a joint
-          predictor, an inverse-dynamics model, a pure policy, or a closed refinement loop.
-        </p>
-      </div>
-
-      <div class="m2-mask-grid" aria-label="Post-training mode attention masks">
-        <figure class="m2-mask">
-          <img src="assets/img/Joint.png" alt="Joint post-training mode attention mask" loading="lazy">
-          <figcaption><strong>Joint</strong> — predict video, action &amp; tactile together.</figcaption>
-        </figure>
-        <figure class="m2-mask">
-          <img src="assets/img/Video_IDM.png" alt="Video + IDM post-training mode attention mask" loading="lazy">
-          <figcaption><strong>Video + IDM</strong> — imagine frames, then infer the action that caused them.</figcaption>
-        </figure>
-        <figure class="m2-mask">
-          <img src="assets/img/Action_Only.png" alt="Action-only post-training mode attention mask" loading="lazy">
-          <figcaption><strong>Action-only</strong> — direct policy, actions without rendering video.</figcaption>
-        </figure>
-      </div>
-
-      <div class="model-pills" aria-label="Post-training modes">
-        <div class="model-pill">Joint<span>Joint video-action-tactile prediction</span></div>
-        <div class="model-pill">Video + IDM<span>Forward video rollout + inverse dynamics</span></div>
-        <div class="model-pill">Action-only<span>Action expert as a direct policy</span></div>
-        <div class="model-pill">Loop<span>Iterative refine: alternate FDM &amp; IDM to refine actions</span></div>
-      </div>
-
-      <div class="m2-prose">
-        <p>
-          The fourth mode, <strong>Loop</strong>, has no fixed mask of its own: it <strong>iteratively
-          refines</strong> by alternating FDM (imagine the next frames) and IDM (re-infer actions from
-          those frames). Post-training teaches these operators; at deployment they become the
-          <strong>depth</strong> path of test-time scaling — complementary to <strong>Planning</strong>,
-          which searches across parallel rollouts in breadth.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Results (hidden until ablation / mode comparison ready)
-  <section id="results" class="m2-section m2-section--alt">
-    <div class="m2-wrap">
-      <p class="m2-section__label">Evaluation</p>
-      <h2 class="m2-section__title">Results &amp; ablation</h2>
-      <div class="m2-prose">
-        <p>
-          Each component of the Motus2 stack contributes measurably to downstream task
-          performance. On screw-bulb insertion with only 100 teleop demos, the full pipeline
-          lifts success rate from 5% to 90%.
-        </p>
-      </div>
-
-      <div class="m2-results-grid">
-        <div class="m2-result-card">
-          <div class="m2-result-card__head">Screw Bulb — Success Rate Progression</div>
-          <div class="m2-result-card__body">
-            <div class="ablation-bar">
-              <div class="ablation-bar__label"><span>Teleop baseline (100 demos)</span><span>5%</span></div>
-              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:5%;"></div></div>
-            </div>
-            <div class="ablation-bar">
-              <div class="ablation-bar__label"><span>+ Stage 2 human data pretrain</span><span>50%</span></div>
-              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:50%;"></div></div>
-            </div>
-            <div class="ablation-bar">
-              <div class="ablation-bar__label"><span>+ Human-Robot Align collection</span><span>70%</span></div>
-              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:70%;"></div></div>
-            </div>
-            <div class="ablation-bar">
-              <div class="ablation-bar__label"><span>+ Tactile sensing</span><span>80%</span></div>
-              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:80%;"></div></div>
-            </div>
-            <div class="ablation-bar">
-              <div class="ablation-bar__label"><span>+ MBRL (Motus2-mbrl)</span><span>90%</span></div>
-              <div class="ablation-bar__track"><div class="ablation-bar__fill" style="width:90%;"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="m2-result-card">
-          <div class="m2-result-card__head">Post-Training Mode Ablation (Cut Banana)</div>
-          <div class="m2-result-card__body" style="padding:0;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Mode</th>
-                  <th>Description</th>
-                  <th>Result</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>joint</strong></td>
-                  <td>Joint video-action prediction</td>
-                  <td>TBD</td>
-                </tr>
-                <tr>
-                  <td><strong>video_idm</strong></td>
-                  <td>Video + inverse dynamics</td>
-                  <td>TBD</td>
-                </tr>
-                <tr>
-                  <td><strong>action_only</strong></td>
-                  <td>Action expert only</td>
-                  <td>TBD</td>
-                </tr>
-                <tr>
-                  <td><strong>loop</strong></td>
-                  <td>Iterative IDM + FDM</td>
-                  <td>TBD</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <figure class="m2-figure">
-        <div class="media-placeholder media-placeholder--light" style="min-height:240px;">
-          <i class="fas fa-images media-placeholder__icon"></i>
-          <span class="media-placeholder__label">Ablation Visualizations</span>
-          <span class="media-placeholder__hint">Comparison GIFs for joint / video_idm / action_only / loop modes</span>
-        </div>
+      <figure class="m2-figure m2-figure--lg">
+        <img src="assets/img/latest/value_model_trajectories.png?v=paper-20260818" alt="Predicted task progress along successful and failed Turn Bulb trajectories" loading="lazy">
+        <figcaption class="m2-figure__caption">
+          <strong>Predicted task progress along Turn Bulb trajectories.</strong>
+          <strong>(a)</strong> A successful execution. <strong>(b-d)</strong> Three failed
+          executions. All keyframes show only the left-camera view.
+        </figcaption>
       </figure>
     </div>
   </section>
-  -->
 
-  <!-- Hardware -->
-  <section id="hardware" class="m2-section">
+  <section id="memory" class="m2-section">
     <div class="m2-wrap">
-      <p class="m2-section__label">Platform</p>
-      <h2 class="m2-section__title">Hardware</h2>
+      <p class="m2-section__label">Memory</p>
+      <h2 class="m2-section__title">Long-Horizon Context</h2>
       <div class="m2-prose">
         <p>
-          The same tactile and stereo egocentric sensing appears across three stacks — robot
-          deployment, teleoperation for collection, and in-the-wild human demos — so what the
-          unified model learns from human video matches what it sees and feels on the bimanual
-          platform at test time.
+          Motus2 uses a bounded sliding window as its default context and evaluates two extensions:
+          full-history global autoregression and a MemoryWAM-style Hybrid Memory with recent frames,
+          persistent anchor frames, and compressed memory tokens. Their task performance is compared
+          on long-context simulation and real-robot probes; the MBRL experiments use the
+          sliding-window setting.
         </p>
       </div>
-
-      <div class="hardware-grid">
-        <div class="hardware-card">
-          <div class="hardware-card__header"><i class="fas fa-robot"></i> Robot Platform</div>
-          <div class="hardware-card__body">
-            <ul>
-              <li>Stereo camera (ZED 2)</li>
-              <li>TianJi dual-arm system</li>
-              <li>WuJi dextrous hands</li>
-              <li>Full-palm tactile glove</li>
-            </ul>
-          </div>
-        </div>
-        <div class="hardware-card">
-          <div class="hardware-card__header"><i class="fas fa-gamepad"></i> Teleoperation</div>
-          <div class="hardware-card__body">
-            <ul>
-              <li>Manus glove</li>
-              <li>HTC Vive tracking</li>
-            </ul>
-          </div>
-        </div>
-        <div class="hardware-card">
-          <div class="hardware-card__header"><i class="fas fa-hand"></i> Human Data Collection</div>
-          <div class="hardware-card__body">
-            <ul>
-              <li>WuJi human tactile glove</li>
-              <li>HTC Vive tracking</li>
-              <li>Stereo egocentric camera</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="m2-hardware-photos">
-        <figure class="m2-figure m2-figure--compact">
-          <img src="assets/img/robot_platform.png"
-               alt="Motus2 robot platform with ZED stereo camera and WuJi hands"
-               loading="lazy">
-          <figcaption class="m2-figure__caption">
-            <strong>Robot platform.</strong> Stereo camera (ZED 2), TianJi dual-arm, WuJi dextrous hands, full-palm tactile.
-          </figcaption>
-        </figure>
-        <figure class="m2-figure m2-figure--compact">
-          <img src="assets/img/human_data_collection.png"
-               alt="Human data collection with WuJi tactile glove and stereo camera"
-               loading="lazy">
-          <figcaption class="m2-figure__caption">
-            <strong>Human data collection.</strong> WuJi human tactile glove, Vive tracking, stereo egocentric camera.
-          </figcaption>
-        </figure>
+      <div class="context-grid">
+        <article><strong>Sliding Window</strong><span>Bounded recent visual context</span></article>
+        <article><strong>Global Autoregression</strong><span>Full observation history</span></article>
+        <article><strong>Hybrid Memory</strong><span>Recent frames, anchors, and compressed tokens</span></article>
       </div>
     </div>
   </section>
 
-  <!-- Author Team -->
-  <section id="team" class="m2-section">
+  <section id="tactile" class="m2-section m2-section--alt">
     <div class="m2-wrap">
-      <p class="m2-section__label">Contributors</p>
-      <h2 class="m2-section__title">Author Team</h2>
-
-      <div class="team-group">
-        <h3 class="team-group__title">Core Team</h3>
-        <ul class="team-list">
-          <li><span class="team-name">Hongzhe Bi</span>: Base Model, Pre-Training, Post-Training, Human-Robot Align, Tactile Sensing, Model base RL, Hardware(Robot Platform), Data Quality</li>
-          <li><span class="team-name">Jingrui Pang</span>: Hardware(Robot Platform + Teleoperation + Human Data Collection), Tactile Sensing, Human-Robot Align, Post-Training</li>
-          <li><span class="team-name">Shuhe Huang</span>: Model base RL(Self-Evolving), Post-Training, Tactile Sensing</li>
-          <li><span class="team-name">Haitian Liu</span>: Human-Robot Align, Tactile Sensing, Inference Speedup, Post-Training, Hardware(Human Data Collection)</li>
-          <li><span class="team-name">Runqing Wang</span>: Async Inference</li>
-          <li><span class="team-name">Mengchen Cai</span>: Async Inference</li>
-          <li><span class="team-name">Ruowen Zhao</span>: Test-Time Scaling &amp; Planning, Writing &amp; Visualization</li>
-        </ul>
+      <p class="m2-section__label">Tactile Sensing</p>
+      <h2 class="m2-section__title">Lightweight Tactile Expert</h2>
+      <div class="m2-prose">
+        <p>
+          The action-first backbone first produces an intermediate action chunk and a detached
+          layer-wise KV cache. A lightweight tactile expert reuses both to refine short action
+          sub-chunks from the most recent tactile measurements. The expert is trained for
+          tactile-conditioned action refinement together with tactile prediction.
+        </p>
       </div>
-
-      <div class="team-group">
-        <h3 class="team-group__title">Data Team</h3>
-        <ul class="team-list">
-          <li><span class="team-name">Jinghui Wan</span>: Data Procurement, Data Collection</li>
-          <li><span class="team-name">Jiabao Liu</span>: Data Cleaning, Data Transformation, Data Annotation</li>
-          <li><span class="team-name">Xiaolong Liu</span>: Data Annotation, Offline Processing</li>
-        </ul>
-      </div>
-
-      <div class="team-group">
-        <h3 class="team-group__title">Contributors</h3>
-        <p class="team-group__plain">TBD</p>
-      </div>
-
-      <div class="team-group">
-        <h3 class="team-group__title">Advisors</h3>
-        <p class="team-group__plain">Min Zhao, Fan Bao, Dongyun Ge, Hang Su, Jun Zhu</p>
+      <div class="tactile-steps">
+        <article><span>01</span><h3>Intermediate action</h3><p>The backbone denoises the complete action chunk to a fixed intermediate state.</p></article>
+        <article><span>02</span><h3>Detached KV cache</h3><p>Layer-wise backbone features are reused across rolling sub-chunk updates.</p></article>
+        <article><span>03</span><h3>Action refinement</h3><p>Recent tactile measurements refine each short action sub-chunk.</p></article>
+        <article><span>04</span><h3>Tactile prediction</h3><p>The expert also predicts the tactile feature following the action sub-chunk.</p></article>
       </div>
     </div>
   </section>
 
-  <!-- Acknowledgments -->
-  <section id="acknowledgments" class="m2-section m2-section--alt">
+  <section id="hardware" class="m2-section">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Robot Systems</p>
+      <h2 class="m2-section__title">Robot Platforms and Alignment Collection</h2>
+      <div class="platform-gallery">
+        <figure><img src="assets/img/latest/marvin_wuji.jpg" alt="Wuji hands with Tianji Marvin dual arms" loading="lazy"><figcaption><strong>(a)</strong> Wuji hands with Tianji Marvin dual arms.</figcaption></figure>
+        <figure><img src="assets/img/latest/luna_wuji.jpg" alt="Wuji Hand 2 with Tianji Gento Luna" loading="lazy"><figcaption><strong>(b)</strong> Wuji Hand 2 with Tianji Gento Luna.</figcaption></figure>
+        <figure><img src="assets/img/latest/luna_sharpa.jpg" alt="Sharpa Wave hands with Tianji Gento Luna" loading="lazy"><figcaption><strong>(c)</strong> Sharpa Wave hands with Tianji Gento Luna.</figcaption></figure>
+        <figure><img src="assets/img/latest/human_robot_alignment.jpg" alt="Human-robot alignment collection setup" loading="lazy"><figcaption><strong>(d)</strong> Human-robot alignment collection setup.</figcaption></figure>
+      </div>
+      <p class="m2-figure__caption m2-figure__caption--standalone">
+        Three bimanual robot configurations are used for data collection and post-training. The
+        separate human-robot alignment collection uses Wuji Human Gloves and does not command a robot.
+      </p>
+    </div>
+  </section>
+
+  <section id="team" class="m2-section m2-section--alt">
+    <div class="m2-wrap">
+      <p class="m2-section__label">Team</p>
+      <h2 class="m2-section__title">Core Team</h2>
+      <div class="team-group">
+        <ul class="team-list">
+          <li><span class="team-name">Hongzhe Bi</span>: Base Model, Pre-Training, MBRL, Memory, Tactile Sensing, Sharpa &amp; WuJi-2 Hardware, Real-Robot Post-Training, Ego Data</li>
+          <li><span class="team-name">Jingrui Pang</span>: WuJi-1 Hardware, Human Data Collection, Real-Robot Post-Training</li>
+          <li><span class="team-name">Zihao Zhou</span>: MBRL, Memory, Real-Robot Post-Training</li>
+          <li><span class="team-name">Yihang Tang</span>: Sharpa &amp; WuJi-2 Hardware, Tactile Sensing, Real-Robot Post-Training</li>
+          <li><span class="team-name">Shuhe Huang</span>: MBRL</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="acknowledgments" class="m2-section">
     <div class="m2-wrap">
       <p class="m2-section__label">Partners</p>
       <h2 class="m2-section__title">Acknowledgments</h2>
       <div class="ack-grid">
-        <div class="ack-block">
-          <h4>Hardware Partners</h4>
-          <p>WuJi · TianJi</p>
-        </div>
-        <div class="ack-block">
-          <h4>Data Partners</h4>
-          <p>Ropedia · Egoscale · JD Group · LightWheel · SaiYuan · Chaowei</p>
-        </div>
+        <div class="ack-block"><h4>Hardware Partners</h4><p>WuJi · Sharpa · Tianji</p></div>
+        <div class="ack-block"><h4>Data Partners</h4><p>Ropedia · EgoScale · LightWheel · JD-Group · CyberOrigin</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Citation -->
-  <section id="citation" class="citation m2-section">
+  <section id="citation" class="citation m2-section m2-section--alt">
     <div class="container m2-wrap m2-wrap--citation">
       <h2 class="section-title">Citation</h2>
       <div class="citation-content">
-        <div class="citation-text">
-          <pre><code>@misc{motus22026,
-  title={Motus2: A Self-Evolved Egocentric Embodied Agent},
-  author={Hongzhe Bi and Jingrui Pang and Shuhe Huang and Haitian Liu and others},
-  year={2026},
-  note={*Joint first authors. †Project lead. Paper forthcoming.},
-  url={https://motus-robotics.github.io/motus2},
-}</code></pre>
-        </div>
+        <p class="citation-source">
+          Current preprint:
+          <a href="assets/paper/Motus2.pdf" target="_blank" rel="noreferrer">Motus2: A Self-Evolved Egocentric Embodied Agent (PDF)</a>
+        </p>
+        <div class="citation-text"><pre><code>@misc{bi2026motus2,
+  title  = {Motus2: A Self-Evolved Egocentric Embodied Agent},
+  author = {Hongzhe Bi and Jingrui Pang and Zihao Zhou and Yihang Tang and
+            Shuhe Huang and Haitian Liu and Runqing Wang and Shuai Huang and
+            Yichen Wang and Yiming Cheng and Ruowen Zhao and Zhenghua Li and
+            Xiaolong Liu and Jinhui Wan and Jiabao Liu and Min Zhao and
+            Fan Bao and Jun Zhu},
+  year   = {2026},
+  url    = {https://motus-robotics.github.io/motus2/assets/paper/Motus2.pdf},
+  note   = {Preprint}
+}</code></pre></div>
       </div>
     </div>
   </section>
@@ -768,60 +482,140 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-info">
-          <p>Motus2<br>Unified World Model · Human Data · Dextrous Hand · Tactile Glove · Self-Evolving</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-section">
-            <h4>Resources</h4>
-            <a href="https://motus-robotics.github.io/motus">Motus v1</a>
-            <a href="#demo">Demo</a>
-            <a href="#citation">Citation</a>
-            <a href="mailto:bhz24@mails.tsinghua.edu.cn">Contact</a>
-          </div>
-        </div>
+        <div class="footer-info"><p>Motus2<br>Human Data Scaling · Unified World Modeling · Closed-Loop Self-Evolution · Memory · Tactile Sensing</p></div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Motus2 Team. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Motus2 Team. All rights reserved.</p></div>
     </div>
   </footer>
 
   <script>
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        var target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
     (function () {
-      var demoVideos = document.querySelectorAll('.demo-video video');
-      function playAll() {
-        demoVideos.forEach(function (video) {
-          video.muted = true;
-          var p = video.play();
-          if (p && p.catch) p.catch(function () {});
+      var demos = [
+        { id: 'open-soda-can-1', title: 'Open Soda Can · Trial 1', embodiment: 'WuJi-2', capability: 'Dexterous', src: 'assets/video/demos/open_soda_can_1.mp4?v=20260819-2', description: 'Lift the pull tab and open a soda can.' },
+        { id: 'open-soda-can-2', title: 'Open Soda Can · Trial 2', embodiment: 'WuJi-2', capability: 'Dexterous', orientation: 'landscape', src: 'assets/video/demos/open_soda_can_2.mp4?v=20260819-2', description: 'Lift the pull tab and open a soda can.' },
+        { id: 'light-incense', title: 'Light Incense', embodiment: 'Sharpa', capability: 'Dexterous', src: 'assets/video/demos/light_incense.mp4?v=20260819-2', description: 'Use a handheld lighter to ignite an incense stick.' },
+        { id: 'paper-cup', title: 'Pull Out Paper Cup', embodiment: 'Sharpa', capability: 'Tactile', src: 'assets/video/demos/pull_paper_cup.mp4', description: 'Pull one paper cup from a tightly nested stack.' },
+        { id: 'multi-finger', title: 'Multi-Finger Grasp', embodiment: 'WuJi-1', capability: 'Dexterous', src: 'assets/video/demos/multi_finger.mp4', description: 'Coordinate multiple fingers to grasp small objects.' },
+        { id: 'screw-bulb', title: 'Screw Bulb', embodiment: 'WuJi-1', capability: 'Dexterous', src: 'assets/video/demos/screw_bulb.mp4', description: 'Align, rotate, and secure a light bulb.' },
+        { id: 'cut-banana', title: 'Cut Banana', embodiment: 'WuJi-1', capability: 'Dexterous', src: 'assets/video/demos/cut_banana.mp4', description: 'Stabilize a banana with one hand and cut with the other.' },
+        { id: 'iced-drink', title: 'Prepare Iced Drink', embodiment: 'WuJi-1', capability: 'Dexterous', src: 'assets/video/demos/make_iced_drink.mp4', description: 'Coordinate container and drinkware handling.' },
+        { id: 'spray-wipe', title: 'Clean the tabletop', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/spray_and_wipe.mp4', description: 'Operate a spray bottle and wipe the tabletop.' },
+        { id: 'multi-fruit', title: 'Multi-Fruit Grasp', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/multi_fruit.mp4', description: 'Handle several fruits in sequence.' },
+        { id: 'place-phone', title: 'Place Phone', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/place_phone.mp4', description: 'Grasp a phone and place it on a stand.' },
+        { id: 'yarn-ball', title: 'Place the Ball', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/yarn_ball.mp4', description: 'Grasp and reposition a deformable yarn ball.' },
+        { id: 'retrieve-eraser', title: 'Take Eraser', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/retrieve_eraser.mp4', description: 'Reach for and pick up a whiteboard eraser.' },
+        { id: 'pull-tissue', title: 'Pull Tissue', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/pull_tissue.mp4', description: 'Pinch and extract a tissue.' },
+        { id: 'make-tea', title: 'Make Tea', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/make_tea.mp4', description: 'Manipulate a teacup and nearby containers.' },
+        { id: 'blocks', title: 'Disassemble Blocks', embodiment: 'WuJi-1', capability: 'Normal', src: 'assets/video/demos/disassemble_blocks.mp4', description: 'Separate and reposition interlocked blocks.' },
+        { id: 'find-square-1', title: 'Find Square · Trial 1', embodiment: 'WuJi-1', capability: 'Memory', src: 'assets/video/demos/find_square_1.mp4', description: 'Use an earlier observation to identify the cup hiding the square.' },
+        { id: 'find-square-2', title: 'Find Square · Trial 2', embodiment: 'WuJi-1', capability: 'Memory', src: 'assets/video/demos/find_square_2.mp4', description: 'A second long-context hidden-object trial.' },
+        { id: 'find-square-3', title: 'Find Square · Trial 3', embodiment: 'WuJi-1', capability: 'Memory', src: 'assets/video/demos/find_square_3.mp4', description: 'A third long-context hidden-object trial.' },
+        { id: 'find-ball', title: 'Find Ball', embodiment: 'WuJi-1', capability: 'Memory', src: 'assets/video/demos/find_ball.mp4', description: 'Track a hidden ball through an extended interaction.' },
+        { id: 'generalization-1', title: 'Generalization · Trial 1', embodiment: 'WuJi-1', capability: 'Generalize', src: 'assets/video/demos/generalization_1.mp4', description: 'Evaluation under an object variation.' },
+        { id: 'generalization-2', title: 'Generalization · Trial 2', embodiment: 'WuJi-1', capability: 'Generalize', src: 'assets/video/demos/generalization_2.mp4', description: 'Evaluation under a second object variation.' },
+        { id: 'generalization-3', title: 'Generalization · Trial 3', embodiment: 'WuJi-1', capability: 'Generalize', src: 'assets/video/demos/generalization_3.mp4', description: 'Evaluation under a third object variation.' },
+      ];
+
+      var activeEmbodiment = 'all';
+      var activeCapability = 'all';
+      var activeDemo = demos[0];
+      var taskSelector = document.getElementById('demo-task-selector');
+      var playerPanel = document.querySelector('.demo-player-panel');
+      var player = document.getElementById('demo-player');
+      var title = document.getElementById('demo-title');
+      var description = document.getElementById('demo-description');
+      var embodiment = document.getElementById('demo-embodiment');
+      var capability = document.getElementById('demo-capability');
+
+      function matchingDemos() {
+        return demos.filter(function (item) {
+          return (activeEmbodiment === 'all' || item.embodiment === activeEmbodiment) &&
+            (activeCapability === 'all' || item.capability === activeCapability);
         });
       }
-      playAll();
-      document.addEventListener('visibilitychange', function () {
-        if (!document.hidden) playAll();
-      });
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.muted = true;
-              entry.target.play().catch(function () {});
-            }
-          });
-        }, { threshold: 0.25 });
-        demoVideos.forEach(function (video) { observer.observe(video); });
+
+      function updatePressedState(containerId, value) {
+        document.querySelectorAll('#' + containerId + ' .demo-filter').forEach(function (button) {
+          var selected = button.dataset.filter === value;
+          button.classList.toggle('is-active', selected);
+          button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
       }
+
+      function playDemo(item) {
+        activeDemo = item;
+        playerPanel.classList.toggle('is-landscape', item.orientation === 'landscape');
+        player.src = item.src;
+        player.load();
+        player.muted = true;
+        player.play().catch(function () {});
+        title.textContent = item.title;
+        description.textContent = item.description;
+        embodiment.textContent = item.embodiment;
+        capability.textContent = item.capability;
+        document.querySelectorAll('.demo-task-button').forEach(function (button) {
+          var selected = button.dataset.demoId === item.id;
+          button.classList.toggle('is-active', selected);
+          button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
+      }
+
+      function renderTasks() {
+        var filtered = matchingDemos();
+        taskSelector.innerHTML = '';
+        if (filtered.length === 0) {
+          player.pause();
+          player.removeAttribute('src');
+          player.load();
+          title.textContent = 'No matching demos';
+          description.textContent = 'Choose another embodiment or capability.';
+          embodiment.textContent = activeEmbodiment === 'all' ? 'All' : activeEmbodiment;
+          capability.textContent = activeCapability === 'all' ? 'All' : activeCapability;
+          return;
+        }
+        filtered.forEach(function (item) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'demo-task-button';
+          button.dataset.demoId = item.id;
+          button.setAttribute('aria-pressed', item.id === activeDemo.id ? 'true' : 'false');
+          button.textContent = item.title;
+          button.addEventListener('click', function () { playDemo(item); });
+          taskSelector.appendChild(button);
+        });
+        if (!filtered.some(function (item) { return item.id === activeDemo.id; })) playDemo(filtered[0]);
+        else playDemo(activeDemo);
+      }
+
+      function setFilter(kind, value) {
+        if (kind === 'embodiment') activeEmbodiment = value;
+        else activeCapability = value;
+        if (matchingDemos().length === 0) {
+          if (kind === 'embodiment') activeCapability = 'all';
+          else activeEmbodiment = 'all';
+        }
+        updatePressedState('embodiment-filters', activeEmbodiment);
+        updatePressedState('capability-filters', activeCapability);
+        renderTasks();
+      }
+
+      document.querySelectorAll('#embodiment-filters .demo-filter').forEach(function (button) {
+        button.addEventListener('click', function () { setFilter('embodiment', button.dataset.filter); });
+      });
+      document.querySelectorAll('#capability-filters .demo-filter').forEach(function (button) {
+        button.addEventListener('click', function () { setFilter('capability', button.dataset.filter); });
+      });
+      document.querySelectorAll('.nav-links a[href^="#"], .motus2-hero__actions a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          var target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      renderTasks();
     })();
   </script>
 </body>
