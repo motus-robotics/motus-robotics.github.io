@@ -491,6 +491,8 @@
   <script>
     (function () {
       var demos = [
+        { id: 'tearing-kitchen-paper-towels', title: 'Tearing Kitchen Paper Towels', embodiment: 'WuJi-2', capability: 'Tactile', capabilities: ['Tactile', 'Dexterous'], src: 'assets/video/demos/tearing_kitchen_paper_towels.mp4?v=20260819', description: 'Tear a sheet of kitchen paper towel using coordinated bimanual manipulation.' },
+        { id: 'turning-book-pages', title: 'Turning Book Pages', embodiment: 'WuJi-2', capability: 'Tactile', capabilities: ['Tactile', 'Dexterous'], src: 'assets/video/demos/turning_book_pages.mp4?v=20260819', description: 'Turn individual pages using coordinated bimanual manipulation.' },
         { id: 'open-soda-can-1', title: 'Open Soda Can · Trial 1', embodiment: 'WuJi-2', capability: 'Dexterous', src: 'assets/video/demos/open_soda_can_1.mp4?v=20260819-2', description: 'Lift the pull tab and open a soda can.' },
         { id: 'open-soda-can-2', title: 'Open Soda Can · Trial 2', embodiment: 'WuJi-2', capability: 'Dexterous', orientation: 'landscape', src: 'assets/video/demos/open_soda_can_2.mp4?v=20260819-2', description: 'Lift the pull tab and open a soda can.' },
         { id: 'light-incense', title: 'Light Incense', embodiment: 'Sharpa', capability: 'Dexterous', src: 'assets/video/demos/light_incense.mp4?v=20260819-2', description: 'Use a handheld lighter to ignite an incense stick.' },
@@ -527,10 +529,14 @@
       var embodiment = document.getElementById('demo-embodiment');
       var capability = document.getElementById('demo-capability');
 
+      function demoCapabilities(item) {
+        return item.capabilities || [item.capability];
+      }
+
       function matchingDemos() {
         return demos.filter(function (item) {
           return (activeEmbodiment === 'all' || item.embodiment === activeEmbodiment) &&
-            (activeCapability === 'all' || item.capability === activeCapability);
+            (activeCapability === 'all' || demoCapabilities(item).indexOf(activeCapability) !== -1);
         });
       }
 
@@ -552,7 +558,7 @@
         title.textContent = item.title;
         description.textContent = item.description;
         embodiment.textContent = item.embodiment;
-        capability.textContent = item.capability;
+        capability.textContent = demoCapabilities(item).join(' · ');
         document.querySelectorAll('.demo-task-button').forEach(function (button) {
           var selected = button.dataset.demoId === item.id;
           button.classList.toggle('is-active', selected);
