@@ -4,3 +4,7 @@
 _site/
 Gemfile.lock
 **/.ruby-version
+
+# Keep unpublished Motus2 project pages local only.
+motus2/
+test_old/
