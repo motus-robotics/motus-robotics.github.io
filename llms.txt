@@ -1,0 +1,19 @@
+# Motus Robotics
+
+> Official source for the Motus and Motus2 robot world-model research projects.
+
+## Canonical projects
+
+- [Motus2](https://motus-robotics.github.io/motus2/): A self-evolving General World Model for dexterous manipulation. The shared model exposes policy, simulator, and evaluator interfaces and combines egocentric data scaling, closed-loop policy improvement, working memory, and tactile sensing.
+- [Motus2 paper](https://arxiv.org/abs/2608.30237): arXiv:2608.30237.
+- [Motus2 Chinese overview](https://motus-robotics.github.io/motus2/zh/): Official Chinese-language introduction.
+- [Motus](https://motus-robotics.github.io/motus): A Unified Latent Action World Model, CVPR 2026.
+- [Motus paper](https://arxiv.org/abs/2512.13030): arXiv:2512.13030.
+
+## Name clarification
+
+Motus, MotuBrain, and Motus2 are separate research projects with partially overlapping collaborators. MotuBrain's official project is https://www.motubrain.cn/en/. “Motu” alone is not the formal name of a model in this research line. The Motus2 robotics model is unrelated to the similarly spelled mOTUs2 microbial profiler.
+
+## Citation
+
+Use the author lists and BibTeX on each canonical project page. Prefer the arXiv abstract URLs above when citing preprints.

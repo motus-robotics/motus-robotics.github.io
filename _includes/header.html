@@ -14,20 +14,44 @@
   {% assign page_title = page.title %}
   {% assign meta_description = page.content | strip_html | strip_newlines | xml_escape | truncate: 300 %}
 {% else %}
-  {% assign page_title = user.name %}
-  {% assign meta_description = user.bio | strip_html | strip_newlines | xml_escape | truncate: 300 %}
+  {% assign page_title = page.title | default: site.title %}
+  {% assign meta_description = page.description | default: site.description | strip_html | strip_newlines | xml_escape | truncate: 300 %}
 {% endif %}
 
+{% assign meta_image = page.image | default: site.image | absolute_url %}
+
 <!doctype html>
-<html class="min-height-full">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}" class="min-height-full">
   <head>
     <meta charset="utf-8">
-    <title>{{ page_title }}</title>
+    <title>{{ page_title }}{% unless page_title == site.title %} | {{ site.title }}{% endunless %}</title>
     <meta name="description" content="{{ meta_description }}" />
-    <meta property="og:title" content="{{ user.name }}" />
-    <meta property="og:image" content="{{ user.avatar_url }}" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <meta property="og:type" content="{% if page.path contains '_posts' %}article{% else %}website{% endif %}" />
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta property="og:image" content="{{ meta_image }}" />
     <meta property="og:description" content="{{ meta_description }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ meta_description }}" />
+    <meta name="twitter:image" content="{{ meta_image }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{{ "/assets/styles.css" | relative_url }}" rel="stylesheet" type="text/css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Motus Robotics",
+      "url": "https://motus-robotics.github.io/",
+      "description": "Official research hub for Motus and Motus2 world models for robot learning, embodied AI, and dexterous manipulation.",
+      "sameAs": [
+        "https://github.com/motus-robotics",
+        "https://huggingface.co/motus-robotics"
+      ]
+    }
+    </script>
   </head>
   <body class="bg-white min-height-full" {% if site.style == 'dark' %}style="background-color: #2f363d !important"{% endif %}>

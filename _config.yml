@@ -1,3 +1,10 @@
+title: Motus Robotics
+description: Official research hub for Motus and Motus2 world models for robot learning, embodied AI, and dexterous manipulation.
+url: https://motus-robotics.github.io
+baseurl: ""
+lang: en
+image: /motus2/assets/img/latest/motus2_overview.png
+
 layout: stacked
 style: light
 

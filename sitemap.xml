@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://motus-robotics.github.io/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://motus-robotics.github.io/motus</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://motus-robotics.github.io/assets/motus/png/Motus.png</image:loc>
+      <image:title>Motus: A Unified Latent Action World Model</image:title>
+      <image:caption>Official project page for the Motus latent action world model.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://motus-robotics.github.io/motus2/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview.png</image:loc>
+      <image:title>Motus2 General World Model</image:title>
+      <image:caption>Motus2 policy, simulator, and evaluator in a closed decision-and-learning loop.</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview.png</video:thumbnail_loc>
+      <video:title>Motus2: A Self-Evolving General World Model for Dexterous Manipulation</video:title>
+      <video:description>Overview of the Motus2 general world model and its real-robot dexterous manipulation capabilities.</video:description>
+      <video:content_loc>https://motus-robotics.github.io/motus2/assets/video/motus2_overview.mp4</video:content_loc>
+      <video:publication_date>2026-09-01</video:publication_date>
+      <video:duration>161</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://motus-robotics.github.io/motus2/zh/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview.png</image:loc>
+      <image:title>Motus2 面向机器人灵巧操作的通用世界模型</image:title>
+      <image:caption>Motus2 策略、模拟器和评估器共享参数的闭环架构。</image:caption>
+    </image:image>
+  </url>
+</urlset>

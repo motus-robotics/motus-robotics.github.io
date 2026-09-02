@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://motus-robotics.github.io/sitemap.xml

@@ -1,0 +1,115 @@
+name: Notify search engines
+
+on:
+  workflow_run:
+    workflows: [pages-build-deployment]
+    branches: [master]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: search-engine-notification
+  cancel-in-progress: true
+
+jobs:
+  validate-production:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      TARGET_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - name: Check out SEO sources without media blobs
+        run: |
+          git init .
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git sparse-checkout init --no-cone
+          git sparse-checkout set --no-cone \
+            '/_config.yml' \
+            '/_includes/**' \
+            '/index.html' \
+            '/motus.html' \
+            '/motus2/index.html' \
+            '/motus2/zh/index.html' \
+            '/robots.txt' \
+            '/sitemap.xml' \
+            '/llms.txt' \
+            '/seo/**' \
+            '/19fea5e34e5429e2c8a76d6f1454dcc2.txt' \
+            '/scripts/check-seo.mjs' \
+            '/scripts/check-live-seo.mjs' \
+            '/scripts/generate-sitemap.mjs'
+          git fetch --depth=1 --filter=blob:none origin "$TARGET_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate the deployed SEO release
+        run: |
+          node scripts/generate-sitemap.mjs --check
+          node scripts/check-seo.mjs
+          node scripts/check-live-seo.mjs
+
+  indexnow:
+    needs: validate-production
+    runs-on: ubuntu-latest
+    env:
+      TARGET_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - name: Check out IndexNow files
+        run: |
+          git init .
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git sparse-checkout init --no-cone
+          git sparse-checkout set --no-cone \
+            '/19fea5e34e5429e2c8a76d6f1454dcc2.txt' \
+            '/seo/**' \
+            '/scripts/submit-indexnow.mjs'
+          git fetch --depth=1 --filter=blob:none origin "$TARGET_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Notify IndexNow participants
+        run: node scripts/submit-indexnow.mjs
+
+  baidu:
+    needs: validate-production
+    runs-on: ubuntu-latest
+    env:
+      TARGET_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - name: Check out Baidu submission files
+        run: |
+          git init .
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git sparse-checkout init --no-cone
+          git sparse-checkout set --no-cone \
+            '/seo/**' \
+            '/scripts/submit-baidu.mjs'
+          git fetch --depth=1 --filter=blob:none origin "$TARGET_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Submit canonical URLs to Baidu when configured
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+          BAIDU_SITE: https://motus-robotics.github.io
+        run: |
+          if [ -z "$BAIDU_PUSH_TOKEN" ]; then
+            echo "BAIDU_PUSH_TOKEN is not configured; skipping Baidu API submission."
+            exit 0
+          fi
+          node scripts/submit-baidu.mjs
