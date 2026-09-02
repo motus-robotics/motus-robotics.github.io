@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const token = process.env.BAIDU_PUSH_TOKEN?.trim();
 const site = process.env.BAIDU_SITE?.trim() || 'https://motus-robotics.github.io';
+const allowInsecurePush = process.env.BAIDU_ALLOW_INSECURE_PUSH === '1';
 const pages = JSON.parse(await readFile(path.join(root, 'seo/pages.json'), 'utf8'));
 const urlList = pages.map((page) => page.canonical);
 
@@ -18,6 +19,9 @@ if (process.env.BAIDU_DRY_RUN === '1') {
 }
 
 // Baidu's URL submission API is currently exposed on this documented HTTP endpoint.
+if (!allowInsecurePush) {
+  throw new Error('Baidu push is disabled because its documented endpoint sends the token over HTTP. Set BAIDU_ALLOW_INSECURE_PUSH=1 only after explicitly accepting that risk.');
+}
 const endpoint = new URL('http://data.zz.baidu.com/urls');
 endpoint.searchParams.set('site', site);
 endpoint.searchParams.set('token', token);

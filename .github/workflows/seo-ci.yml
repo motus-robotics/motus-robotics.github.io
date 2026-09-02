@@ -13,6 +13,7 @@ on:
       - 'llms.txt'
       - 'seo/**'
       - 'scripts/check-seo.mjs'
+      - 'scripts/check-lighthouse-budget.mjs'
       - 'scripts/generate-sitemap.mjs'
       - '.github/workflows/seo-ci.yml'
   push:
@@ -28,6 +29,7 @@ on:
       - 'llms.txt'
       - 'seo/**'
       - 'scripts/check-seo.mjs'
+      - 'scripts/check-lighthouse-budget.mjs'
       - 'scripts/generate-sitemap.mjs'
       - '.github/workflows/seo-ci.yml'
   workflow_dispatch:
@@ -58,6 +60,7 @@ jobs:
             '/llms.txt' \
             '/seo/**' \
             '/scripts/check-seo.mjs' \
+            '/scripts/check-lighthouse-budget.mjs' \
             '/scripts/generate-sitemap.mjs'
           git fetch --depth=1 --filter=blob:none origin "$TARGET_SHA"
           git checkout --detach FETCH_HEAD
@@ -72,3 +75,6 @@ jobs:
 
       - name: Audit technical and scholarly SEO
         run: node scripts/check-seo.mjs
+
+      - name: Validate the web-quality budget checker
+        run: node --check scripts/check-lighthouse-budget.mjs

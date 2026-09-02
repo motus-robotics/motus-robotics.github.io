@@ -162,7 +162,28 @@ for (const spec of pageSpecs) {
     if (video.attrs.preload === 'auto') fail(spec.file, 'video preload=auto defeats the performance budget');
   }
 
-  const references = [...html.matchAll(/<(?:a|link|script|img|source)\b[^>]*\b(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
+  if (spec.file.startsWith('motus2/')) {
+    const mainTags = tags(html, 'main');
+    if (mainTags.length !== 1) fail(spec.file, `expected exactly one main landmark, found ${mainTags.length}`);
+    const externalStylesheets = tags(html, 'link').filter(({ attrs }) =>
+      attrs.rel?.toLowerCase() === 'stylesheet' && /^https?:/i.test(attrs.href ?? ''),
+    );
+    if (externalStylesheets.length > 0) fail(spec.file, 'external render-blocking stylesheets are not allowed');
+    for (const video of tags(html, 'video')) {
+      if (video.attrs.preload !== 'none') fail(spec.file, 'Motus2 videos must use preload=none');
+    }
+  }
+
+  const references = ['a', 'link', 'script', 'img', 'source', 'video'].flatMap((tagName) =>
+    tags(html, tagName).flatMap(({ attrs }) => {
+      const direct = [attrs.href, attrs.src, attrs.poster].filter(Boolean);
+      const responsive = (attrs.srcset ?? '')
+        .split(',')
+        .map((candidate) => candidate.trim().split(/\s+/)[0])
+        .filter(Boolean);
+      return [...direct, ...responsive];
+    }),
+  );
   for (const reference of references) {
     if (!(await localTargetExists(spec.file, reference))) fail(spec.file, `broken local reference: ${reference}`);
   }

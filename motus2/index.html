@@ -146,10 +146,7 @@
   </script>
 
   <link rel="stylesheet" href="../static/css/motus_style.css">
-  <link rel="stylesheet" href="static/css/motus2.css?v=20260831-1">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/motus2.css?v=20260902-performance">
 </head>
 <body class="motus2-dark">
 
@@ -174,7 +171,10 @@
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
       <a href="#home" class="motus2-hero__logo" aria-label="GensPI">
-        <img src="assets/img/ss-logo.png?v=20260831-2" alt="GensPI logo" width="1458" height="324">
+        <picture>
+          <source srcset="assets/img/ss-logo-480.webp" type="image/webp">
+          <img src="assets/img/ss-logo.png?v=20260831-2" alt="GensPI logo" width="480" height="107">
+        </picture>
       </a>
       <div class="motus2-hero__meta">
         <span>Motus2 Team</span>
@@ -229,40 +229,40 @@
 
       <div class="motus2-hero__actions">
         <a href="#overview-video" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="fas fa-play"></i></span><span>Watch Demo</span>
+          <span class="icon m2-symbol" aria-hidden="true">▶</span><span>Watch Demo</span>
         </a>
         <a href="https://motus-robotics.github.io/motus" class="external-link button is-normal is-rounded is-light">
-          <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Motus v1</span>
+          <span class="icon m2-symbol" aria-hidden="true">←</span><span>Motus v1</span>
         </a>
         <a href="https://arxiv.org/abs/2608.30237" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+          <span class="icon m2-symbol" aria-hidden="true">↗</span><span>arXiv</span>
         </a>
         <a href="https://www.alphaxiv.org/abs/2608.30237" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fas fa-book-open"></i></span><span>alphaXiv</span>
+          <span class="icon m2-symbol" aria-hidden="true">α</span><span>alphaXiv</span>
         </a>
         <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
-          <span class="icon"><i class="fab fa-github"></i></span><span>Code (Soon)</span>
+          <span class="icon m2-symbol" aria-hidden="true">⌘</span><span>Code (Soon)</span>
         </span>
         <span class="external-link button button--soon is-normal is-rounded is-light" aria-disabled="true">
           <span class="icon">🤗</span><span>Model (Soon)</span>
         </span>
         <a href="https://discord.gg/f44aAbgJT" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fab fa-discord"></i></span><span>Discord</span>
+          <span class="icon m2-symbol" aria-hidden="true">◉</span><span>Discord</span>
         </a>
         <a href="assets/img/wechat_group.png?v=20260901-2" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fab fa-weixin"></i></span><span>WeChat Group</span>
+          <span class="icon m2-symbol" aria-hidden="true">◆</span><span>WeChat Group</span>
         </a>
       </div>
 
       <figure id="overview-video" class="motus2-overview-video">
-        <video controls muted loop playsinline preload="metadata" poster="assets/img/latest/motus2_overview.png" aria-label="Motus2 overview video">
+        <video controls muted loop playsinline preload="none" poster="assets/img/latest/motus2_overview-960.webp" aria-label="Motus2 overview video">
           <source src="assets/video/motus2_overview.mp4?v=20260829" type="video/mp4">
           Your browser does not support HTML5 video.
         </video>
       </figure>
 
       <div id="tldr" class="motus2-tldr">
-        <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> TL;DR</p>
+        <p class="motus2-tldr__heading"><span class="m2-symbol" aria-hidden="true">✦</span> TL;DR</p>
         <ul>
           <li><strong>General World Model</strong> — one shared video-action model exposes a policy (world-action model), a simulator (action-conditioned world model), and an evaluator (value model).</li>
           <li><strong>Human Data Pyramid</strong> — 130K hours of data support progressive pretraining from monocular egocentric video to synchronized stereo egocentric data, followed by robot-domain mid-training.</li>
@@ -274,6 +274,7 @@
     </div>
   </header>
 
+  <main>
   <section id="demo" class="m2-section m2-section--alt demo">
     <div class="demo-container">
       <p class="m2-section__label m2-section__label--center">Real-Robot Rollouts</p>
@@ -313,13 +314,11 @@
         <div class="demo-player-panel">
           <div class="demo-player-shell">
             <div class="demo-player-media">
-              <video id="demo-player" loop muted playsinline preload="metadata" poster="assets/img/latest/motus2_overview.png">
-                <source id="demo-source" src="assets/video/demos/screw_bulb.mp4" type="video/mp4">
-              </video>
+              <video id="demo-player" loop muted playsinline preload="none" poster="assets/img/latest/motus2_overview-960.webp"></video>
             </div>
             <div class="demo-player-controls">
               <button type="button" id="demo-play-toggle" class="demo-player-btn" aria-label="Play or pause">
-                <i class="fas fa-pause" aria-hidden="true"></i>
+                <span aria-hidden="true">▶</span>
               </button>
               <input type="range" id="demo-seek" class="demo-player-seek" min="0" max="100" step="0.01" value="0" aria-label="Seek video">
               <span id="demo-time" class="demo-player-time">0:00 / 0:00</span>
@@ -363,7 +362,10 @@
         <article class="role-card"><span>03</span><h3>Evaluator</h3><p>Value model that assesses predicted outcomes for selection and learning.</p></article>
       </div>
       <figure class="m2-figure m2-figure--architecture">
-        <img src="assets/img/latest/motus2_overview.png?v=paper-20260829" alt="Motus2 General World Model and closed policy-simulator-evaluator loop" width="2110" height="1071" loading="lazy">
+        <picture>
+          <source srcset="assets/img/latest/motus2_overview-960.webp 960w, assets/img/latest/motus2_overview-1600.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px" type="image/webp">
+          <img src="assets/img/latest/motus2_overview.png?v=paper-20260829" alt="Motus2 General World Model and closed policy-simulator-evaluator loop" width="2110" height="1071" loading="lazy">
+        </picture>
         <figcaption class="m2-figure__caption">
           <strong>Figure 1: Motus2 overview.</strong> A single General World Model with one shared
           parameter set exposes three control interfaces. The policy generates action chunks, the
@@ -610,8 +612,8 @@
       <p class="m2-section__label">Partners</p>
       <h2 class="m2-section__title">Acknowledgments</h2>
       <div class="ack-grid">
-        <div class="ack-block"><h4>Hardware Partners</h4><p>WuJi · Sharpa · Tianji</p></div>
-        <div class="ack-block"><h4>Data Partners</h4><p>Ropedia · EgoScale · LightWheel · JD-Group · CyberOrigin</p></div>
+        <div class="ack-block"><h3>Hardware Partners</h3><p>WuJi · Sharpa · Tianji</p></div>
+        <div class="ack-block"><h3>Data Partners</h3><p>Ropedia · EgoScale · LightWheel · JD-Group · CyberOrigin</p></div>
       </div>
     </div>
   </section>
@@ -685,6 +687,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer class="footer">
     <div class="container">
@@ -772,9 +775,8 @@
 
       function updatePlayToggleIcon() {
         if (!playToggle) return;
-        playToggle.innerHTML = player.paused
-          ? '<i class="fas fa-play" aria-hidden="true"></i>'
-          : '<i class="fas fa-pause" aria-hidden="true"></i>';
+        playToggle.textContent = player.paused ? '▶' : 'Ⅱ';
+        playToggle.setAttribute('aria-label', player.paused ? 'Play demo' : 'Pause demo');
       }
 
       function updateSeekUi() {
@@ -794,15 +796,19 @@
         activeDemo = item;
         isScrubbing = false;
         playerPanel.classList.toggle('is-landscape', item.orientation === 'landscape');
-        player.src = item.src;
+        player.pause();
+        player.removeAttribute('src');
         player.load();
         player.muted = true;
         if (seekBar) {
           seekBar.value = '0';
           seekBar.max = '100';
         }
-        if (shouldPlay) player.play().catch(function () {});
-        else player.pause();
+        if (shouldPlay) {
+          player.src = item.src;
+          player.load();
+          player.play().catch(function () {});
+        }
         updateSeekUi();
         title.textContent = item.title;
         description.textContent = item.description;
@@ -872,7 +878,8 @@
 
       if (playToggle) {
         playToggle.addEventListener('click', function () {
-          if (player.paused) player.play().catch(function () {});
+          if (!player.getAttribute('src')) playDemo(activeDemo, true);
+          else if (player.paused) player.play().catch(function () {});
           else player.pause();
           updatePlayToggleIcon();
         });

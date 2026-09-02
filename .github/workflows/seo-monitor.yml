@@ -11,6 +11,7 @@ permissions:
 jobs:
   production-health:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Check out monitor without media blobs
         env:
@@ -19,7 +20,9 @@ jobs:
           git init .
           git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
           git sparse-checkout init --no-cone
-          git sparse-checkout set --no-cone '/scripts/check-live-seo.mjs'
+          git sparse-checkout set --no-cone \
+            '/scripts/check-live-seo.mjs' \
+            '/scripts/check-lighthouse-budget.mjs'
           git fetch --depth=1 --filter=blob:none origin "$TARGET_SHA"
           git checkout --detach FETCH_HEAD
 
@@ -30,3 +33,25 @@ jobs:
 
       - name: Check live canonical pages and discovery files
         run: node scripts/check-live-seo.mjs
+
+      - name: Measure Motus2 mobile web quality
+        run: |
+          mkdir -p lighthouse-reports
+          for run in 1 2 3; do
+            npx --yes lighthouse@13.4.1 https://motus-robotics.github.io/motus2/ \
+              --output=json \
+              --output-path="lighthouse-reports/run-${run}.json" \
+              --only-categories=performance,accessibility,best-practices,seo \
+              --chrome-flags="--headless --no-sandbox" \
+              --quiet
+          done
+          node scripts/check-lighthouse-budget.mjs lighthouse-reports/run-*.json
+
+      - name: Preserve Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus2-mobile-lighthouse
+          path: lighthouse-reports/*.json
+          if-no-files-found: warn
+          retention-days: 30

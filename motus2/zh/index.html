@@ -93,9 +93,7 @@
 
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../static/css/motus_style.css">
-  <link rel="stylesheet" href="../static/css/motus2.css?v=20260902-seo">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/motus2.css?v=20260902-performance">
 </head>
 <body class="motus2-dark">
   <nav class="navbar navbar--motus2">
@@ -115,7 +113,10 @@
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
       <a href="https://www.genspi.com/" class="motus2-hero__logo" aria-label="GensPI">
-        <img src="../assets/img/ss-logo.png?v=20260831-2" alt="GensPI 标志" width="1458" height="324">
+        <picture>
+          <source srcset="../assets/img/ss-logo-480.webp" type="image/webp">
+          <img src="../assets/img/ss-logo.png?v=20260831-2" alt="GensPI 标志" width="480" height="107">
+        </picture>
       </a>
       <div class="motus2-hero__meta">
         <span>Motus2 团队</span>
@@ -133,21 +134,21 @@
 
       <div class="motus2-hero__actions">
         <a href="../" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="fas fa-globe"></i></span><span>英文项目主页</span>
+          <span class="icon m2-symbol" aria-hidden="true">EN</span><span>英文项目主页</span>
         </a>
         <a href="https://arxiv.org/abs/2608.30237" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fas fa-file-alt"></i></span><span>arXiv 论文</span>
+          <span class="icon m2-symbol" aria-hidden="true">↗</span><span>arXiv 论文</span>
         </a>
         <a href="https://www.alphaxiv.org/abs/2608.30237" class="external-link button is-normal is-rounded is-light" target="_blank" rel="noreferrer">
-          <span class="icon"><i class="fas fa-book-open"></i></span><span>alphaXiv 解读</span>
+          <span class="icon m2-symbol" aria-hidden="true">α</span><span>alphaXiv 解读</span>
         </a>
         <a href="../../motus" class="external-link button is-normal is-rounded is-light">
-          <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Motus</span>
+          <span class="icon m2-symbol" aria-hidden="true">←</span><span>Motus</span>
         </a>
       </div>
 
       <div class="motus2-tldr">
-        <p class="motus2-tldr__heading"><i class="fas fa-lightbulb"></i> 核心摘要</p>
+        <p class="motus2-tldr__heading"><span class="m2-symbol" aria-hidden="true">✦</span> 核心摘要</p>
         <ul>
           <li><strong>一个模型，三种接口：</strong>策略生成动作，模拟器预测未来，评估器判断结果。</li>
           <li><strong>约 13 万小时原始人类数据：</strong>统计口径为过滤、切分与标注前的第一视角原始录制时长，覆盖单目与同步双目数据。</li>
@@ -176,7 +177,10 @@
           </p>
         </div>
         <figure class="m2-figure m2-figure--architecture">
-          <img src="../assets/img/latest/motus2_overview.png?v=paper-20260829" alt="Motus2 策略、模拟器和评估器共享参数的通用世界模型架构" width="2110" height="1071" loading="eager" fetchpriority="high">
+          <picture>
+            <source srcset="../assets/img/latest/motus2_overview-960.webp 960w, ../assets/img/latest/motus2_overview-1600.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px" type="image/webp">
+            <img src="../assets/img/latest/motus2_overview.png?v=paper-20260829" alt="Motus2 策略、模拟器和评估器共享参数的通用世界模型架构" width="2110" height="1071" loading="lazy">
+          </picture>
           <figcaption class="m2-figure__caption">
             <strong>Motus2 总体架构。</strong>共享参数模型提供策略、动作条件模拟器和价值评估器，
             支持机器人决策、未来预测、Best-of-N 规划与模型化策略优化。

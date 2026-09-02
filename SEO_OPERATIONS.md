@@ -36,10 +36,13 @@ ongoing impressions, clicks, CTR, and average position.
   after GitHub Pages reports a successful production deployment and the live-page
   checks pass. Its public verification key is intentionally committed at the
   repository root.
-- `scripts/submit-baidu.mjs` sends the same canonical URLs to Baidu when the repository
-  secret `BAIDU_PUSH_TOKEN` is configured.
+- `scripts/submit-baidu.mjs` can send the same canonical URLs to Baidu only when the
+  repository secret `BAIDU_PUSH_TOKEN` and the explicit opt-in variable
+  `BAIDU_ALLOW_INSECURE_PUSH=1` are both configured.
 - `scripts/check-live-seo.mjs` verifies the deployed pages, canonical markers, robots,
   sitemap, Chinese page, and IndexNow key every day.
+- The production monitor also runs three mobile Lighthouse samples and checks their
+  median performance, accessibility, SEO, Core Web Vitals, and initial transfer size.
 
 Run the local checks before publishing:
 
@@ -77,16 +80,18 @@ node scripts/generate-sitemap.mjs
 
 1. Add and verify `https://motus-robotics.github.io` with the HTML-file method.
 2. Submit the root sitemap in the ordinary-inclusion section.
-3. Copy the API push token into the GitHub Actions secret `BAIDU_PUSH_TOKEN`. The
-   `Notify search engines` workflow will then submit canonical URLs after each relevant
-   production update.
+3. Prefer the authenticated Baidu console for manual submission. If the organization
+   explicitly accepts the API's HTTP transport risk, copy the token into the GitHub
+   Actions secret `BAIDU_PUSH_TOKEN` and set the repository variable
+   `BAIDU_ALLOW_INSECURE_PUSH` to `1`. Only then will the `Notify search engines`
+   workflow submit canonical URLs after a production update.
 4. Keep `/motus2/zh/` substantive and current. Do not duplicate the same Chinese copy
    across low-quality third-party sites.
 
 Baidu currently documents and serves URL API submission on an HTTP endpoint. The token
-is limited to URL pushing, but organizations that prohibit sending any token over HTTP
-should leave `BAIDU_PUSH_TOKEN` unset and submit through the authenticated Baidu console
-instead; the workflow skips Baidu cleanly when the secret is absent.
+is limited to URL pushing, but it is still exposed in the request URL without TLS. The
+workflow therefore remains disabled unless both the token and the separate insecure-
+transport opt-in are present. Otherwise, submit through the authenticated Baidu console.
 
 Verification files and API tokens are site-specific. Never commit Baidu's API token or
 Google credentials to this public repository.

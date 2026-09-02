@@ -106,10 +106,16 @@ jobs:
       - name: Submit canonical URLs to Baidu when configured
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+          BAIDU_ALLOW_INSECURE_PUSH: ${{ vars.BAIDU_ALLOW_INSECURE_PUSH }}
           BAIDU_SITE: https://motus-robotics.github.io
         run: |
           if [ -z "$BAIDU_PUSH_TOKEN" ]; then
             echo "BAIDU_PUSH_TOKEN is not configured; skipping Baidu API submission."
+            exit 0
+          fi
+          if [ "$BAIDU_ALLOW_INSECURE_PUSH" != "1" ]; then
+            echo "Baidu API submission remains disabled because the documented endpoint transmits its token over HTTP."
+            echo "Use Baidu Search Resource Platform manually, or set repository variable BAIDU_ALLOW_INSECURE_PUSH=1 only after accepting that risk."
             exit 0
           fi
           node scripts/submit-baidu.mjs
