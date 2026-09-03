@@ -32,6 +32,7 @@ jobs:
             '/index.html' \
             '/motus.html' \
             '/motus2/index.html' \
+            '/motus2/demos/index.html' \
             '/motus2/zh/index.html' \
             '/robots.txt' \
             '/sitemap.xml' \

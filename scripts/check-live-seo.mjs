@@ -4,6 +4,7 @@ const checks = [
   { path: '/', canonical: 'https://motus-robotics.github.io/', contains: 'Motus Robotics' },
   { path: '/motus', canonical: 'https://motus-robotics.github.io/motus', contains: 'Motus: A Unified Latent Action World Model' },
   { path: '/motus2/', canonical: 'https://motus-robotics.github.io/motus2/', contains: 'Motus2: A Self-Evolving General World Model' },
+  { path: '/motus2/demos/', canonical: 'https://motus-robotics.github.io/motus2/demos/', contains: '29 real-robot Motus2 rollouts' },
   { path: '/motus2/zh/', canonical: 'https://motus-robotics.github.io/motus2/zh/', contains: 'Motus2：面向灵巧操作的自进化通用世界模型' },
   { path: '/robots.txt', contains: 'Sitemap: https://motus-robotics.github.io/sitemap.xml' },
   { path: '/sitemap.xml', contains: 'https://motus-robotics.github.io/motus2/zh/' },

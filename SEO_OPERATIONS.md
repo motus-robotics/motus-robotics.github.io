@@ -41,6 +41,8 @@ ongoing impressions, clicks, CTR, and average position.
   `BAIDU_ALLOW_INSECURE_PUSH=1` are both configured.
 - `scripts/check-live-seo.mjs` verifies the deployed pages, canonical markers, robots,
   sitemap, Chinese page, and IndexNow key every day.
+- `/motus2/demos/` exposes all 29 existing real-robot rollouts as crawlable HTML,
+  grouped into 22 substantive task cards instead of generating thin pages per clip.
 - The production monitor also runs three mobile Lighthouse samples and checks their
   median performance, accessibility, SEO, Core Web Vitals, and initial transfer size.
 
@@ -138,8 +140,9 @@ position. Do not optimize around a single personalized rank check.
 
 1. Publish code and model pages as soon as the artifacts are real; update disabled
    buttons and the sitemap in the same release.
-2. Turn the existing demo selector into crawlable task detail pages or sections with
-   stable anchors, captions, embodiment, capability, and a short transcript.
+2. Keep the crawlable demonstration catalog synchronized with the interactive player.
+   Only promote a rollout to its own watch page when it has a unique poster, verified
+   metadata, and enough original explanation or captions to avoid a thin page.
 3. Publish one factual research-lineage page comparing Motus, MotuBrain, and Motus2,
    citing their primary papers and clearly labeling them as separate projects.
 4. Add official institutional and author-page links to the project page. Avoid paid

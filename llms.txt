@@ -7,6 +7,7 @@
 - [Motus2](https://motus-robotics.github.io/motus2/): A self-evolving General World Model for dexterous manipulation. The shared model exposes policy, simulator, and evaluator interfaces and combines egocentric data scaling, closed-loop policy improvement, working memory, and tactile sensing.
 - [Motus2 paper](https://arxiv.org/abs/2608.30237): arXiv:2608.30237.
 - [Motus2 Chinese overview](https://motus-robotics.github.io/motus2/zh/): Official Chinese-language introduction.
+- [Motus2 robot demonstrations](https://motus-robotics.github.io/motus2/demos/): A crawlable catalog of 29 real-robot rollouts grouped into 22 tasks across WuJi-1, WuJi-2 and Sharpa.
 - [Motus](https://motus-robotics.github.io/motus): A Unified Latent Action World Model, CVPR 2026.
 - [Motus paper](https://arxiv.org/abs/2512.13030): arXiv:2512.13030.
 

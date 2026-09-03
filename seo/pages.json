@@ -21,7 +21,7 @@
   {
     "source": "motus2/index.html",
     "canonical": "https://motus-robotics.github.io/motus2/",
-    "lastmod": "2026-09-02",
+    "lastmod": "2026-09-03",
     "changefreq": "weekly",
     "priority": "1.0",
     "image": {
@@ -30,12 +30,24 @@
       "caption": "Motus2 policy, simulator, and evaluator in a closed decision-and-learning loop."
     },
     "video": {
-      "thumbnail": "https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview.png",
+      "thumbnail": "https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview-960.webp",
       "title": "Motus2: A Self-Evolving General World Model for Dexterous Manipulation",
       "description": "Overview of the Motus2 general world model and its real-robot dexterous manipulation capabilities.",
       "content": "https://motus-robotics.github.io/motus2/assets/video/motus2_overview.mp4",
       "publicationDate": "2026-09-01",
       "duration": 161
+    }
+  },
+  {
+    "source": "motus2/demos/index.html",
+    "canonical": "https://motus-robotics.github.io/motus2/demos/",
+    "lastmod": "2026-09-03",
+    "changefreq": "weekly",
+    "priority": "0.9",
+    "image": {
+      "loc": "https://motus-robotics.github.io/motus2/assets/img/demos/pull-out-pushpin-960.webp",
+      "title": "Motus2 Pull Out Pushpin Robot Demonstration",
+      "caption": "A featured real-robot rollout from the Motus2 demonstration catalog."
     }
   },
   {

@@ -1850,3 +1850,226 @@ a.author-card:hover {
   }
 
 }
+
+/* ── Crawlable demo catalog ── */
+.motus2-overview-video__caption {
+  padding: 0.8rem 1rem 0.9rem;
+  border-top: 1px solid var(--m2-border);
+  background: var(--m2-surface);
+  color: var(--m2-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.motus2-overview-video__caption strong {
+  color: var(--m2-ink);
+}
+
+.m2-demo-lead a {
+  color: var(--m2-link);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.motus2-hero--catalog {
+  padding-bottom: clamp(3rem, 7vw, 4.5rem);
+}
+
+.motus2-hero--catalog .motus2-hero__lede + .motus2-hero__lede {
+  margin-top: 1rem;
+  color: #b9c5d6;
+}
+
+.demo-watch-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.8fr);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: center;
+}
+
+.demo-watch-player {
+  overflow: hidden;
+  border: 1px solid var(--m2-border);
+  border-radius: 14px;
+  background: #000;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
+}
+
+.demo-watch-player video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+}
+
+.demo-watch-copy {
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.demo-watch-copy > p:first-child {
+  margin-top: 0;
+  color: var(--m2-ink);
+  font-size: 1.03rem;
+}
+
+.demo-watch-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 1.1rem 0;
+}
+
+.demo-watch-meta div {
+  padding: 10px 12px;
+  border: 1px solid var(--m2-border);
+  border-radius: 9px;
+  background: var(--m2-surface);
+}
+
+.demo-watch-meta dt {
+  color: var(--m2-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.demo-watch-meta dd {
+  margin: 3px 0 0;
+  color: var(--m2-ink);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.demo-visible-timeline {
+  margin-top: 1rem;
+}
+
+.demo-visible-timeline h3 {
+  margin: 0 0 0.5rem;
+  color: var(--m2-ink);
+  font-size: 0.95rem;
+}
+
+.demo-visible-timeline ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #cbd5e1;
+  font-size: 0.86rem;
+}
+
+.demo-evidence-note {
+  margin-bottom: 0;
+  color: var(--m2-muted);
+  font-size: 0.82rem;
+}
+
+.demo-catalog-lede {
+  max-width: var(--m2-max-prose);
+  margin: -0.45rem 0 1.75rem;
+  color: var(--m2-muted);
+  line-height: 1.7;
+}
+
+.demo-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.demo-catalog-card {
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  border: 1px solid var(--m2-border);
+  border-radius: 12px;
+  background: var(--m2-surface);
+  scroll-margin-top: 96px;
+}
+
+.demo-catalog-card:target {
+  border-color: var(--m2-accent-bright);
+  box-shadow: 0 0 0 3px var(--m2-accent-soft);
+}
+
+.demo-catalog-card h3 {
+  margin: 0.75rem 0 0.55rem;
+  color: var(--m2-ink);
+  font-size: 1.05rem;
+}
+
+.demo-catalog-card p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.demo-catalog-badges,
+.demo-rollout-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.demo-catalog-badges span {
+  padding: 4px 8px;
+  border: 1px solid rgba(167, 139, 250, 0.38);
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.12);
+  color: #ddd6fe;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.demo-rollout-links {
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.demo-watch-button,
+.demo-rollout-links a {
+  appearance: none;
+  padding: 7px 10px;
+  border: 1px solid var(--m2-border);
+  border-radius: 8px;
+  background: #0b0b0c;
+  color: var(--m2-link);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.demo-watch-button:hover,
+.demo-rollout-links a:hover {
+  border-color: rgba(167, 139, 250, 0.75);
+  color: #fff;
+}
+
+.demo-watch-button[aria-pressed="true"] {
+  border-color: var(--m2-accent-bright);
+  background: var(--m2-accent-soft);
+  color: #fff;
+}
+
+.demo-watch-button:focus-visible,
+.demo-rollout-links a:focus-visible {
+  outline: 2px solid var(--m2-accent-bright);
+  outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .demo-watch-grid,
+  .demo-catalog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .demo-watch-meta {
+    grid-template-columns: 1fr;
+  }
+}
