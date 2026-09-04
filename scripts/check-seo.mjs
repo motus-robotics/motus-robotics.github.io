@@ -225,6 +225,52 @@ const motus2Page = await readFile(path.join(root, 'motus2/index.html'), 'utf8');
 for (const target of ['arxiv.org/abs/2608.30237', 'alphaxiv.org/abs/2608.30237', '/motus', 'motubrain']) {
   if (!new RegExp(escapeRegExp(target), 'i').test(motus2Page)) fail('motus2/index.html', `missing research-entity link for ${target}`);
 }
+for (const target of ['genspi.com/en/', 'tsinghua.edu.cn/en/', 'global.buaa.edu.cn/en/', 'english.bit.edu.cn/']) {
+  if (!new RegExp(escapeRegExp(target), 'i').test(motus2Page)) fail('motus2/index.html', `missing official affiliation link for ${target}`);
+}
+
+const motus2StructuredData = JSON.parse(
+  motus2Page.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)[1],
+);
+const motus2Graph = motus2StructuredData['@graph'] ?? [motus2StructuredData];
+const motus2WebPage = motus2Graph.find((item) => item['@type'] === 'WebPage');
+const motus2Article = motus2Graph.find((item) => item['@type'] === 'ScholarlyArticle');
+if (motus2Article?.['@id'] !== 'https://arxiv.org/abs/2608.30237#article') {
+  fail('motus2/index.html', 'ScholarlyArticle must use the shared arXiv entity identifier');
+}
+if (motus2Article?.isBasedOn?.url !== 'https://arxiv.org/abs/2512.13030') {
+  fail('motus2/index.html', 'ScholarlyArticle must identify Motus as the verified foundation for Motus2');
+}
+if (!motus2Article?.citation?.some((item) => item.url === 'https://arxiv.org/abs/2604.27792')) {
+  fail('motus2/index.html', 'ScholarlyArticle must cite the distinct MotuBrain paper');
+}
+if (motus2Article?.publisher) fail('motus2/index.html', 'do not describe an author affiliation as the paper publisher');
+if (motus2Article?.author?.length !== 19 || motus2Article.author.some((author) => !author.affiliation)) {
+  fail('motus2/index.html', 'all 19 authors must retain their paper-verified affiliations');
+}
+if (motus2Article?.dateModified) {
+  fail('motus2/index.html', 'do not use the project-page update date as the paper revision date');
+}
+if (motus2WebPage?.dateModified !== manifest.find((page) => page.source === 'motus2/index.html')?.lastmod) {
+  fail('motus2/index.html', 'WebPage dateModified must match the sitemap manifest lastmod');
+}
+
+const motus2ChinesePage = await readFile(path.join(root, 'motus2/zh/index.html'), 'utf8');
+const motus2ChineseStructuredData = JSON.parse(
+  motus2ChinesePage.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)[1],
+);
+const motus2ChineseGraph = motus2ChineseStructuredData['@graph'] ?? [];
+const motus2ChineseWebPage = motus2ChineseGraph.find((item) => item['@type'] === 'WebPage');
+const motus2ChineseArticle = motus2ChineseGraph.find((item) => item['@type'] === 'ScholarlyArticle');
+if (motus2ChineseArticle?.['@id'] !== motus2Article?.['@id']) {
+  fail('motus2/zh/index.html', 'English and Chinese pages must identify the same ScholarlyArticle entity');
+}
+if (motus2ChineseArticle?.isBasedOn?.url !== 'https://arxiv.org/abs/2512.13030') {
+  fail('motus2/zh/index.html', 'Chinese structured data must identify Motus as the verified foundation for Motus2');
+}
+if (motus2ChineseWebPage?.dateModified !== manifest.find((page) => page.source === 'motus2/zh/index.html')?.lastmod) {
+  fail('motus2/zh/index.html', 'WebPage dateModified must match the sitemap manifest lastmod');
+}
 
 const demoCatalog = await readFile(path.join(root, 'motus2/demos/index.html'), 'utf8');
 const demoIds = [...motus2Page.matchAll(/\{\s*id:\s*'([^']+)'/g)].map((match) => match[1]);

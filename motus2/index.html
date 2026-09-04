@@ -56,14 +56,35 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    "@graph": [
+    {
+    "@type": "WebPage",
+    "@id": "https://motus-robotics.github.io/motus2/#webpage",
+    "url": "https://motus-robotics.github.io/motus2/",
+    "name": "Motus2: A Self-Evolving General World Model for Dexterous Manipulation",
+    "description": "The official Motus2 project page, with the paper, model overview, and real-robot demonstrations.",
+    "inLanguage": "en",
+    "dateModified": "2026-09-04",
+    "isPartOf": {"@id": "https://motus-robotics.github.io/#website"},
+    "mainEntity": {"@id": "https://arxiv.org/abs/2608.30237#article"}
+    },
+    {
+    "@type": "WebSite",
+    "@id": "https://motus-robotics.github.io/#website",
+    "url": "https://motus-robotics.github.io/",
+    "name": "Motus Robotics",
+    "inLanguage": ["en", "zh-CN"]
+    },
+    {
     "@type": "ScholarlyArticle",
+    "@id": "https://arxiv.org/abs/2608.30237#article",
     "headline": "Motus2: A Self-Evolving General World Model for Dexterous Manipulation",
     "name": "Motus2: A Self-Evolving General World Model for Dexterous Manipulation",
     "description": "Motus2 is a self-evolving General World Model for dexterous manipulation. It unifies policy, simulation, and evaluation in one video-action model and combines egocentric data scaling, model-based policy improvement, working memory, and tactile sensing.",
-    "url": "https://motus-robotics.github.io/motus2/",
-    "mainEntityOfPage": "https://motus-robotics.github.io/motus2/",
+    "url": "https://arxiv.org/abs/2608.30237",
+    "mainEntityOfPage": {"@id": "https://motus-robotics.github.io/motus2/#webpage"},
     "sameAs": [
-      "https://arxiv.org/abs/2608.30237",
+      "https://motus-robotics.github.io/motus2/",
       "https://www.alphaxiv.org/abs/2608.30237"
     ],
     "identifier": [
@@ -75,7 +96,6 @@
       }
     ],
     "datePublished": "2026-08-31",
-    "dateModified": "2026-09-02",
     "inLanguage": "en",
     "isAccessibleForFree": true,
     "image": "https://motus-robotics.github.io/motus2/assets/img/latest/motus2_overview.png",
@@ -100,47 +120,49 @@
       "tactile sensing"
     ],
     "author": [
-      {"@type": "Person", "name": "Hongzhe Bi", "url": "https://hongzhebi.github.io/"},
-      {"@type": "Person", "name": "Zihao Zhou"},
-      {"@type": "Person", "name": "Yihang Tang"},
-      {"@type": "Person", "name": "Jingrui Pang"},
-      {"@type": "Person", "name": "Shuhe Huang"},
-      {"@type": "Person", "name": "Haitian Liu"},
-      {"@type": "Person", "name": "Runqing Wang"},
-      {"@type": "Person", "name": "Shuai Huang"},
-      {"@type": "Person", "name": "Yichen Wang"},
-      {"@type": "Person", "name": "Yiming Cheng"},
-      {"@type": "Person", "name": "Ruowen Zhao"},
-      {"@type": "Person", "name": "Zhenghua Li"},
-      {"@type": "Person", "name": "Hengkai Tan"},
-      {"@type": "Person", "name": "Xiaolong Liu"},
-      {"@type": "Person", "name": "Jinhui Wan"},
-      {"@type": "Person", "name": "Jiabao Liu"},
-      {"@type": "Person", "name": "Min Zhao"},
-      {"@type": "Person", "name": "Fan Bao"},
-      {"@type": "Person", "name": "Jun Zhu", "url": "https://ml.cs.tsinghua.edu.cn/~jun/index.shtml"}
+      {"@type": "Person", "name": "Hongzhe Bi", "url": "https://hongzhebi.github.io/", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Zihao Zhou", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://global.buaa.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Yihang Tang", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://english.bit.edu.cn/#organization"}]},
+      {"@type": "Person", "name": "Jingrui Pang", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Shuhe Huang", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Haitian Liu", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Runqing Wang", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://english.bit.edu.cn/#organization"}]},
+      {"@type": "Person", "name": "Shuai Huang", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Yichen Wang", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Yiming Cheng", "affiliation": {"@id": "https://www.tsinghua.edu.cn/en/#organization"}},
+      {"@type": "Person", "name": "Ruowen Zhao", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Zhenghua Li", "affiliation": {"@id": "https://www.tsinghua.edu.cn/en/#organization"}},
+      {"@type": "Person", "name": "Hengkai Tan", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Xiaolong Liu", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Jinhui Wan", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Jiabao Liu", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Min Zhao", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]},
+      {"@type": "Person", "name": "Fan Bao", "affiliation": {"@id": "https://www.genspi.com/#organization"}},
+      {"@type": "Person", "name": "Jun Zhu", "url": "https://ml.cs.tsinghua.edu.cn/~jun/index.shtml", "affiliation": [{"@id": "https://www.genspi.com/#organization"}, {"@id": "https://www.tsinghua.edu.cn/en/#organization"}]}
     ],
-    "publisher": {
-      "@type": "Organization",
-      "name": "GensPI",
-      "url": "https://www.genspi.com/"
-    },
     "about": [
       {"@type": "Thing", "name": "Dexterous robot manipulation"},
       {"@type": "Thing", "name": "General world models"},
       {"@type": "Thing", "name": "Embodied artificial intelligence"}
     ],
+    "isBasedOn": {
+      "@type": "ScholarlyArticle",
+      "name": "Motus: A Unified Latent Action World Model",
+      "url": "https://arxiv.org/abs/2512.13030",
+      "identifier": "arXiv:2512.13030"
+    },
     "citation": [
-      {
-        "@type": "ScholarlyArticle",
-        "name": "Motus: A Unified Latent Action World Model",
-        "url": "https://arxiv.org/abs/2512.13030"
-      },
       {
         "@type": "ScholarlyArticle",
         "name": "MotuBrain: An Advanced World Action Model for Robot Control",
         "url": "https://arxiv.org/abs/2604.27792"
       }
+    ]
+    },
+    {"@type": "Organization", "@id": "https://www.genspi.com/#organization", "name": "GensPI", "url": "https://www.genspi.com/en/"},
+    {"@type": "CollegeOrUniversity", "@id": "https://www.tsinghua.edu.cn/en/#organization", "name": "Tsinghua University", "url": "https://www.tsinghua.edu.cn/en/index.htm"},
+    {"@type": "CollegeOrUniversity", "@id": "https://global.buaa.edu.cn/en/#organization", "name": "Beihang University (BUAA)", "url": "https://global.buaa.edu.cn/en/"},
+    {"@type": "CollegeOrUniversity", "@id": "https://english.bit.edu.cn/#organization", "name": "Beijing Institute of Technology (BIT)", "url": "https://english.bit.edu.cn/"}
     ]
   }
   </script>
@@ -171,7 +193,7 @@
 
   <header id="home" class="motus2-hero">
     <div class="motus2-hero__inner">
-      <a href="#home" class="motus2-hero__logo" aria-label="GensPI">
+      <a href="https://www.genspi.com/en/" class="motus2-hero__logo" aria-label="GensPI" target="_blank" rel="noreferrer">
         <picture>
           <source srcset="assets/img/ss-logo-480.webp" type="image/webp">
           <img src="assets/img/ss-logo.png?v=20260831-2" alt="GensPI logo" width="480" height="107">
@@ -207,10 +229,10 @@
           <a class="motus2-author-name" href="https://ml.cs.tsinghua.edu.cn/~jun/index.shtml" target="_blank" rel="noreferrer">Jun Zhu</a><sup>1,2&#9993;</sup>
         </p>
         <p class="motus2-hero__affiliations">
-          <span><sup>1</sup>GensPI</span>
-          <span><sup>2</sup>Tsinghua University</span>
-          <span><sup>3</sup>BUAA</span>
-          <span><sup>4</sup>BIT</span>
+          <span><sup>1</sup><a class="motus2-author-name" href="https://www.genspi.com/en/" target="_blank" rel="noreferrer">GensPI</a></span>
+          <span><sup>2</sup><a class="motus2-author-name" href="https://www.tsinghua.edu.cn/en/index.htm" target="_blank" rel="noreferrer">Tsinghua University</a></span>
+          <span><sup>3</sup><a class="motus2-author-name" href="https://global.buaa.edu.cn/en/" target="_blank" rel="noreferrer">BUAA</a></span>
+          <span><sup>4</sup><a class="motus2-author-name" href="https://english.bit.edu.cn/" target="_blank" rel="noreferrer">BIT</a></span>
         </p>
         <p class="motus2-hero__author-note">
           <span><sup>&dagger;</sup>Project lead.</span>
@@ -261,7 +283,7 @@
           Your browser does not support HTML5 video.
         </video>
         <figcaption class="motus2-overview-video__caption">
-          <strong>Motus2 overview video.</strong> An overview of the General World Model and its
+          <strong>Motus2: A Self-Evolving General World Model for Dexterous Manipulation.</strong> An overview of the model and its
           real-robot dexterous manipulation capabilities. Published by the Motus2 Team on September 1, 2026.
         </figcaption>
       </figure>
@@ -630,17 +652,16 @@
       <h2 class="m2-section__title">Motus, MotuBrain, and Motus2</h2>
       <div class="m2-prose">
         <p>
-          Motus2 is a distinct 2026 research project in a broader line of world-action models developed
-          by overlapping collaborators from GensPI and Tsinghua University. It extends the research
-          direction represented by <a href="https://motus-robotics.github.io/motus">Motus</a> and is
-          technically related to <a href="https://www.motubrain.cn/en/" target="_blank" rel="noreferrer">MotuBrain</a>,
-          while introducing its own general-world-model interfaces, closed-loop self-evolution, working
-          memory, and tactile expert.
+          The Motus2 paper explicitly describes the model as built on
+          <a href="https://motus-robotics.github.io/motus">Motus</a>. Motus2 introduces general-world-model
+          interfaces, closed-loop self-evolution, working memory, and a tactile expert. Separately,
+          <a href="https://www.motubrain.cn/en/" target="_blank" rel="noreferrer">MotuBrain</a> also builds on
+          Motus and develops that foundation toward general-purpose real-world robot deployment.
         </p>
         <p>
-          The official project names are <strong>Motus</strong>, <strong>MotuBrain</strong>, and
-          <strong>Motus2</strong>. “Motu” by itself is not the name of a separate model in this research
-          family; references should use the complete project name to avoid ambiguity.
+          The cited papers and official project pages use the complete names <strong>Motus</strong>,
+          <strong>MotuBrain</strong>, and <strong>Motus2</strong>. Use those names when referencing or
+          searching these projects; the shorter query “Motu” is ambiguous.
         </p>
         <h3>Motus2 robotics model vs. mOTUs2 profiler</h3>
         <p>

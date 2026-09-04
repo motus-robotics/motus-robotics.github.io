@@ -13,9 +13,11 @@ on:
       - 'llms.txt'
       - 'seo/**'
       - 'scripts/check-seo.mjs'
+      - 'scripts/check-live-seo.mjs'
       - 'scripts/check-lighthouse-budget.mjs'
       - 'scripts/generate-sitemap.mjs'
       - '.github/workflows/seo-ci.yml'
+      - '.github/workflows/seo-monitor.yml'
   push:
     branches: [master]
     paths:
@@ -29,9 +31,11 @@ on:
       - 'llms.txt'
       - 'seo/**'
       - 'scripts/check-seo.mjs'
+      - 'scripts/check-live-seo.mjs'
       - 'scripts/check-lighthouse-budget.mjs'
       - 'scripts/generate-sitemap.mjs'
       - '.github/workflows/seo-ci.yml'
+      - '.github/workflows/seo-monitor.yml'
   workflow_dispatch:
 
 permissions:

@@ -36,22 +36,35 @@ jobs:
 
       - name: Measure Motus2 mobile web quality
         run: |
-          mkdir -p lighthouse-reports
+          mkdir -p lighthouse-reports/motus2
           for run in 1 2 3; do
             npx --yes lighthouse@13.4.1 https://motus-robotics.github.io/motus2/ \
               --output=json \
-              --output-path="lighthouse-reports/run-${run}.json" \
+              --output-path="lighthouse-reports/motus2/run-${run}.json" \
               --only-categories=performance,accessibility,best-practices,seo \
               --chrome-flags="--headless --no-sandbox" \
               --quiet
           done
-          node scripts/check-lighthouse-budget.mjs lighthouse-reports/run-*.json
+          node scripts/check-lighthouse-budget.mjs lighthouse-reports/motus2/run-*.json
+
+      - name: Measure demo catalog mobile web quality
+        run: |
+          mkdir -p lighthouse-reports/demos
+          for run in 1 2 3; do
+            npx --yes lighthouse@13.4.1 https://motus-robotics.github.io/motus2/demos/ \
+              --output=json \
+              --output-path="lighthouse-reports/demos/run-${run}.json" \
+              --only-categories=performance,accessibility,best-practices,seo \
+              --chrome-flags="--headless --no-sandbox" \
+              --quiet
+          done
+          node scripts/check-lighthouse-budget.mjs lighthouse-reports/demos/run-*.json
 
       - name: Preserve Lighthouse reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: motus2-mobile-lighthouse
-          path: lighthouse-reports/*.json
+          path: lighthouse-reports/**/*.json
           if-no-files-found: warn
           retention-days: 30

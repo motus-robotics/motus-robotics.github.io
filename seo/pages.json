@@ -2,7 +2,7 @@
   {
     "source": "index.html",
     "canonical": "https://motus-robotics.github.io/",
-    "lastmod": "2026-09-02",
+    "lastmod": "2026-09-04",
     "changefreq": "weekly",
     "priority": "0.8"
   },
@@ -21,7 +21,7 @@
   {
     "source": "motus2/index.html",
     "canonical": "https://motus-robotics.github.io/motus2/",
-    "lastmod": "2026-09-03",
+    "lastmod": "2026-09-04",
     "changefreq": "weekly",
     "priority": "1.0",
     "image": {
@@ -53,7 +53,7 @@
   {
     "source": "motus2/zh/index.html",
     "canonical": "https://motus-robotics.github.io/motus2/zh/",
-    "lastmod": "2026-09-02",
+    "lastmod": "2026-09-04",
     "changefreq": "weekly",
     "priority": "0.9",
     "image": {

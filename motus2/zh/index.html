@@ -41,7 +41,7 @@
         "description": "Motus2 论文与项目的官方中文介绍，并解释 Motus、MotuBrain 和 Motus2 的研究关系。",
         "inLanguage": "zh-CN",
         "datePublished": "2026-09-02",
-        "dateModified": "2026-09-02",
+        "dateModified": "2026-09-04",
         "isPartOf": {"@id": "https://motus-robotics.github.io/#website"},
         "mainEntity": {"@id": "https://arxiv.org/abs/2608.30237#article"}
       },
@@ -65,6 +65,17 @@
         "datePublished": "2026-08-31",
         "inLanguage": "en",
         "isAccessibleForFree": true,
+        "isBasedOn": {
+          "@type": "ScholarlyArticle",
+          "name": "Motus: A Unified Latent Action World Model",
+          "url": "https://arxiv.org/abs/2512.13030",
+          "identifier": "arXiv:2512.13030"
+        },
+        "citation": {
+          "@type": "ScholarlyArticle",
+          "name": "MotuBrain: An Advanced World Action Model for Robot Control",
+          "url": "https://arxiv.org/abs/2604.27792"
+        },
         "author": [
           {"@type": "Person", "name": "Hongzhe Bi", "url": "https://hongzhebi.github.io/"},
           {"@type": "Person", "name": "Zihao Zhou"},
@@ -209,15 +220,15 @@
         <h2 class="m2-section__title">Motus、MotuBrain 和 Motus2 是什么关系？</h2>
         <div class="m2-prose">
           <p>
-            三者是由部分重叠合作者推进的相关世界动作模型研究，但它们是彼此独立的项目，拥有不同
-            论文和研究重点。<a href="../../motus"><strong>Motus</strong></a> 是发表于 CVPR 2026 的统一
-            潜动作世界模型；<a href="https://www.motubrain.cn/zh/" target="_blank" rel="noreferrer"><strong>MotuBrain</strong></a>
-            聚焦面向机器人控制的先进世界动作模型；<strong>Motus2</strong> 则进一步研究通用世界模型、
-            闭环自进化、工作记忆和触觉灵巧操作。
+            Motus2 论文明确将其描述为建立在 <a href="../../motus"><strong>Motus</strong></a> 之上，并进一步
+            研究通用世界模型接口、闭环自进化、工作记忆和触觉灵巧操作。另一个独立项目
+            <a href="https://www.motubrain.cn/zh/" target="_blank" rel="noreferrer"><strong>MotuBrain</strong></a>
+            同样承接 Motus 的技术基础，重点面向通用真实机器人部署。三者拥有不同论文与研究重点，
+            不应被视为同一个模型的别名。
           </p>
           <p>
-            正式名称是 Motus、MotuBrain 和 Motus2。“Motu”不是该研究系列中某个模型的正式名称，
-            引用和检索时应使用完整项目名称，以避免与其他同名实体混淆。
+            上述论文和官方项目页使用 Motus、MotuBrain 和 Motus2 这些完整名称。引用或检索这些项目时，
+            建议使用完整名称；较短的检索词“Motu”存在歧义。
           </p>
         </div>
         <div class="role-grid">
@@ -266,7 +277,7 @@
           <h3>Motus2 与传统 VLA 模型有什么不同？</h3>
           <p>Motus2 不只生成动作；同一共享模型还能够在给定动作条件下预测未来，并对预测结果进行价值评估，从而支持规划和闭环策略改进。</p>
           <h3>代码和模型权重在哪里？</h3>
-          <p>项目团队已说明将开放代码与模型权重；正式发布前，请关注英文项目主页上的 Code 和 Model 入口，避免使用非官方镜像。</p>
+          <p>英文项目主页当前将 Code 和 Model 标记为 “Soon”，尚未提供正式仓库或模型链接；正式发布前，请避免使用未经团队确认的镜像。</p>
         </div>
       </div>
     </section>

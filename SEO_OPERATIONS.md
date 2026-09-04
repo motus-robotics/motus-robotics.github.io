@@ -143,11 +143,12 @@ position. Do not optimize around a single personalized rank check.
 2. Keep the crawlable demonstration catalog synchronized with the interactive player.
    Only promote a rollout to its own watch page when it has a unique poster, verified
    metadata, and enough original explanation or captions to avoid a thin page.
-3. Publish one factual research-lineage page comparing Motus, MotuBrain, and Motus2,
-   citing their primary papers and clearly labeling them as separate projects.
-4. Add official institutional and author-page links to the project page. Avoid paid
-   link networks, automated comments, copied press releases, click bots, and hidden
-   keyword variants.
+3. Keep the bilingual research-lineage explanation aligned with the primary papers:
+   Motus2 and MotuBrain are distinct projects that each build on Motus; never connect
+   them with `sameAs` or imply that one is a version of the other.
+4. Add author pages, code, and model links only after their official canonical URLs
+   are confirmed. Avoid paid link networks, automated comments, copied press releases,
+   click bots, and hidden keyword variants.
 
 Useful primary documentation:
 
