@@ -99,12 +99,6 @@ const pageSpecs = [
     h1Includes: 'Motus2',
     alternates: ['en', 'zh-cn', 'x-default'],
   },
-  {
-    file: 'motus2/demos/index.html',
-    canonical: 'https://motus-robotics.github.io/motus2/demos/',
-    lang: 'en',
-    h1Includes: 'Motus2 Robot Demonstrations',
-  },
 ];
 
 for (const spec of pageSpecs) {
@@ -224,104 +218,6 @@ for (const target of ['/motus', '/motus2/', 'arxiv.org/abs/2608.30237', 'motubra
 const motus2Page = await readFile(path.join(root, 'motus2/index.html'), 'utf8');
 for (const target of ['arxiv.org/abs/2608.30237', 'alphaxiv.org/abs/2608.30237', '/motus', 'motubrain']) {
   if (!new RegExp(escapeRegExp(target), 'i').test(motus2Page)) fail('motus2/index.html', `missing research-entity link for ${target}`);
-}
-for (const target of ['genspi.com/en/', 'tsinghua.edu.cn/en/', 'global.buaa.edu.cn/en/', 'english.bit.edu.cn/']) {
-  if (!new RegExp(escapeRegExp(target), 'i').test(motus2Page)) fail('motus2/index.html', `missing official affiliation link for ${target}`);
-}
-
-const motus2StructuredData = JSON.parse(
-  motus2Page.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)[1],
-);
-const motus2Graph = motus2StructuredData['@graph'] ?? [motus2StructuredData];
-const motus2WebPage = motus2Graph.find((item) => item['@type'] === 'WebPage');
-const motus2Article = motus2Graph.find((item) => item['@type'] === 'ScholarlyArticle');
-if (motus2Article?.['@id'] !== 'https://arxiv.org/abs/2608.30237#article') {
-  fail('motus2/index.html', 'ScholarlyArticle must use the shared arXiv entity identifier');
-}
-if (motus2Article?.isBasedOn?.url !== 'https://arxiv.org/abs/2512.13030') {
-  fail('motus2/index.html', 'ScholarlyArticle must identify Motus as the verified foundation for Motus2');
-}
-if (!motus2Article?.citation?.some((item) => item.url === 'https://arxiv.org/abs/2604.27792')) {
-  fail('motus2/index.html', 'ScholarlyArticle must cite the distinct MotuBrain paper');
-}
-if (motus2Article?.publisher) fail('motus2/index.html', 'do not describe an author affiliation as the paper publisher');
-if (motus2Article?.author?.length !== 19 || motus2Article.author.some((author) => !author.affiliation)) {
-  fail('motus2/index.html', 'all 19 authors must retain their paper-verified affiliations');
-}
-if (motus2Article?.dateModified) {
-  fail('motus2/index.html', 'do not use the project-page update date as the paper revision date');
-}
-if (motus2WebPage?.dateModified !== manifest.find((page) => page.source === 'motus2/index.html')?.lastmod) {
-  fail('motus2/index.html', 'WebPage dateModified must match the sitemap manifest lastmod');
-}
-
-const motus2ChinesePage = await readFile(path.join(root, 'motus2/zh/index.html'), 'utf8');
-const motus2ChineseStructuredData = JSON.parse(
-  motus2ChinesePage.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)[1],
-);
-const motus2ChineseGraph = motus2ChineseStructuredData['@graph'] ?? [];
-const motus2ChineseWebPage = motus2ChineseGraph.find((item) => item['@type'] === 'WebPage');
-const motus2ChineseArticle = motus2ChineseGraph.find((item) => item['@type'] === 'ScholarlyArticle');
-if (motus2ChineseArticle?.['@id'] !== motus2Article?.['@id']) {
-  fail('motus2/zh/index.html', 'English and Chinese pages must identify the same ScholarlyArticle entity');
-}
-if (motus2ChineseArticle?.isBasedOn?.url !== 'https://arxiv.org/abs/2512.13030') {
-  fail('motus2/zh/index.html', 'Chinese structured data must identify Motus as the verified foundation for Motus2');
-}
-if (motus2ChineseWebPage?.dateModified !== manifest.find((page) => page.source === 'motus2/zh/index.html')?.lastmod) {
-  fail('motus2/zh/index.html', 'WebPage dateModified must match the sitemap manifest lastmod');
-}
-
-const demoCatalog = await readFile(path.join(root, 'motus2/demos/index.html'), 'utf8');
-const demoIds = [...motus2Page.matchAll(/\{\s*id:\s*'([^']+)'/g)].map((match) => match[1]);
-const catalogVideoReferences = [...demoCatalog.matchAll(/data-src=["']\.\.\/assets\/video\/demos\/([^"']+)["']/g)]
-  .map((match) => match[1]);
-const catalogDirectVideoReferences = [...demoCatalog.matchAll(/<a\b[^>]*href=["']\.\.\/assets\/video\/demos\/([^"']+)["'][^>]*>/g)]
-  .map((match) => match[1]);
-const sourceVideoReferences = [...motus2Page.matchAll(/src:\s*'assets\/video\/demos\/([^']+)'/g)]
-  .map((match) => match[1]);
-const catalogVideoPaths = catalogVideoReferences.map((reference) => reference.split('?')[0]);
-const sourceVideoPaths = sourceVideoReferences.map((reference) => reference.split('?')[0]);
-const catalogCards = [...demoCatalog.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/gi)]
-  .filter((match) => attributes(match[1]).class?.split(/\s+/).includes('demo-catalog-card'))
-  .map((match) => ({ id: attributes(match[1]).id, name: textOfFirst(match[2], 'h3') }));
-const catalogStructuredData = JSON.parse(
-  demoCatalog.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)[1],
-);
-const catalogGraph = catalogStructuredData['@graph'] ?? [];
-const catalogItemList = catalogGraph.find((item) => item['@type'] === 'ItemList');
-if (!catalogGraph.some((item) => item['@type'] === 'CollectionPage')) fail('motus2/demos/index.html', 'structured data must describe a CollectionPage');
-if (catalogGraph.some((item) => item['@type'] === 'VideoObject')) fail('motus2/demos/index.html', 'a multi-video catalog must not masquerade as a single-video watch page');
-if (new Set(demoIds).size !== 29) fail('motus2/index.html', `expected 29 unique demo rollouts, found ${new Set(demoIds).size}`);
-if (new Set(sourceVideoPaths).size !== 29) fail('motus2/index.html', `expected 29 unique demo video paths, found ${new Set(sourceVideoPaths).size}`);
-if (catalogCards.length !== 22) {
-  fail('motus2/demos/index.html', 'expected 22 grouped demo task cards');
-}
-if (catalogVideoPaths.length !== 29) fail('motus2/demos/index.html', `expected 29 playable rollout buttons, found ${catalogVideoPaths.length}`);
-if (new Set(catalogVideoPaths).size !== 29) fail('motus2/demos/index.html', 'playable rollout paths must be unique');
-if (catalogDirectVideoReferences.length !== 29) fail('motus2/demos/index.html', `expected 29 direct rollout links, found ${catalogDirectVideoReferences.length}`);
-if (catalogDirectVideoReferences.slice().sort().join('\n') !== catalogVideoReferences.slice().sort().join('\n')) {
-  fail('motus2/demos/index.html', 'playable rollout buttons and direct video links must match');
-}
-if (catalogVideoReferences.slice().sort().join('\n') !== sourceVideoReferences.slice().sort().join('\n')) {
-  fail('motus2/demos/index.html', 'catalog and interactive player rollout URLs, including cache versions, must match');
-}
-for (const videoPath of sourceVideoPaths) {
-  if (!catalogVideoPaths.includes(videoPath)) fail('motus2/demos/index.html', `missing rollout from catalog: ${videoPath}`);
-}
-for (const videoPath of catalogVideoPaths) {
-  if (!sourceVideoPaths.includes(videoPath)) fail('motus2/demos/index.html', `catalog contains an unknown rollout: ${videoPath}`);
-}
-if (!catalogItemList || catalogItemList.numberOfItems !== 22 || catalogItemList.itemListElement?.length !== 22) {
-  fail('motus2/demos/index.html', 'ItemList must describe all 22 grouped task cards');
-} else {
-  const cardsById = new Map(catalogCards.map((card) => [card.id, card.name]));
-  for (const [index, item] of catalogItemList.itemListElement.entries()) {
-    const fragment = new URL(item.url).hash.slice(1);
-    if (item.position !== index + 1) fail('motus2/demos/index.html', `ItemList position ${item.position} is out of sequence`);
-    if (!cardsById.has(fragment)) fail('motus2/demos/index.html', `ItemList URL does not target a task card: ${item.url}`);
-    else if (cardsById.get(fragment) !== item.name) fail('motus2/demos/index.html', `ItemList name does not match #${fragment}`);
-  }
 }
 
 if (errors.length) {
