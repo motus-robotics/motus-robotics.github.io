@@ -156,7 +156,7 @@ body.motus2-dark .footer-section a {
 }
 
 body.motus2-dark .footer-bottom p {
-  color: #94a3b8;
+  color: #64748b;
 }
 
 body.motus2-dark .hero-authors {
@@ -282,8 +282,7 @@ body.motus2-dark .hero-authors a {
 
 .motus2-hero__authors a {
   color: var(--m2-link);
-  text-decoration: underline;
-  text-underline-offset: 0.16em;
+  text-decoration: none;
 }
 
 .motus2-hero__authors a:hover {
@@ -634,22 +633,6 @@ body.motus2-dark .hero-authors a {
   font-weight: 600;
 }
 
-.m2-prose a,
-.role-card h3 a,
-.footer-info a,
-.footer-bottom a {
-  color: var(--m2-link);
-  text-decoration: underline;
-  text-underline-offset: 0.16em;
-}
-
-.m2-prose a:hover,
-.role-card h3 a:hover,
-.footer-info a:hover,
-.footer-bottom a:hover {
-  color: var(--m2-link-hover);
-}
-
 .m2-prose h3 {
   font-size: 1.15rem;
   font-weight: 700;
@@ -989,7 +972,7 @@ body.motus2-dark .hero-authors a {
   border: 1px solid var(--m2-border);
 }
 
-.ack-block h3 {
+.ack-block h4 {
   margin: 0 0 10px;
   font-size: 0.95rem;
   color: var(--m2-accent-bright);
@@ -1558,13 +1541,6 @@ body.motus2-dark .subsection-title {
 .demo-player-btn:focus-visible {
   outline: 2px solid #c4b5fd;
   outline-offset: 2px;
-}
-
-.m2-symbol {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1;
 }
 
 .demo-player-seek {
